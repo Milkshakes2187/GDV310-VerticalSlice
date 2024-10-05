@@ -711,7 +711,7 @@ MonoBehaviour:
   ReaverSpawns: []
   ReaverOppositeSpawns: []
   ReaverPF: {fileID: 0}
-  ThreadPF: {fileID: 0}
+  ThreadPF: {fileID: 3331948630723726842, guid: 6bde0b6237bf54742adbc9c7c64b244a, type: 3}
   ThreadPointPF: {fileID: 5982159138515845284, guid: 7cad62b0faea97d46bc7daf953563c01, type: 3}
 --- !u!4 &1156084086
 Transform:
