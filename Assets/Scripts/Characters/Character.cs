@@ -27,12 +27,17 @@ public class Character : MonoBehaviour
 
         if (fHealth <= 0)
         {
-            Debug.Log("YOU HAVE DIED.");
+            TriggerDeath();
         }
     }
 
     protected void Heal(float _fHealAmount)
     {
         fHealth = fHealth + _fHealAmount > fMaxHealth ? fMaxHealth : fHealth + _fHealAmount;
+    }
+
+    protected void TriggerDeath()
+    {
+        Debug.Log(gameObject.name + " HAS DIED.");
     }
 }
