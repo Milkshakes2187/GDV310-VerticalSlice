@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LAseq4
+  m_Controller: {fileID: 9100000, guid: f5534d3e4403f8c44af4bb27e30c7dee, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: -1723204712488263773, guid: 9bfc58f92fe12794bb2a01c19409a889, type: 3}
+    m_OverrideClip: {fileID: -8791239104163697058, guid: 9bfc58f92fe12794bb2a01c19409a889, type: 3}

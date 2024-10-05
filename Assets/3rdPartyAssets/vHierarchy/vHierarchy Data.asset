@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a9752b0c8e144801967e6897679604b, type: 3}
+  m_Name: vHierarchy Data
+  m_EditorClassIdentifier: 
+  sceneDatas_byGuid:
+    keys:
+    - e1d00c037120d694da488b07be1e2962
+    - c90d8b9849435034a8eba84b079c83ae
+    - 800299151bb3bc64eb2de3c08c4e79c7
+    - 8e7e756bb33f49c408fcd0cf1bdb2d12
+    - d0d907e4b5c7ede47aef0a772b62fc19
+    values:
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-e1d00c037120d694da488b07be1e2962-6597818090437083712-459967018
+        - globalObjectIdString: GlobalObjectId_V1-2-e1d00c037120d694da488b07be1e2962-648615551-0
+        - globalObjectIdString: GlobalObjectId_V1-2-e1d00c037120d694da488b07be1e2962-8617857774365792271-1300339346
+        - globalObjectIdString: GlobalObjectId_V1-2-e1d00c037120d694da488b07be1e2962-2746088554731258879-697191000
+        - globalObjectIdString: GlobalObjectId_V1-2-e1d00c037120d694da488b07be1e2962-671363297-0
+        - globalObjectIdString: GlobalObjectId_V1-2-e1d00c037120d694da488b07be1e2962-832376347510794897-4397258637929772577
+        values:
+        - colorIndex: 5
+          iconNameOrGuid: AvatarMask On Icon
+        - colorIndex: 2
+          iconNameOrGuid: 
+        - colorIndex: 5
+          iconNameOrGuid: AvatarMask On Icon
+        - colorIndex: 0
+          iconNameOrGuid: Camera Icon
+        - colorIndex: 0
+          iconNameOrGuid: Camera Icon
+        - colorIndex: 2
+          iconNameOrGuid: 
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-c90d8b9849435034a8eba84b079c83ae-8617857774365792271-1581397525
+        - globalObjectIdString: GlobalObjectId_V1-2-c90d8b9849435034a8eba84b079c83ae-832376347510794897-1849744835
+        - globalObjectIdString: GlobalObjectId_V1-2-c90d8b9849435034a8eba84b079c83ae-8882869361881832430-7885348405832175186
+        values:
+        - colorIndex: 5
+          iconNameOrGuid: AvatarMask On Icon
+        - colorIndex: 2
+          iconNameOrGuid: 
+        - colorIndex: 3
+          iconNameOrGuid: Settings Icon
+    - goDatas_byGlobalId:
+        keys: []
+        values: []
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-8e7e756bb33f49c408fcd0cf1bdb2d12-8882869361881832430-1783976640
+        values:
+        - colorIndex: 3
+          iconNameOrGuid: Settings Icon
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-d0d907e4b5c7ede47aef0a772b62fc19-8882869361881832430-2043257878
+        - globalObjectIdString: GlobalObjectId_V1-2-d0d907e4b5c7ede47aef0a772b62fc19-8617857774365792271-1679564828
+        - globalObjectIdString: GlobalObjectId_V1-2-d0d907e4b5c7ede47aef0a772b62fc19-832376347510794897-41161994
+        values:
+        - colorIndex: 3
+          iconNameOrGuid: Settings Icon
+        - colorIndex: 5
+          iconNameOrGuid: AvatarMask On Icon
+        - colorIndex: 2
+          iconNameOrGuid: ParticleSystem Icon
