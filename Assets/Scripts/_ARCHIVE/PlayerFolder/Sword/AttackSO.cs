@@ -19,5 +19,5 @@ public class AttackSO : ScriptableObject
     public float fAttackDamage;
 
     //Which sword to use
-    public E_ActiveSword eActiveSword;
+    //public E_ActiveSword eActiveSword;
 }
