@@ -3,6 +3,7 @@ using VInspector;
 
 public class Thread : MonoBehaviour
 {
+<<<<<<< Updated upstream
     bool isThreadActive = false;
 
     [Tab("Data")]
@@ -35,6 +36,33 @@ public class Thread : MonoBehaviour
         else
         {
             threadMeshRenderer.materials[0] = inactiveMaterial;
+=======
+    public GameObject mesh;
+    MeshRenderer meshRenderer;
+    public Material activeMat;
+    public Material inactiveMat;
+
+    public bool isThreadActive = false;
+
+    private void Start()
+    {
+        mesh = transform.GetChild(0).gameObject;
+        meshRenderer = mesh.GetComponent<MeshRenderer>();
+    }
+
+    [Button]
+    public void ChangeThreadState(bool _isActive)
+    {
+        isThreadActive = _isActive;
+        
+        if (isThreadActive )
+        {
+            meshRenderer.material = activeMat;
+        }
+        else
+        {
+            meshRenderer.material = inactiveMat;
+>>>>>>> Stashed changes
         }
     }
 }

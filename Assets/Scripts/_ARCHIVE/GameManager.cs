@@ -48,11 +48,11 @@ public class GameManager : MonoBehaviour
         if (bInMainMenu) return;
 
         // Increment game timer but only when the fight has started
-        if (PrototypeBoss.instance.bFightStarted)
-        {
-            fGameTimer += Time.deltaTime;
-            gameTimeText.text = ConvertToMinSecs(fGameTimer);
-        }
+        //if (PrototypeBoss.instance.bFightStarted)
+        //{
+        //    fGameTimer += Time.deltaTime;
+        //    gameTimeText.text = ConvertToMinSecs(fGameTimer);
+        //}
 
         // Pause key input
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -72,32 +72,32 @@ public class GameManager : MonoBehaviour
 
     public void PauseUnpause()
     {
-        if (!bIsPaused)
-        {
-            bIsPaused = true;
-
-            // Pause game and reenable cursor
-            Time.timeScale = 0.0f;
-            Cursor.visible = true;
-            Cursor.lockState= CursorLockMode.None;
-
-            // Activate pause screen & disable player HUD
-            pauseScreen.SetActive(true);
-            playerHUD.SetActive(false);
-        }
-        else
-        {
-            bIsPaused = false;
-
-            // Pause game and reenable cursor
-            Time.timeScale = 1.0f;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
-            // Deactivate pause screen
-            pauseScreen.SetActive(false);
-            playerHUD.SetActive(true);
-        }
+        //if (!bIsPaused)
+        //{
+        //    bIsPaused = true;
+        //
+        //    // Pause game and reenable cursor
+        //    Time.timeScale = 0.0f;
+        //    Cursor.visible = true;
+        //    Cursor.lockState= CursorLockMode.None;
+        //
+        //    // Activate pause screen & disable player HUD
+        //    pauseScreen.SetActive(true);
+        //    playerHUD.SetActive(false);
+        //}
+        //else
+        //{
+        //    bIsPaused = false;
+        //
+        //    // Pause game and reenable cursor
+        //    Time.timeScale = 1.0f;
+        //    Cursor.visible = false;
+        //    Cursor.lockState = CursorLockMode.Locked;
+        //
+        //    // Deactivate pause screen
+        //    pauseScreen.SetActive(false);
+        //    playerHUD.SetActive(true);
+        //}
     }
 
     public void GameOver(bool _bVictory)
