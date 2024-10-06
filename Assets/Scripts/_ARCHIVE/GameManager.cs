@@ -48,11 +48,11 @@ public class GameManager : MonoBehaviour
         if (bInMainMenu) return;
 
         // Increment game timer but only when the fight has started
-        if (PrototypeBoss.instance.bFightStarted)
-        {
-            fGameTimer += Time.deltaTime;
-            gameTimeText.text = ConvertToMinSecs(fGameTimer);
-        }
+        //if (PrototypeBoss.instance.bFightStarted)
+        //{
+        //    fGameTimer += Time.deltaTime;
+        //    gameTimeText.text = ConvertToMinSecs(fGameTimer);
+        //}
 
         // Pause key input
         if (Input.GetKeyDown(KeyCode.Escape))

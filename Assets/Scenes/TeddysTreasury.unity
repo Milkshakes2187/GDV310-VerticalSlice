@@ -506,10 +506,6 @@ PrefabInstance:
       propertyPath: CMvcam
       value: 
       objectReference: {fileID: 1247119827}
-    - target: {fileID: 842605538034811164, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
-      propertyPath: charController
-      value: 
-      objectReference: {fileID: 1483578665}
     - target: {fileID: 4179989437618786010, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -678,11 +674,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &1483578665 stripped
-CharacterController:
-  m_CorrespondingSourceObject: {fileID: 3177767304474543866, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
-  m_PrefabInstance: {fileID: 883322348}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1704728584
 PrefabInstance:
   m_ObjectHideFlags: 0
