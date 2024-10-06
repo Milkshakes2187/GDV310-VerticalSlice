@@ -20,14 +20,14 @@ public class UIHealthVignette : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float wantedAmount = Mathf.Clamp(1f - (Player.instance.fHealth / Player.instance.fMaxHealth), 0, 1f);
+        float wantedAmount = Mathf.Clamp(1f - (Player.instance.health / Player.instance.maxHealth), 0, 1f);
         float vignetteAmount = Mathf.Lerp(healthImage.color.r, wantedAmount * intensity, Time.deltaTime * resetSpeed);
         healthImage.color = new Color(vignetteAmount, 0, 0, vignetteAmount);
     }
 
     private void OnTakeDamage(float damage)
     {
-        float percentage = damage / Player.instance.fMaxHealth;
+        float percentage = damage / Player.instance.maxHealth;
         healthImage.color += new Color(1 * percentage * damageScale, 0,0);
     }
 }
