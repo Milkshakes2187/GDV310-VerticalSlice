@@ -3,17 +3,17 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     [Header("Base Stats")]
-    public float fMaxHealth;
-    public float fMaxMoveSpeed;
-    public float fBaseDamage;
+    public float maxHealth;
+    public float maxMoveSpeed;
+    public float baseDamage;
 
     [Header("Current Stats")]
-    public float fHealth;
-    public float fMoveSpeed;
+    public float health;
+    public float moveSpeed;
 
     [Header("Multipliers")]
-    public float fSpeedMultiplier;
-    public float fDamageMultiplier;
+    public float speedMultiplier;
+    public float damageMultiplier;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()

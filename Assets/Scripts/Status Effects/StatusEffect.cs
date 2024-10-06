@@ -5,10 +5,10 @@ public class StatusEffect : MonoBehaviour
     public float duration;
     float elapsedTime = 0.0f;
 
-    Character target;
+    protected Character target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected virtual void Start()
     {
         target = transform.root.GetComponent<Character>();
     }
@@ -16,8 +16,7 @@ public class StatusEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Tick();
-        ApplyEffect();
+        TickDuration();
     }
 
     /***********************************************
@@ -26,16 +25,13 @@ public class StatusEffect : MonoBehaviour
     * @parameter:
     * @return: void
     ************************************************/
-    protected virtual void Tick()
+    protected virtual void TickDuration()
     {
         elapsedTime += Time.deltaTime;
 
         if (elapsedTime >= duration)
         {
-            // Destroy this effect
-            // Reset any effects on target here.
-
-            Destroy(gameObject);
+            RemoveEffect();
         }
     }
 
@@ -48,5 +44,19 @@ public class StatusEffect : MonoBehaviour
     protected virtual void ApplyEffect()
     {
         // To be overwritten by the actual status effects
+    }
+
+    /***********************************************
+    * RemoveEffect: Remove status effect from target and destroy this object.
+    * @author: Justhine Nisperos
+    * @parameter:
+    * @return: void
+    ************************************************/
+    protected virtual void RemoveEffect()
+    {
+        // Destroy this effect
+        // Reset any effects on target here.
+
+        Destroy(gameObject);
     }
 }
