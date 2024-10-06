@@ -703,16 +703,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2398b621dfe040343940f18c1ca18767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Threads: []
-  ThreadInnerPoints: []
-  ThreadOuterPoints: []
   fInnerRadius: 20
   fOuterRadius: 40
-  ReaverSpawns: []
-  ReaverOppositeSpawns: []
-  ReaverPF: {fileID: 0}
+  iTotalPoints: 6
+  ThreadInnerPoints: []
+  ThreadOuterPoints: []
+  edgeThreads: []
+  inbetweenTrheads: []
   ThreadPF: {fileID: 3331948630723726842, guid: 6bde0b6237bf54742adbc9c7c64b244a, type: 3}
-  ThreadPointPF: {fileID: 5982159138515845284, guid: 7cad62b0faea97d46bc7daf953563c01, type: 3}
+  OuterThreadPF: {fileID: 3331948630723726842, guid: 1d631855b6f302a4b8dde0294e535757, type: 3}
+  ThreadPointPF: {fileID: 5982159138515845284, guid: 4c36a66bcf760fb44ac5a3802fbdacb2, type: 3}
 --- !u!4 &1156084086
 Transform:
   m_ObjectHideFlags: 0
