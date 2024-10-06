@@ -22,7 +22,7 @@ namespace VInspector
                 else
                     serializedKvps.Add(kvp);
 
-            serializedKvps.RemoveAll(r => !this.ContainsKey(r.Key));
+            serializedKvps.RemoveAll(r => r.Key is not null && !this.ContainsKey(r.Key));
 
             for (int i = 0; i < serializedKvps.Count; i++)
                 serializedKvps[i].index = i;
@@ -32,11 +32,18 @@ namespace VInspector
         {
             this.Clear();
 
-            serializedKvps.RemoveAll(r => r.Key is null);
-
             foreach (var serializedKvp in serializedKvps)
-                if (!(serializedKvp.isKeyRepeated = this.ContainsKey(serializedKvp.Key)))
-                    this.Add(serializedKvp.Key, serializedKvp.Value);
+            {
+                serializedKvp.isKeyNull = serializedKvp.Key is null;
+                serializedKvp.isKeyRepeated = serializedKvp.Key is not null && this.ContainsKey(serializedKvp.Key);
+
+                if (serializedKvp.isKeyNull) continue;
+                if (serializedKvp.isKeyRepeated) continue;
+
+
+                this.Add(serializedKvp.Key, serializedKvp.Value);
+
+            }
 
         }
 
@@ -49,7 +56,9 @@ namespace VInspector
             public TValue_ Value;
 
             public int index;
+
             public bool isKeyRepeated;
+            public bool isKeyNull;
 
 
             public SerializedKeyValuePair(TKey_ key, TValue_ value) { this.Key = key; this.Value = value; }
