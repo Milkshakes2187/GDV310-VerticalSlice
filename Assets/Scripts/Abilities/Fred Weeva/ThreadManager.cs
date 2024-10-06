@@ -25,7 +25,6 @@ public class ThreadManager : MonoBehaviour
 
     [Tab("References")]
     public GameObject ThreadPF;
-    public GameObject OuterThreadPF;
     public GameObject ThreadPointPF;
     //public GameObject ReaverPF;
 
@@ -33,22 +32,6 @@ public class ThreadManager : MonoBehaviour
     {
         InitializeArenaThreads();
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            
-        }
-
-       //// pick a random reaver spawn position
-       //int randomReaver = Random.Range(0, ReaverSpawns.Count);
-       //
-       //// Spawn both the reaver and another reaver on the opposite side of the map
-       //Instantiate(ReaverPF, ReaverSpawns[randomReaver].transform.position, Quaternion.identity);
-       //Instantiate(ReaverPF, ReaverOppositeSpawns[randomReaver].transform.position, Quaternion.identity);
-    }
-
 
     /***********************************************
     * InitializeArenaThreads: Initializes the threads for the thread weaver arena.
@@ -100,12 +83,12 @@ public class ThreadManager : MonoBehaviour
             int nextPoint = (i == iTotalPoints - 1) ? 0 : i + 1; // Determine the next point index
 
             // Instantiate an inner and outer thread
-            InstantiateThread(ThreadPF, ThreadInnerPoints[i].transform.position, ThreadInnerPoints[nextPoint].transform.position, edgeThreads);
-            InstantiateThread(OuterThreadPF, ThreadOuterPoints[i].transform.position, ThreadOuterPoints[nextPoint].transform.position,  edgeThreads);
+            InstantiateThread(ThreadInnerPoints[i].transform.position, ThreadInnerPoints[nextPoint].transform.position, edgeThreads);
+            InstantiateThread(ThreadOuterPoints[i].transform.position, ThreadOuterPoints[nextPoint].transform.position,  edgeThreads);
 
             // Instantiate in-between threads (Threads going from the outer points to the inner points as well as the inner points to the center of arena)
-            InstantiateThread(ThreadPF, ThreadInnerPoints[i].transform.position, fCenter, inbetweenTrheads);
-            InstantiateThread(ThreadPF, ThreadOuterPoints[i].transform.position, ThreadInnerPoints[i].transform.position, inbetweenTrheads);
+            InstantiateThread(ThreadInnerPoints[i].transform.position, fCenter, inbetweenTrheads);
+            InstantiateThread(ThreadOuterPoints[i].transform.position, ThreadInnerPoints[i].transform.position, inbetweenTrheads);
         }
     }
 
@@ -115,15 +98,16 @@ public class ThreadManager : MonoBehaviour
     * @parameter: GameObject, Vector3, Vector3, List
     * @return: void
     ************************************************/
-    GameObject InstantiateThread(GameObject _prefab, Vector3 _v3Pos, Vector3 _v3LookDir, List<GameObject> _threadList)
+    GameObject InstantiateThread(Vector3 _v3Pos, Vector3 _v3LookDir, List<GameObject> _threadList)
     {
         // create the thread and add it to its designated list
-        var thread = Instantiate(_prefab, _v3Pos, Quaternion.identity, transform);
+        var thread = Instantiate(ThreadPF, _v3Pos, Quaternion.identity, transform);
         float fDistBetweenPoints = Vector3.Distance(_v3Pos, _v3LookDir);
 
-        var threadChild = thread.transform.GetChild(0);
-        threadChild.transform.localScale = new Vector3(0.1f, 1, fDistBetweenPoints);
-        threadChild.transform.localPosition = new Vector3(0, 0, fDistBetweenPoints/2);
+        // Get the mesh component and set its size and scale
+        var threadMesh = thread.transform.GetChild(0);
+        threadMesh.transform.localScale = new Vector3(0.1f, 1, fDistBetweenPoints);
+        threadMesh.transform.localPosition = new Vector3(0, 0, fDistBetweenPoints/2);
 
         thread.transform.LookAt(_v3LookDir);
 
