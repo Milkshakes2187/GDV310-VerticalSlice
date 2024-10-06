@@ -22,14 +22,12 @@ namespace VInspector
 
         public static void ResetButtonGUI(Rect fieldRect, SerializedProperty property, FieldInfo fieldInfo, IEnumerable<object> targets)
         {
-            // if (!fieldRect.IsHovered()) return;
-
 
             object targetWithDefaultValues = GetTargetWithDefaulValues(targets.First().GetType());
 
             bool isResetted(object target)
             {
-                if (property.isInstantiatedPrefab) return !property.prefabOverride;
+                if (property.isInstantiatedPrefab && !PrefabUtility.IsAddedComponentOverride(property.serializedObject.targetObject)) return !property.prefabOverride;
 
                 if (targetWithDefaultValues as object == null) return true;
 
@@ -68,7 +66,7 @@ namespace VInspector
 
             if (!IconButton(buttonRect, "CrossIcon", iconSize, colorNormal, colorHovered, colorPressed)) return;
 
-            if (property.isInstantiatedPrefab)
+            if (property.isInstantiatedPrefab && !PrefabUtility.IsAddedComponentOverride(property.serializedObject.targetObject))
             {
                 foreach (var target in property.serializedObject.targetObjects)
                     target.RecordUndo();

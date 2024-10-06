@@ -1235,7 +1235,7 @@ namespace VInspector.Libs
             var isSymbolDefined = Enumerable.Range(0, definesList.Count).Any(i => definesList[i].GetFieldValue<string>("define") == symbol);
 
 
-            editor.DestroyImmediate();
+            Object.DestroyImmediate(editor);
 
             return isSymbolDefined;
 
@@ -1265,7 +1265,7 @@ namespace VInspector.Libs
 
             editor.InvokeMethod("Apply");
 
-            editor.DestroyImmediate();
+            Object.DestroyImmediate(editor);
 
         }
         static void UndefineSymbolInAsmdef(string asmdefName, string symbol)
@@ -1288,7 +1288,7 @@ namespace VInspector.Libs
 
             editor.InvokeMethod("Apply");
 
-            editor.DestroyImmediate();
+            Object.DestroyImmediate(editor);
 
         }
 
@@ -1306,21 +1306,6 @@ namespace VInspector.Libs
 
         }
         public static void PingObject(string guid, bool select = false, bool focusProjectWindow = true) => PingObject(AssetDatabase.LoadAssetAtPath<Object>(guid.ToPath()));
-
-        public static void OpenFolder(string path)
-        {
-            var folder = AssetDatabase.LoadAssetAtPath(path, typeof(Object));
-
-            var t = typeof(Editor).Assembly.GetType("UnityEditor.ProjectBrowser");
-            var w = (EditorWindow)t.GetField("s_LastInteractedProjectBrowser").GetValue(null);
-
-            var m_ListAreaState = t.GetField("m_ListAreaState", maxBindingFlags).GetValue(w);
-
-            m_ListAreaState.GetType().GetField("m_SelectedInstanceIDs").SetValue(m_ListAreaState, new List<int> { folder.GetInstanceID() });
-
-            t.GetMethod("OpenSelectedFolders", maxBindingFlags).Invoke(null, null);
-
-        }
 
         public static void SelectInInspector(this Object[] objects, bool frameInHierarchy = false, bool frameInProject = false)
         {
@@ -1347,44 +1332,72 @@ namespace VInspector.Libs
 
 
 
-        public static EditorWindow OpenObjectPicker<T>(Object obj = null, bool allowSceneObjects = false, string searchFilter = "", int controlID = 0) where T : Object
-        {
-            EditorGUIUtility.ShowObjectPicker<T>(obj, allowSceneObjects, searchFilter, controlID);
 
-            return Resources.FindObjectsOfTypeAll(typeof(Editor).Assembly.GetType("UnityEditor.ObjectSelector")).FirstOrDefault() as EditorWindow;
+
+
+        public static class EditorPrefsCached
+        {
+            public static bool GetBool(string key, bool defaultValue = false)
+            {
+                if (bools_byKey.ContainsKey(key))
+                    return bools_byKey[key];
+                else
+                    return bools_byKey[key] = EditorPrefs.GetBool(key, defaultValue);
+
+            }
+            public static void SetFloat(string key, float value)
+            {
+                floats_byKey[key] = value;
+
+                EditorPrefs.SetFloat(key, value);
+
+            }
+
+            public static void SetBool(string key, bool value)
+            {
+                bools_byKey[key] = value;
+
+                EditorPrefs.SetBool(key, value);
+
+            }
+            public static float GetFloat(string key, float defaultValue = 0)
+            {
+                if (floats_byKey.ContainsKey(key))
+                    return floats_byKey[key];
+                else
+                    return floats_byKey[key] = EditorPrefs.GetFloat(key, defaultValue);
+
+            }
+
+
+
+            static Dictionary<string, bool> bools_byKey = new();
+            static Dictionary<string, float> floats_byKey = new();
 
         }
-        public static EditorWindow OpenColorPicker(System.Action<Color> colorChangedCallback, Color color, bool showAlpha = true, bool hdr = false)
-        {
-            typeof(Editor).Assembly.GetType("UnityEditor.ColorPicker").InvokeMethod("Show", colorChangedCallback, color, showAlpha, hdr);
 
-            return typeof(Editor).Assembly.GetType("UnityEditor.ColorPicker").GetPropertyValue<EditorWindow>("instance");
+        public static class ProjectPrefs
+        {
+            public static int GetInt(string key, int defaultValue = 0) => EditorPrefs.GetInt(key + projectId, defaultValue);
+            public static bool GetBool(string key, bool defaultValue = false) => EditorPrefs.GetBool(key + projectId, defaultValue);
+            public static float GetFloat(string key, float defaultValue = 0) => EditorPrefs.GetFloat(key + projectId, defaultValue);
+            public static string GetString(string key, string defaultValue = "") => EditorPrefs.GetString(key + projectId, defaultValue);
+
+            public static void SetInt(string key, int value) => EditorPrefs.SetInt(key + projectId, value);
+            public static void SetBool(string key, bool value) => EditorPrefs.SetBool(key + projectId, value);
+            public static void SetFloat(string key, float value) => EditorPrefs.SetFloat(key + projectId, value);
+            public static void SetString(string key, string value) => EditorPrefs.SetString(key + projectId, value);
+
+
+
+            public static bool HasKey(string key) => EditorPrefs.HasKey(key + projectId);
+            public static void DeleteKey(string key) => EditorPrefs.DeleteKey(key + projectId);
+
+
+
+            public static int projectId => PlayerSettings.productGUID.GetHashCode();
 
         }
-
-
-        public static void MoveTo(this EditorWindow window, Vector2 position, bool ensureFitsOnScreen = true)
-        {
-            if (!ensureFitsOnScreen) { window.position = window.position.SetPos(position); return; }
-
-            var windowRect = window.position;
-            var unityWindowRect = EditorGUIUtility.GetMainWindowPosition();
-
-            position.x = position.x.Max(unityWindowRect.position.x);
-            position.y = position.y.Max(unityWindowRect.position.y);
-
-            position.x = position.x.Min(unityWindowRect.xMax - windowRect.width);
-            position.y = position.y.Min(unityWindowRect.yMax - windowRect.height);
-
-            window.position = windowRect.SetPos(position);
-
-        }
-
-
-
-
-        public static int GetProjectId() => Application.dataPath.GetHashCode();
-
 
 
 
@@ -1663,56 +1676,55 @@ namespace VInspector.Libs
         #region Events
 
 
-        public struct WrappedEvent
+        public class WrappedEvent
         {
             public Event e;
 
-            public bool isNull => e == null;
-            public bool isRepaint => isNull ? default : e.type == EventType.Repaint;
-            public bool isLayout => isNull ? default : e.type == EventType.Layout;
-            public bool isUsed => isNull ? default : e.type == EventType.Used;
-            public bool isMouseLeaveWindow => isNull ? default : e.type == EventType.MouseLeaveWindow;
-            public bool isMouseEnterWindow => isNull ? default : e.type == EventType.MouseEnterWindow;
-            public bool isContextClick => isNull ? default : e.type == EventType.ContextClick;
+            public bool isRepaint => e.type == EventType.Repaint;
+            public bool isLayout => e.type == EventType.Layout;
+            public bool isUsed => e.type == EventType.Used;
+            public bool isMouseLeaveWindow => e.type == EventType.MouseLeaveWindow;
+            public bool isMouseEnterWindow => e.type == EventType.MouseEnterWindow;
+            public bool isContextClick => e.type == EventType.ContextClick;
 
-            public bool isKeyDown => isNull ? default : e.type == EventType.KeyDown;
-            public bool isKeyUp => isNull ? default : e.type == EventType.KeyUp;
-            public KeyCode keyCode => isNull ? default : e.keyCode;
-            public char characted => isNull ? default : e.character;
+            public bool isKeyDown => e.type == EventType.KeyDown;
+            public bool isKeyUp => e.type == EventType.KeyUp;
+            public KeyCode keyCode => e.keyCode;
+            public char characted => e.character;
 
-            public bool isExecuteCommand => isNull ? default : e.type == EventType.ExecuteCommand;
-            public string commandName => isNull ? default : e.commandName;
+            public bool isExecuteCommand => e.type == EventType.ExecuteCommand;
+            public string commandName => e.commandName;
 
-            public bool isMouse => isNull ? default : e.isMouse;
-            public bool isMouseDown => isNull ? default : e.type == EventType.MouseDown;
-            public bool isMouseUp => isNull ? default : e.type == EventType.MouseUp;
-            public bool isMouseDrag => isNull ? default : e.type == EventType.MouseDrag;
-            public bool isMouseMove => isNull ? default : e.type == EventType.MouseMove;
-            public bool isScroll => isNull ? default : e.type == EventType.ScrollWheel;
-            public int mouseButton => isNull ? default : e.button;
-            public int clickCount => isNull ? default : e.clickCount;
-            public Vector2 mousePosition => isNull ? default : e.mousePosition;
-            public Vector2 mousePosition_screenSpace => isNull ? default : GUIUtility.GUIToScreenPoint(e.mousePosition);
-            public Vector2 mouseDelta => isNull ? default : e.delta;
+            public bool isMouse => e.isMouse;
+            public bool isMouseDown => e.type == EventType.MouseDown;
+            public bool isMouseUp => e.type == EventType.MouseUp;
+            public bool isMouseDrag => e.type == EventType.MouseDrag;
+            public bool isMouseMove => e.type == EventType.MouseMove;
+            public bool isScroll => e.type == EventType.ScrollWheel;
+            public int mouseButton => e.button;
+            public int clickCount => e.clickCount;
+            public Vector2 mousePosition => e.mousePosition;
+            public Vector2 mousePosition_screenSpace => GUIUtility.GUIToScreenPoint(e.mousePosition);
+            public Vector2 mouseDelta => e.delta;
 
-            public bool isDragUpdate => isNull ? default : e.type == EventType.DragUpdated;
-            public bool isDragPerform => isNull ? default : e.type == EventType.DragPerform;
-            public bool isDragExit => isNull ? default : e.type == EventType.DragExited;
+            public bool isDragUpdate => e.type == EventType.DragUpdated;
+            public bool isDragPerform => e.type == EventType.DragPerform;
+            public bool isDragExit => e.type == EventType.DragExited;
 
-            public EventModifiers modifiers => isNull ? default : e.modifiers;
+            public EventModifiers modifiers => e.modifiers;
             public bool holdingAnyModifierKey => modifiers != EventModifiers.None;
 
-            public bool holdingAlt => isNull ? default : e.alt;
-            public bool holdingShift => isNull ? default : e.shift;
-            public bool holdingCtrl => isNull ? default : e.control;
-            public bool holdingCmd => isNull ? default : e.command;
-            public bool holdingCmdOrCtrl => isNull ? default : e.command || e.control;
+            public bool holdingAlt => e.alt;
+            public bool holdingShift => e.shift;
+            public bool holdingCtrl => e.control;
+            public bool holdingCmd => e.command;
+            public bool holdingCmdOrCtrl => e.command || e.control;
 
-            public bool holdingAltOnly => isNull ? default : e.modifiers == EventModifiers.Alt;        // in some sessions FunctionKey is always pressed?
-            public bool holdingShiftOnly => isNull ? default : e.modifiers == EventModifiers.Shift;        // in some sessions FunctionKey is always pressed?
-            public bool holdingCtrlOnly => isNull ? default : e.modifiers == EventModifiers.Control;
-            public bool holdingCmdOnly => isNull ? default : e.modifiers == EventModifiers.Command;
-            public bool holdingCmdOrCtrlOnly => isNull ? default : (e.modifiers == EventModifiers.Command || e.modifiers == EventModifiers.Control);
+            public bool holdingAltOnly => e.modifiers == EventModifiers.Alt;        // in some sessions FunctionKey is always pressed?
+            public bool holdingShiftOnly => e.modifiers == EventModifiers.Shift;        // in some sessions FunctionKey is always pressed?
+            public bool holdingCtrlOnly => e.modifiers == EventModifiers.Control;
+            public bool holdingCmdOnly => e.modifiers == EventModifiers.Command;
+            public bool holdingCmdOrCtrlOnly => (e.modifiers == EventModifiers.Command || e.modifiers == EventModifiers.Control);
 
             public EventType type => e.type;
 
@@ -1726,8 +1738,9 @@ namespace VInspector.Libs
         }
 
         public static WrappedEvent Wrap(this Event e) => new(e);
-        public static WrappedEvent curEvent => (Event.current ?? _fi_s_Current.GetValue(null) as Event).Wrap();
-        static FieldInfo _fi_s_Current = typeof(Event).GetField("s_Current", maxBindingFlags);
+
+        public static WrappedEvent curEvent => _curEvent ??= typeof(Event).GetFieldValue<Event>("s_Current").Wrap();
+        static WrappedEvent _curEvent;
 
 
 
@@ -1742,7 +1755,7 @@ namespace VInspector.Libs
 
         public static bool isDarkTheme => EditorGUIUtility.isProSkin;
 
-        public static bool IsHovered(this Rect r) => !curEvent.isNull && r.Contains(curEvent.mousePosition);
+        public static bool IsHovered(this Rect r) => r.Contains(curEvent.mousePosition);
 
         public static float GetLabelWidth(this string s) => GUI.skin.label.CalcSize(new GUIContent(s)).x;
         public static float GetLabelWidth(this string s, int fontSize)

@@ -5,6 +5,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 163041
   packageName: Modern Procedural UI Kit
-  packageVersion: 1.2.1
-  assetPath: Assets/MPUIKit/Runtime/Scripts/Utility/MPMaterials.cs
-  uploadId: 668392
+  packageVersion: 1.2.2
+  assetPath: Assets/3rdPartyAssets/MPUIKit/Runtime/Scripts/Utility/MPMaterials.cs
+  uploadId: 681261
