@@ -1,3 +1,4 @@
+using MPUIKIT;
 using UnityEngine;
 
 
@@ -20,13 +21,35 @@ public class Ability : MonoBehaviour
 
     E_CastStyle castStyle = E_CastStyle.CAST_TIME;
 
+
+    //strength of spell?
     float fStrength = 0.0f;
 
-    // cooldown
-    // damage
-    // etc
+
+    //ability icon
+    [SerializeField] MPImage AbilityIcon = null;
 
 
 
 
+
+
+
+
+    public void CastSpell()
+    {
+
+    }
+
+
+
+    public bool CheckSpellFinishedCasting(float _currentCastTime)
+    {
+        if(_currentCastTime >= fCastTime)
+        {
+            return true;
+        }
+
+        return false;
+    }
 }
