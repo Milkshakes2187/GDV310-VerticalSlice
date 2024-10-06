@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditor.ShortcutManagement;
 using System.Reflection;
 using System.Linq;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using UnityEditor.SceneManagement;
@@ -22,7 +23,8 @@ namespace VInspector
 
         void OnGUI()
         {
-            if (!component || !editor) { Close(); return; } // todo script components break on playmode
+            if (!component) { Close(); return; }
+            if (!editor) { Init(component); skipHeightUpdate = true; }
 
 
             void background()
@@ -200,8 +202,11 @@ namespace VInspector
                 escHint();
 
             }
-            void body()
+            void body_imgui()
             {
+                if (useUITK) return;
+
+
                 EditorGUIUtility.labelWidth = (this.position.width * .4f).Max(120);
 
                 BeginIndent(17);
@@ -214,12 +219,28 @@ namespace VInspector
 
             }
 
-            void updateHeight()
+            void updateHeight_imgui()
             {
+                if (useUITK) return;
+
                 var r = ExpandWidthLabelRect();
 
-                if (curEvent.isRepaint)
-                    position = position.SetHeight(lastRect.y);
+
+                if (!curEvent.isRepaint) return;
+
+                position = position.SetHeight(lastRect.y);
+
+            }
+            void updateHeight_uitk()
+            {
+                if (!useUITK) return;
+                if (!curEvent.isRepaint) return;
+                if (skipHeightUpdate) { skipHeightUpdate = false; return; } // crashses otherwise
+
+
+                var lastElement = inspectorElement[inspectorElement.childCount - 1];
+
+                position = position.SetHeight(lastElement.contentRect.yMax + 33);
 
             }
             void closeOnEscape()
@@ -294,12 +315,13 @@ namespace VInspector
             outline();
 
             Space(3);
-            body();
+            body_imgui();
 
             Space(7);
 
 
-            updateHeight();
+            updateHeight_imgui();
+            updateHeight_uitk();
             closeOnEscape();
 
             horizontalResize();
@@ -317,13 +339,9 @@ namespace VInspector
         public Vector2 resizeStartMousePos;
         public Vector2 resizeStartWindowSize;
 
+        bool skipHeightUpdate;
+
         static Dictionary<System.Type, Texture> componentIcons_byType = new();
-
-
-
-
-
-
 
 
 
@@ -340,8 +358,20 @@ namespace VInspector
             this.component = component;
             this.editor = Editor.CreateEditor(component);
 
+            hasCustomUITKEditor = editor.GetType().GetMethod("CreateInspectorGUI", maxBindingFlags) != null;
+
             if (!instances.Contains(this))
                 instances.Add(this);
+
+
+
+            if (!useUITK) return;
+
+            inspectorElement = new InspectorElement(editor.serializedObject);
+
+            inspectorElement.style.marginTop = 23;
+
+            this.rootVisualElement.Add(inspectorElement);
 
         }
 
@@ -356,6 +386,10 @@ namespace VInspector
 
         public Component component;
         public Editor editor;
+        public InspectorElement inspectorElement;
+
+        bool useUITK => editor.target is MonoBehaviour && (VInspectorEditor.HasUITKOnlyDrawers(editor.serializedObject) || hasCustomUITKEditor);
+        bool hasCustomUITKEditor;
 
         public static List<VInspectorComponentWindow> instances = new();
 
