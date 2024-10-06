@@ -80,20 +80,35 @@ namespace VInspector
                     if (!curEvent.isRepaint) return;
 
 
-                    var hasRepeated = false;
+                    var hasRepeatedKeys = false;
+                    var hasNullKeys = false;
 
                     for (int i = 0; i < kvpsProp.arraySize; i++)
-                        hasRepeated |= kvpsProp.GetArrayElementAtIndex(i).FindPropertyRelative("isKeyRepeated").boolValue;
+                    {
+                        hasRepeatedKeys |= kvpsProp.GetArrayElementAtIndex(i).FindPropertyRelative("isKeyRepeated").boolValue;
+                        hasNullKeys |= kvpsProp.GetArrayElementAtIndex(i).FindPropertyRelative("isKeyNull").boolValue;
+                    }
+
+                    if (!hasRepeatedKeys && !hasNullKeys) return;
 
 
-                    if (!hasRepeated) return;
 
-                    var warningRect = headerRect.AddWidthFromRight(-prop.displayName.GetLabelWidth(isBold: true));
+                    var warningTextRect = headerRect.AddWidthFromRight(-prop.displayName.GetLabelWidth(isBold: true));
+                    var warningIconRect = warningTextRect.SetHeightFromMid(20).SetWidth(20);
 
-                    GUI.Label(warningRect.SetHeightFromMid(20).SetWidth(20), EditorGUIUtility.IconContent("Warning"));
+                    var warningText = (hasRepeatedKeys && hasNullKeys) ? "Repeated and null keys"
+                                                     : hasRepeatedKeys ? "Repeated keys"
+                                                         : hasNullKeys ? "Null keys" : "";
+
+
+
+                    GUI.Label(warningIconRect, EditorGUIUtility.IconContent("Warning"));
+
 
                     SetGUIColor(new Color(1, .9f, .03f) * 1.1f);
-                    GUI.Label(warningRect.MoveX(16), "Repeated keys");
+
+                    GUI.Label(warningTextRect.MoveX(16), warningText);
+
                     ResetGUIColor();
 
                 }
@@ -147,7 +162,7 @@ namespace VInspector
                 // var height = typeof(Editor).Assembly.GetType("UnityEditor.ScriptAttributeUtility").InvokeMethod("GetHandler", prop).InvokeMethod<float>("GetHeight", prop, GUIContent.none, true);
                 var height = EditorGUI.GetPropertyHeight(prop);
 
-                if (!IsSingleLine(prop))
+                if (!IsSingleLine(prop) && prop.type != "EventReference")
                     height -= 10;
 
                 return height;
@@ -177,7 +192,14 @@ namespace VInspector
 
                 GUI.BeginGroup(rect);
 
-                EditorGUI.PropertyField(rect.SetPos(0, -20), prop, true);
+                if (prop.type == "EventReference") // don't hide first line for FMOD EventReference
+                {
+                    EditorGUIUtility.labelWidth = 1;
+                    EditorGUI.PropertyField(rect.SetPos(0, 0), prop, GUIContent.none);
+                    EditorGUIUtility.labelWidth = 0;
+                }
+                else
+                    EditorGUI.PropertyField(rect.SetPos(0, -20), prop, true);
 
                 GUI.EndGroup();
 
@@ -200,8 +222,22 @@ namespace VInspector
             {
                 drawProp(keyRect, keyProp);
 
-                if (kvpProp.FindPropertyRelative("isKeyRepeated").boolValue)
-                    GUI.Label(keyRect.SetWidthFromRight(20).SetHeight(20).MoveY(-1), EditorGUIUtility.IconContent("Warning"));
+            }
+            void warning()
+            {
+                var isKeyRepeated = kvpProp.FindPropertyRelative("isKeyRepeated").boolValue;
+                var isKeyNull = kvpProp.FindPropertyRelative("isKeyNull").boolValue;
+
+                if (!isKeyRepeated && !isKeyNull) return;
+
+
+                var warningRect = keyRect.SetWidthFromRight(20).SetHeight(20).MoveY(-1);
+
+                if (kvpProp.FindPropertyRelative("Key").propertyType == SerializedPropertyType.ObjectReference)
+                    warningRect = warningRect.MoveX(-17);
+
+
+                GUI.Label(warningRect, EditorGUIUtility.IconContent("Warning"));
 
             }
             void value()
@@ -230,6 +266,7 @@ namespace VInspector
 
             rects();
             key();
+            warning();
             value();
             divider();
 
@@ -291,7 +328,7 @@ namespace VInspector
 
 
     [CustomPropertyDrawer(typeof(VariantsAttribute))]
-    public class VariantsAttributeDrawer : PropertyDrawer
+    public class VariantsDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect rect, SerializedProperty prop, GUIContent label)
         {
@@ -310,6 +347,75 @@ namespace VInspector
                 prop.SetBoxedValue(variants[0]);
 
             EditorGUI.EndProperty();
+
+        }
+    }
+
+
+    [CustomPropertyDrawer(typeof(MinMaxSliderAttribute))]
+    public class MinMaxSliderDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect rect, SerializedProperty prop, GUIContent label)
+        {
+            var fieldWidth = 52;
+
+            var controlsRect = rect.AddWidthFromRight(-EditorGUIUtility.labelWidth);
+
+            var minFieldRect = controlsRect.SetWidth(fieldWidth).AddWidthFromRight(-2 + EditorGUI.indentLevel * 15);
+            var maxFieldRect = controlsRect.SetWidthFromRight(fieldWidth).AddWidthFromRight(-2 + EditorGUI.indentLevel * 15);
+            var sliderRect = controlsRect.AddWidthFromMid(-fieldWidth * 2 - 4).AddWidthFromRight(-2 + EditorGUI.indentLevel * 15);
+
+
+            var isInt = prop.propertyType == SerializedPropertyType.Vector2Int;
+
+            var min = isInt ? prop.vector2IntValue.x : prop.vector2Value.x;
+            var max = isInt ? prop.vector2IntValue.y : prop.vector2Value.y;
+
+            var minLimit = ((MinMaxSliderAttribute)attribute).min;
+            var maxLimit = ((MinMaxSliderAttribute)attribute).max;
+
+
+
+
+            EditorGUI.PrefixLabel(rect, label);
+
+
+            EditorGUI.BeginProperty(rect, label, prop);
+
+            if (sliderRect.width > 14)
+            {
+                EditorGUI.BeginChangeCheck();
+
+                EditorGUI.MinMaxSlider(sliderRect, ref min, ref max, minLimit, maxLimit);
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    var abs = (maxLimit - minLimit).Abs();
+
+                    var decimals = abs > 190 ?
+                               0 : abs > 19 ?
+                               1 : abs > 1.9f ?
+                               2 :
+                               3;
+
+                    min = (float)System.Math.Round(min, decimals);
+                    max = (float)System.Math.Round(max, decimals);
+
+                    // same rounding logic as for [Range]
+                }
+
+            }
+
+            min = EditorGUI.DelayedFloatField(minFieldRect, min).Max(minLimit).Min(maxLimit);
+            max = EditorGUI.DelayedFloatField(maxFieldRect, max).Max(min).Max(minLimit).Min(maxLimit);
+
+            if (isInt)
+                prop.vector2IntValue = new Vector2Int(min.RoundToInt(), max.RoundToInt());
+            else
+                prop.vector2Value = new Vector2(min, max);
+
+            EditorGUI.EndProperty();
+
 
         }
     }

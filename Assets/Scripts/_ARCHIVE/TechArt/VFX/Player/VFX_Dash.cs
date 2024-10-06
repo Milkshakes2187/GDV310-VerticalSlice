@@ -14,7 +14,7 @@ public class VFX_Dash : MonoBehaviour
     }
     void Start()
     {
-        player.OnDash += ActivateDash;
+        //player.OnDash += ActivateDash;
     }
 
     private void ActivateDash(float dashLength)
