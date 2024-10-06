@@ -66,9 +66,7 @@ public class ThreadManager : MonoBehaviour
         {
             /* 
              Create a hexagon by placing 6 points at even spaces around a circle
-            
-             When facing forward in the world (towards z axis) this is the order of the placements
-             --- (Placement always starts on the right side going counter-clockwise)
+             --- Placement always starts on the right side going counter-clockwise
             
                     3   2
                     *   *
@@ -102,12 +100,12 @@ public class ThreadManager : MonoBehaviour
             int nextPoint = (i == iTotalPoints - 1) ? 0 : i + 1; // Determine the next point index
 
             // Instantiate an inner and outer thread
-            var innerThread = InstantiateThread(ThreadPF, ThreadInnerPoints[i].transform.position, ThreadInnerPoints[nextPoint].transform.position, edgeThreads);
-            var outerThread = InstantiateThread(OuterThreadPF, ThreadOuterPoints[i].transform.position, ThreadOuterPoints[nextPoint].transform.position,  edgeThreads);
+            InstantiateThread(ThreadPF, ThreadInnerPoints[i].transform.position, ThreadInnerPoints[nextPoint].transform.position, edgeThreads);
+            InstantiateThread(OuterThreadPF, ThreadOuterPoints[i].transform.position, ThreadOuterPoints[nextPoint].transform.position,  edgeThreads);
 
             // Instantiate in-between threads (Threads going from the outer points to the inner points as well as the inner points to the center of arena)
-            var inBetweenInnerThread = InstantiateThread(ThreadPF, ThreadInnerPoints[i].transform.position, fCenter, inbetweenTrheads);
-            var inBetweenOuterThread = InstantiateThread(ThreadPF, ThreadOuterPoints[i].transform.position, fCenter, inbetweenTrheads);
+            InstantiateThread(ThreadPF, ThreadInnerPoints[i].transform.position, fCenter, inbetweenTrheads);
+            InstantiateThread(ThreadPF, ThreadOuterPoints[i].transform.position, ThreadInnerPoints[i].transform.position, inbetweenTrheads);
         }
     }
 
@@ -121,6 +119,12 @@ public class ThreadManager : MonoBehaviour
     {
         // create the thread and add it to its designated list
         var thread = Instantiate(_prefab, _v3Pos, Quaternion.identity, transform);
+        float fDistBetweenPoints = Vector3.Distance(_v3Pos, _v3LookDir);
+
+        var threadChild = thread.transform.GetChild(0);
+        threadChild.transform.localScale = new Vector3(0.1f, 1, fDistBetweenPoints);
+        threadChild.transform.localPosition = new Vector3(0, 0, fDistBetweenPoints/2);
+
         thread.transform.LookAt(_v3LookDir);
 
         _threadList.Add(thread);
