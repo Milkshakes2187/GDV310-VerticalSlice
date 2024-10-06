@@ -18,14 +18,14 @@ public class Character : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
-        fHealth = fMaxHealth;
+        health = maxHealth;
     }
 
     public void TakeDamage(float _fDamage)
     {
-        fHealth -= _fDamage;
+        health -= _fDamage;
 
-        if (fHealth <= 0)
+        if (health <= 0)
         {
             TriggerDeath();
         }
@@ -33,7 +33,7 @@ public class Character : MonoBehaviour
 
     protected void Heal(float _fHealAmount)
     {
-        fHealth = fHealth + _fHealAmount > fMaxHealth ? fMaxHealth : fHealth + _fHealAmount;
+        health = health + _fHealAmount > maxHealth ? maxHealth : health + _fHealAmount;
     }
 
     protected void TriggerDeath()
