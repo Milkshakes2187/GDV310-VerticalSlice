@@ -26,8 +26,6 @@ public class Ability : MonoBehaviour
     float fStrength = 0.0f;
 
 
-    //ability icon
-    [SerializeField] MPImage AbilityIcon = null;
 
 
 
@@ -35,8 +33,7 @@ public class Ability : MonoBehaviour
 
 
 
-
-    public void CastSpell()
+    public virtual void CastSpell()
     {
 
     }
