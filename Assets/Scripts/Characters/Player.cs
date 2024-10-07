@@ -130,7 +130,7 @@ public class Player : Character
         float velocity = 0.0f;
         if (bCanMove)
         {
-            charController.Move(v3MoveVec * moveSpeed * Time.deltaTime);
+            charController.Move(v3MoveVec * moveSpeed * speedMultiplier * Time.deltaTime);
             velocity = charController.velocity.magnitude;
         }
 

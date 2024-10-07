@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class ThreadCollision : MonoBehaviour
 {
-    Thread parentThread;
+    public Thread parentThread;
 
-    private void Start()
+    private void Awake()
     {
-        parentThread = transform.root.GetComponent<Thread>();
     }
 
     private void OnTriggerEnter(Collider other)

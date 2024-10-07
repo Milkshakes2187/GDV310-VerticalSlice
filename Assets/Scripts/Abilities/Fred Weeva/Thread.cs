@@ -9,6 +9,8 @@ public class Thread : MonoBehaviour
     public Material activeMat;
     public Material inactiveMat;
 
+    public GameObject statusPF;
+
     public bool isThreadActive = false;
 
     private void Start()
@@ -35,5 +37,7 @@ public class Thread : MonoBehaviour
     public void CharacterCollided(Character _character)
     {
         _character.TakeDamage(50);
+
+        var slowStatus = Instantiate(statusPF, _character.transform);
     }
 }

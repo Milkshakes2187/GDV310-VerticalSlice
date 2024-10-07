@@ -48,6 +48,7 @@ MonoBehaviour:
   mesh: {fileID: 7205356732019252381}
   activeMat: {fileID: 2100000, guid: 7b4efa1de99b43444880e3b0cbcc17bd, type: 2}
   inactiveMat: {fileID: 2100000, guid: 56578421612ad4d4d9d5438dd36fd001, type: 2}
+  statusPF: {fileID: 8480516010316039844, guid: 24365bb372544b94aa6508b31cc0e934, type: 3}
   isThreadActive: 0
 --- !u!1 &7205356732019252381
 GameObject:
@@ -97,6 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b502a288accbb45a09ba3d39dd25cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parentThread: {fileID: 7735904784587225629}
 --- !u!33 &2095635876115695730
 MeshFilter:
   m_ObjectHideFlags: 0
