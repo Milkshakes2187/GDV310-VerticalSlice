@@ -68,7 +68,7 @@ public class Player : Character
     {
         charController = GetComponent<CharacterController>();
         playerAnim = GetComponent<Animator>();
-        fHealth = fMaxHealth;
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -130,7 +130,7 @@ public class Player : Character
         float velocity = 0.0f;
         if (bCanMove)
         {
-            charController.Move(v3MoveVec * fMoveSpeed * Time.deltaTime);
+            charController.Move(v3MoveVec * moveSpeed * speedMultiplier * Time.deltaTime);
             velocity = charController.velocity.magnitude;
         }
 
@@ -168,7 +168,7 @@ public class Player : Character
         v3MoveVec = Vector3.zero;
         float velocity = 0.0f;
 
-        charController.Move(v3MoveVec * fMoveSpeed * Time.deltaTime);
+        charController.Move(v3MoveVec * moveSpeed * Time.deltaTime);
         velocity = charController.velocity.magnitude;
 
 

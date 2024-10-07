@@ -11,6 +11,9 @@ public class ThreadManager : MonoBehaviour
 
     public int iTotalPoints = 6; // set the amount of points on the circle to place a thread point (e.g. 6 = Hexagon)
 
+    public int interwovenThreadsCount = 5;
+    public int wovenRealityCount = 3;
+
     //public List<GameObject> ReaverSpawns;
     //public List<GameObject> ReaverOppositeSpawns;
 
@@ -21,7 +24,7 @@ public class ThreadManager : MonoBehaviour
 
     [Header("Threads")]
     public List<GameObject> edgeThreads;
-    public List<GameObject> inbetweenTrheads;
+    public List<GameObject> inbetweenThreads;
 
     [Tab("References")]
     public GameObject ThreadPF;
@@ -31,6 +34,14 @@ public class ThreadManager : MonoBehaviour
     private void Start()
     {
         InitializeArenaThreads();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            InterwovenThreads();
+        }
     }
 
     /***********************************************
@@ -87,8 +98,8 @@ public class ThreadManager : MonoBehaviour
             InstantiateThread(ThreadOuterPoints[i].transform.position, ThreadOuterPoints[nextPoint].transform.position,  edgeThreads);
 
             // Instantiate in-between threads (Threads going from the outer points to the inner points as well as the inner points to the center of arena)
-            InstantiateThread(ThreadInnerPoints[i].transform.position, fCenter, inbetweenTrheads);
-            InstantiateThread(ThreadOuterPoints[i].transform.position, ThreadInnerPoints[i].transform.position, inbetweenTrheads);
+            InstantiateThread(ThreadInnerPoints[i].transform.position, fCenter, inbetweenThreads);
+            InstantiateThread(ThreadOuterPoints[i].transform.position, ThreadInnerPoints[i].transform.position, inbetweenThreads);
         }
     }
 
@@ -115,4 +126,43 @@ public class ThreadManager : MonoBehaviour
 
         return thread;
     }
+
+    void ResetThreads()
+    {
+        foreach (var thread in edgeThreads)
+        {
+            thread.GetComponent<Thread>().ChangeThreadState(false);
+        }
+    }
+
+    void InterwovenThreads() // TODO: Efficientize this + comments (Move to own script)
+    {
+        ResetThreads();
+
+        int threadsActive = 0;
+
+        while (threadsActive < interwovenThreadsCount)
+        {
+            int randomThread = Random.Range(0, edgeThreads.Count);
+
+            if (!edgeThreads[randomThread].GetComponent<Thread>().isThreadActive)
+            {
+                edgeThreads[randomThread].GetComponent<Thread>().ChangeThreadState(true);
+
+                threadsActive++;
+            }
+        }
+    }
+
+    void WovenReality() // TODO: Efficientize this + comments
+    {
+        int threadsActive = 0;
+
+        while (threadsActive < wovenRealityCount)
+        {
+            int randomThread = Random.Range(0, inbetweenThreads.Count);
+        }
+
+    }
+
 }
