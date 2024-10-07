@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.TextCore.Text;
 using VInspector;
 
 public class Thread : MonoBehaviour
@@ -29,5 +30,10 @@ public class Thread : MonoBehaviour
         {
             meshRenderer.material = inactiveMat;
         }
+    }
+
+    public void CharacterCollided(Character _character)
+    {
+        _character.TakeDamage(50);
     }
 }
