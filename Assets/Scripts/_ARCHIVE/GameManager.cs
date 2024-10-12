@@ -72,32 +72,32 @@ public class GameManager : MonoBehaviour
 
     public void PauseUnpause()
     {
-        if (!bIsPaused)
-        {
-            bIsPaused = true;
-
-            // Pause game and reenable cursor
-            Time.timeScale = 0.0f;
-            Cursor.visible = true;
-            Cursor.lockState= CursorLockMode.None;
-
-            // Activate pause screen & disable player HUD
-            pauseScreen.SetActive(true);
-            playerHUD.SetActive(false);
-        }
-        else
-        {
-            bIsPaused = false;
-
-            // Pause game and reenable cursor
-            Time.timeScale = 1.0f;
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
-            // Deactivate pause screen
-            pauseScreen.SetActive(false);
-            playerHUD.SetActive(true);
-        }
+        //if (!bIsPaused)
+        //{
+        //    bIsPaused = true;
+        //
+        //    // Pause game and reenable cursor
+        //    Time.timeScale = 0.0f;
+        //    Cursor.visible = true;
+        //    Cursor.lockState= CursorLockMode.None;
+        //
+        //    // Activate pause screen & disable player HUD
+        //    pauseScreen.SetActive(true);
+        //    playerHUD.SetActive(false);
+        //}
+        //else
+        //{
+        //    bIsPaused = false;
+        //
+        //    // Pause game and reenable cursor
+        //    Time.timeScale = 1.0f;
+        //    Cursor.visible = false;
+        //    Cursor.lockState = CursorLockMode.Locked;
+        //
+        //    // Deactivate pause screen
+        //    pauseScreen.SetActive(false);
+        //    playerHUD.SetActive(true);
+        //}
     }
 
     public void GameOver(bool _bVictory)

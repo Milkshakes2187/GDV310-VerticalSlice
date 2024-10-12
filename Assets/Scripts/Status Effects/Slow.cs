@@ -14,6 +14,7 @@ public class Slow : StatusEffect
         if (existingSlow != null && existingSlow != this)
         {
             Destroy(existingSlow.gameObject);
+            return;
         }
 
         ApplyEffect();
