@@ -34,6 +34,10 @@ public class Player : Character
     [SerializeField] private float coyoteTime = 0.25f;
     [SerializeField] private float coyoteTimer = 0.0f;
 
+    public float acceleration = 4.0f;
+    public AnimationCurve frictionCurve;
+    public float stopFriction = 4.0f;
+
     //[Foldout("Dash Vars")]
     //[SerializeField] private float fDashDistance = 10.0f;
     //[SerializeField] private float fDashTime = 0.3f;
@@ -125,6 +129,7 @@ public class Player : Character
             moveInput.Normalize();
         }
 
+
         // Coyote time
         coyoteTimer -= Time.deltaTime;
         if ((charController.collisionFlags & CollisionFlags.Below) != 0)    // Grounded check
@@ -141,13 +146,19 @@ public class Player : Character
             coyoteTimer = 0.0f;
         }
 
-        moveVelocity.x = moveInput.x * moveSpeed * speedMultiplier;
         moveVelocity.y -= gravity * Time.deltaTime;
-        moveVelocity.z = moveInput.z * moveSpeed * speedMultiplier;
+        moveVelocity += moveInput * acceleration * Time.deltaTime;
 
-        float velocity = 0.0f;
-        charController.Move(moveVelocity * Time.deltaTime);
-        velocity = charController.velocity.magnitude;
+        // Apply friction - more friction if no movement input
+        float frictionVal = frictionCurve.Evaluate(moveVelocity.magnitude);
+        float frictionMod = (moveInput.sqrMagnitude < 0.01f) ? stopFriction : 1.0f;
+        moveVelocity -= moveVelocity.normalized * frictionVal * frictionMod * acceleration * Time.deltaTime;
+        
+        Vector3 velocity = moveVelocity;
+        velocity.x *= moveSpeed * speedMultiplier;
+        velocity.z *= moveSpeed * speedMultiplier;
+
+        charController.Move(velocity * Time.deltaTime);
         //if (canMove)
         //{
         //    charController.Move(moveVelocity * Time.deltaTime);
@@ -158,7 +169,7 @@ public class Player : Character
         //charController.Move(Vector3.up * -9.81f * Time.deltaTime * 2);
 
         // Update animator according to movement
-        playerAnim.SetFloat("Velocity", velocity);
+        playerAnim.SetFloat("Velocity", charController.velocity.magnitude);
     }
 
     void ProcessRotations()
@@ -194,11 +205,6 @@ public class Player : Character
     //    // Update animator according to movement
     //    playerAnim.SetFloat("Velocity", velocity);
     //}
-
-    public void Jump()
-    {
-
-    }
 
     //IEnumerator Dash()
     //{
