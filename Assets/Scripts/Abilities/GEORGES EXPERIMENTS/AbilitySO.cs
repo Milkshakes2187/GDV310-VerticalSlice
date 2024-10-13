@@ -4,7 +4,7 @@ using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 
 [CreateAssetMenu(fileName = "AbilitySO", menuName = "Scriptable Objects/AbilitySO")]
-public abstract class AbilitySO : ScriptableObject
+public  class AbilitySO : ScriptableObject
 {
     //Basic variables
     public string abilityName;
@@ -28,7 +28,7 @@ public abstract class AbilitySO : ScriptableObject
     public GameObject InitialiseAbility(Character _owner, Character _target, Vector3 _targetLocation)
     {
         //instantiating ability
-        var ability = Instantiate(abilityPrefab, _owner.transform.position, Quaternion.identity);
+        var ability = Instantiate(abilityPrefab, _targetLocation, Quaternion.identity);
 
         //initialising member variables
         ability.GetComponent<Ability>().owner = _owner;

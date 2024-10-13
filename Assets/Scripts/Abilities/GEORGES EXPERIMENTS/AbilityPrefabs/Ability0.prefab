@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6622381234472351554
+--- !u!1 &1645567380262440351
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,43 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3840616387687163822}
-  - component: {fileID: 8233128894761033718}
+  - component: {fileID: 4549550258590780488}
+  - component: {fileID: 3488650209667964705}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Ability0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3840616387687163822
+--- !u!4 &4549550258590780488
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6622381234472351554}
+  m_GameObject: {fileID: 1645567380262440351}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.809183, y: -0.11818384, z: -16.108885}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8233128894761033718
+--- !u!114 &3488650209667964705
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6622381234472351554}
+  m_GameObject: {fileID: 1645567380262440351}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71448b827c977264a96b9ca1da16112e, type: 3}
+  m_Script: {fileID: 11500000, guid: 345d89fb8b9335345a1cd3ba9a8c581b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityName: 
-  image: {fileID: 0}
-  castTime: 0
-  cooldown: 0
+  owner: {fileID: 0}
+  target: {fileID: 0}
+  targetLocation: {x: 0, y: 0, z: 0}
+  abilityData: {fileID: 0}
+  canMoveWhileCasting: 1
+  timeToCast: 0
+  currentCastTime: 0
+  damage: 0
+  tempAttack: {fileID: 6947339161028381666, guid: e2d6f518f66ccf64097a7be5159b5dc5, type: 3}
