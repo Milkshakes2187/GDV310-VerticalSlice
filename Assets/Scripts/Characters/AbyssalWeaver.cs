@@ -11,7 +11,7 @@ public class AbyssalWeaver : Enemy
 
     bool mfaCast = false;
 
-    enum States
+    public enum States
     {
         IDLE,
         STUNNED,
@@ -30,8 +30,8 @@ public class AbyssalWeaver : Enemy
 
     ThreadManager threadManager;
 
-    States currentState = States.IDLE;
-    States nextState = States.INTERWOVENTHREADS;
+    [HideInInspector] public States currentState = States.IDLE;
+    [HideInInspector] public States nextState = States.INTERWOVENTHREADS;
 
     private void Awake()
     {
