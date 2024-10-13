@@ -1,11 +1,9 @@
-using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerSpellSystem : MonoBehaviour
 {
-
     [SerializeField] List<AbilitySO> abilitySequenceList = new List<AbilitySO>();
-
 
     [SerializeField] AbilitySO ability1;
     [SerializeField] AbilitySO ability3;

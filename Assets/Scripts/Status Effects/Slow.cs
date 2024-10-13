@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Slow : StatusEffect
 {
-    float slowMultiplier = 0.5f;
+    public float slowMultiplier = 0.5f;
 
     protected override void Start()
     {
