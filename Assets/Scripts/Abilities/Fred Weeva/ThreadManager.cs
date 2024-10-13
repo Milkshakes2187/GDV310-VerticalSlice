@@ -1,4 +1,3 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
@@ -135,7 +134,7 @@ public class ThreadManager : MonoBehaviour
         }
     }
 
-    void InterwovenThreads() // TODO: Efficientize this + comments (Move to own script)
+    public void InterwovenThreads() // TODO: Efficientize this + comments (Move to own script)
     {
         ResetThreads();
 

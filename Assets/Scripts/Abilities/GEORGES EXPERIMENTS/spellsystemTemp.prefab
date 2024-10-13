@@ -121,3 +121,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d568465066146d48b12c490028b7114, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityUseState: 0
+  abilityHolders: []
+  basicKey: 113
+  basicAbilitySequence:
+  - {fileID: 11400000, guid: 822a712ac8a268747b98e0407a82ebd0, type: 2}
+  - {fileID: 11400000, guid: c71e0cfbe419dc64eaba1d2bf43022d1, type: 2}
+  - {fileID: 11400000, guid: 224d6338977eb844fbbb0ac15ddb1a99, type: 2}
+  - {fileID: 11400000, guid: cfc74dd3fa707064ebc984fc8224e53e, type: 2}
+  - {fileID: 11400000, guid: 624e35cc294a49744a6ee18375e3df25, type: 2}
+  abilitySequenceResetTime: 3

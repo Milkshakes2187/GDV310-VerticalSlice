@@ -1,27 +1,42 @@
 using MPUIKIT;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.UI.GridLayoutGroup;
 
-[CreateAssetMenu(fileName = "NewScriptableObjectScript", menuName = "Scriptable Objects/NewScriptableObjectScript")]
-public class AbilitySO : ScriptableObject
+[CreateAssetMenu(fileName = "AbilitySO", menuName = "Scriptable Objects/AbilitySO")]
+public  class AbilitySO : ScriptableObject
 {
-
+    //Basic variables
     public string abilityName;
     public Sprite image;
-
-    public float cooldownTime;
-    public float castTime;
-    public float activeTime;
+    public AnimatorOverrideController animatorOverrideController;   //Or at least a string with the ability animation override key?
 
 
-    public Ability ability;
+    public float cooldown; //TODO is this needed?
 
-    public void ActivateAbility()
+
+    //prefab of ability that the scriptable object references
+    public GameObject abilityPrefab = null;
+
+
+    /***********************************************
+   * InitialiseAbility: Instantiates an ability so it is ready to use, assigning relevant variables
+   * @author: George White
+   * @parameter: Character , Character , Vector3 
+   * @return: GameObject
+   ************************************************/
+    public GameObject InitialiseAbility(Character _owner, Character _target, Vector3 _targetLocation)
     {
-        
-    }
+        //instantiating ability
+        var ability = Instantiate(abilityPrefab, _targetLocation, Quaternion.identity);
 
-    public void Spell()
-    {
-        ability.CastSpell();
+        //initialising member variables
+        ability.GetComponent<Ability>().owner = _owner;
+        ability.GetComponent<Ability>().target = _target;
+        ability.GetComponent<Ability>().targetLocation = _targetLocation;
+        ability.GetComponent<Ability>().abilityData = this;
+
+        //return the gameobject
+        return ability;
     }
 }
