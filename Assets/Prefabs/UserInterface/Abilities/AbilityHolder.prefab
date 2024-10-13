@@ -430,7 +430,7 @@ MonoBehaviour:
   fillImages:
   - {fileID: 5073040423462533803}
   - {fileID: 6312431405566844225}
-  fillAmount: 1
+  fillAmount: 0.99
 --- !u!114 &2559890810182442871
 MonoBehaviour:
   m_ObjectHideFlags: 0
