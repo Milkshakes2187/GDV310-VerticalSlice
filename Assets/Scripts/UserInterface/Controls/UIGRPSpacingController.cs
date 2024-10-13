@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ public class UIGRPSpacingController : MonoBehaviour
     public List<RectTransform> spacingTransforms = new List<RectTransform>();
     public bool vertical = false;
     public float spacing = 0;
+    private RectTransform rectTransform;
 
     private void Start()
     {
@@ -28,17 +30,19 @@ public class UIGRPSpacingController : MonoBehaviour
     [OnValueChanged("spacing", "vertical")]
     public void SpacingChanged()
     {
-        Vector3 dirVector = Vector2.right;
-        if(vertical) dirVector = Vector3.up;
+        rectTransform = GetComponent<RectTransform>();
+        Vector2 dirVector = Vector2.right;
+        if(vertical) dirVector = Vector2.up;
 
         int postionIndex = 0;
         foreach (RectTransform _sTransform in spacingTransforms)
         {
-            _sTransform.transform.position = transform.position
+            _sTransform.anchoredPosition = rectTransform.anchoredPosition
                 + (dirVector * spacing * postionIndex)
                 - (dirVector * spacing * spacingTransforms.Count) /2f
                 + (dirVector * spacing/2f);
 
+            _sTransform.anchoredPosition = dirVector * _sTransform.anchoredPosition;
             postionIndex++;
         }
     }
