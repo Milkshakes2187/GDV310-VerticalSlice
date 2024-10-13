@@ -49,7 +49,7 @@ MonoBehaviour:
   targetLocation: {x: 0, y: 0, z: 0}
   abilityData: {fileID: 0}
   canMoveWhileCasting: 1
-  timeToCast: 0
+  timeToCast: 0.3
   currentCastTime: 0
-  damage: 1
+  damage: 2
   tempAttack: {fileID: 6947339161028381666, guid: cc77449fe2937ed44822dbd913cb918d, type: 3}
