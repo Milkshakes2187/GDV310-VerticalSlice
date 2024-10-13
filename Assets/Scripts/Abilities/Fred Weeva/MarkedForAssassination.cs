@@ -1,44 +1,38 @@
 using UnityEngine;
 
-public class MarkedForAssassination : MonoBehaviour
+public class MarkedForAssassination : Ability
 {
     // TODO: make sure to rework this ability to work with georges ability system
     // TODO: Comment once reworked
 
-    public GameObject target;
     public GameObject indicatorPF;
-    public GameObject echoPF;
+    public GameObject assassinPF;
 
     GameObject indicator;
 
-    public float castTime = 5f;
-    public float elapsedTime = 0f;
-
-    private void Start()
+    public override void UseSpellEffect()
     {
-        target = FindFirstObjectByType<Player>().gameObject;
+        Instantiate(assassinPF, target.transform.position, Quaternion.identity);
+        Destroy(gameObject);
+    }
+
+   /***********************************************
+   * UseSpellEffect: Abstract function to perform inituial setup. Overridden by children
+   * @author: George White
+   * @parameter:
+   * @return: abstract void
+   ************************************************/
+    public override void InitialSetup()
+    {
         indicator = Instantiate(indicatorPF, target.transform.position, Quaternion.identity);
-        Destroy(indicator, castTime);
+        Destroy(indicator, timeToCast);
     }
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
-
-        if (elapsedTime > castTime)
-        {
-            ActivateAbility();
-            Destroy(gameObject);
-        }
-
         if (indicator)
         {
             indicator.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 4, target.transform.position.z);
         }
-    }
-
-    void ActivateAbility()
-    {
-        Instantiate(echoPF, target.transform.position, Quaternion.identity);
     }
 }

@@ -721,8 +721,8 @@ MonoBehaviour:
   speedMultiplier: 1
   damageMultiplier: 1
   aggroRange: 1
-  abyssalKnivesPF: {fileID: 8774507104299533834, guid: b364ef49420a4474eb320ff38c08e20e, type: 3}
-  markedForAssassinationPF: {fileID: 2696490181125908779, guid: 5b6cd055b3a5e45419692e4b9f13f593, type: 3}
+  abyssalKnives: {fileID: 11400000, guid: 42803130371ae524eb74dc2318d36eff, type: 2}
+  markedForAssassination: {fileID: 11400000, guid: 5143948a532220a4dbb280dace1b0fb8, type: 2}
   threadManagerPF: {fileID: 1618098391873643487, guid: ebebb455086e49f4591b4667b531dd87, type: 3}
 --- !u!1 &832575517
 GameObject:

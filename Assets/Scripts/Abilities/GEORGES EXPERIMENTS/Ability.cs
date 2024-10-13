@@ -30,6 +30,14 @@ public abstract class Ability : MonoBehaviour
    ************************************************/
     public abstract void UseSpellEffect();
 
+   /***********************************************
+   * UseSpellEffect: Abstract function to perform inituial setup. Overridden by children
+   * @author: George White
+   * @parameter:
+   * @return: abstract void
+   ************************************************/
+    public virtual void InitialSetup() { }
+
 
     /***********************************************
     * CastSpell: Calls "UseSpellEffect" either instantly, or after the required cast time

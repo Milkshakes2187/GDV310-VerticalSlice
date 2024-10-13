@@ -44,8 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec52579ad9993c49b69d58c981b773e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
   target: {fileID: 0}
+  targetLocation: {x: 0, y: 0, z: 0}
+  abilityData: {fileID: 0}
+  canMoveWhileCasting: 1
+  timeToCast: 3.5
+  currentCastTime: 0
   indicatorPF: {fileID: 6434061528602989899, guid: 8f59f953c703a86449f93a9086ca2f48, type: 3}
-  echoPF: {fileID: 3286839393940212142, guid: d48b16fa0660f794c9973405a3acba62, type: 3}
-  castTime: 5
-  elapsedTime: 0
+  assassinPF: {fileID: 3286839393940212142, guid: d48b16fa0660f794c9973405a3acba62, type: 3}
