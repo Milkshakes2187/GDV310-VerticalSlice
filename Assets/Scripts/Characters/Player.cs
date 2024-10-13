@@ -29,10 +29,10 @@ public class Player : Character
     Vector3 moveVelocity = Vector3.zero;
     Vector3 camRotation = Vector3.zero;
 
-    private float gravity = 9.81f;
+    public float gravity = 9.81f;
 
-    private float coyoteTime = 0.25f;
-    private float coyoteTimer = 0.0f;
+    [SerializeField] private float coyoteTime = 0.25f;
+    [SerializeField] private float coyoteTimer = 0.0f;
 
     //[Foldout("Dash Vars")]
     //[SerializeField] private float fDashDistance = 10.0f;
@@ -119,19 +119,25 @@ public class Player : Character
         moveInput = camTarget.transform.right * moveInput.x +
             camTarget.transform.forward * moveInput.z;
 
+        // Ensures moving diagonally is not faster
+        if (moveInput.sqrMagnitude > 1.0f)
+        {
+            moveInput.Normalize();
+        }
 
         // Coyote time
         coyoteTimer -= Time.deltaTime;
         if ((charController.collisionFlags & CollisionFlags.Below) != 0)    // Grounded check
+        //if (charController.isGrounded)    // Grounded check
         {
             coyoteTimer = coyoteTime;
             moveVelocity.y = -1.0f;
         }
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.Space) && coyoteTimer > 0.0f)
+        if (Input.GetKeyDown(KeyCode.Space)) // && coyoteTimer > 0.0f)
         {
-            moveVelocity.y = 10.0f; // Jump speed
+            moveVelocity.y = 12.0f; // Jump speed
             coyoteTimer = 0.0f;
         }
 
@@ -140,11 +146,13 @@ public class Player : Character
         moveVelocity.z = moveInput.z * moveSpeed * speedMultiplier;
 
         float velocity = 0.0f;
-        if (canMove)
-        {
-            charController.Move(moveVelocity * Time.deltaTime);
-            velocity = charController.velocity.magnitude;
-        }
+        charController.Move(moveVelocity * Time.deltaTime);
+        velocity = charController.velocity.magnitude;
+        //if (canMove)
+        //{
+        //    charController.Move(moveVelocity * Time.deltaTime);
+        //    velocity = charController.velocity.magnitude;
+        //}
 
         // This is gravity
         //charController.Move(Vector3.up * -9.81f * Time.deltaTime * 2);
@@ -159,7 +167,7 @@ public class Player : Character
 
         // Reset Y vector to 0 to discount camera rotation
         // And prevent gravity from affecting player rotation
-        moveVelocity.y = 0;
+        //moveVelocity.y = 0;
 
         // Rotate player in desired direction
         if (moveVelocity != Vector3.zero)
