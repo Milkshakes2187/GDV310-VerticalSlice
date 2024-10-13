@@ -1,89 +1,103 @@
 using MPUIKIT;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 
-public enum E_CastStyle
+public abstract class Ability : MonoBehaviour
 {
-    INSTANT,
-    CAST_TIME,
-    CHANNEL,
-    TOGGLE,
-}
-
-public class Ability : MonoBehaviour
-{
-
-    bool bCastWhileMoving = false;
-
-    public float castTime = 0.0f;
-
-    public float cooldown = 0.0f;
-    float currentCooldown = 0.0f;
-
-    E_CastStyle castStyle = E_CastStyle.CAST_TIME;
+    //assigned member variables
+    [HideInInspector] public Character owner;
+    [HideInInspector] public Character target;
+    [HideInInspector] public Vector3 targetLocation;
+    [HideInInspector] public AbilitySO abilityData;
 
 
-    public Character owner;
-    public Character target;
-    public Vector3 targetLocation;
+    [Header("Base Ability Variables")]
+    public bool canMoveWhileCasting = true;
+    public float timeToCast = 0.0f;
+    [HideInInspector] public float currentCastTime = 0.0f;
 
 
+    Coroutine castTimerCrouton;
 
 
-    public void RequestCastSpell()
+    /***********************************************
+   * UseSpellEffect: Abstract function to use a spell's effect. Overridden by children
+   * @author: George White
+   * @parameter:
+   * @return: abstract void
+   ************************************************/
+    public abstract void UseSpellEffect();
+
+
+    /***********************************************
+    * CastSpell: Calls "UseSpellEffect" either instantly, or after the required cast time
+    * @author: George White
+    * @parameter:
+    * @return: void
+    ************************************************/
+    public void CastSpell()
     {
-        
-
-
+        if (timeToCast == 0.0f)
+        {
+            //instantly use the spell effect if there is no time to cast
+            UseSpellEffect();
+        }
+        else
+        {
+            //start the cast timer coroutine
+            currentCastTime = timeToCast;
+            castTimerCrouton = StartCoroutine(CastTimer());
+        }
     }
 
 
-    public virtual void CastSpell()
+    /***********************************************
+    * IsCasting: Returns wether the spell is currently being cast or not
+    * @author: George White
+    * @parameter:
+    * @return: bool
+    ************************************************/
+    public bool IsCasting()
     {
-
-    }
-
-
-
-    public bool CheckSpellFinishedCasting(float _currentCastTime)
-    {
-        if(_currentCastTime >= castTime)
+        if(currentCastTime > 0.0f)
         {
             return true;
         }
-
         return false;
     }
 
 
-
-
-
-    
-
-    public void SetCooldown(float _cooldown)
+    /***********************************************
+    * Interrupt: Stops the spell from casting, and destroys the ability gameobject
+    * @author: George White
+    * @parameter:
+    * @return: void
+    ************************************************/
+    public void Interrupt()
     {
-        currentCooldown = _cooldown;
+        StopCoroutine(castTimerCrouton);
+        Destroy(gameObject);
     }
 
 
-    public void TickCooldown(float _cooldownTicked)
+    /***********************************************
+   * CastTimer: Coroutine to count down the spell's casting time, and casts the spell when done
+   * @author: George White
+   * @parameter:
+   * @return: IEnumerator
+   ************************************************/
+    IEnumerator CastTimer()
     {
-        //if ability is on cooldown, reduce by an amount
-        if(currentCooldown > 0.0f)
+        while (currentCastTime > 0.0f)
         {
-            currentCooldown -= _cooldownTicked;
-
-            //if cooldown is less than 0, set it to zero
-            if(currentCooldown < 0.0f)
-            {
-                currentCooldown = 0.0f;
-            }
+            currentCastTime -= Time.deltaTime;
+            yield return new WaitForSeconds(0.0f);
         }
 
-
-        //update ui
+        //cast the spell
+        UseSpellEffect();
     }
-
-
+    
 }

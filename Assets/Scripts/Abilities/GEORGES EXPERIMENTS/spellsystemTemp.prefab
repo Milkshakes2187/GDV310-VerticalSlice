@@ -122,12 +122,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilityUseState: 0
-  basicAbilitySequence:
-  - {fileID: 11400000, guid: 209bd4fc04cbf5f48972c50528daf9fc, type: 2}
-  - {fileID: 11400000, guid: 92c59fcd7955ec84e92b7cd3da8e34ba, type: 2}
-  - {fileID: 11400000, guid: 0d26eaba22ece4744a7d913d0c8d4f80, type: 2}
-  - {fileID: 11400000, guid: c4837d9c8caf78643b3e4968dfd8daf9, type: 2}
-  - {fileID: 11400000, guid: 73c794ef63e0a5f4fa33606188fd3348, type: 2}
+  abilityHolder:
+  - ability: {fileID: 0}
+    keybind: 0
+    currentCooldown: 0
+  - ability: {fileID: 0}
+    keybind: 0
+    currentCooldown: 0
+  basicAbilitySequence: []
   ability1: {fileID: 0}
   ability3: {fileID: 0}
   ability2: {fileID: 0}

@@ -14,6 +14,23 @@ public enum E_AbilityUseState
     Inactive = 4,
 }
 
+
+[System.Serializable]
+public struct S_SpellHolder
+{
+    public AbilitySO ability;
+    public KeyCode keybind;
+    public float currentCooldown;
+
+    public S_SpellHolder(AbilitySO _aso = null, KeyCode _code = KeyCode.None, float _cd = 0.0f)
+    {
+        ability = _aso;
+        keybind = _code;
+        currentCooldown = _cd;
+    }
+}
+
+
 public class PlayerSpellSystem : MonoBehaviour
 {
 
@@ -21,26 +38,15 @@ public class PlayerSpellSystem : MonoBehaviour
 
     [Tab("Main spell tab")]
 
+    [SerializeField] List<S_SpellHolder> abilityHolder = new List<S_SpellHolder>();
+  
+    
     [SerializeField] List<AbilitySO> basicAbilitySequence = new List<AbilitySO>();
-    int currentSequenceIndex = 0;
-
-
-    [SerializeField] AbilitySO ability1;
-    [SerializeField] AbilitySO ability3;
-    [SerializeField] AbilitySO ability2;
-    [SerializeField] AbilitySO ability4;
-
-
-    [Header("Keybinds")]
-    [SerializeField] KeyCode abilityKeyBasic = KeyCode.Q;
-    [SerializeField] KeyCode abilityKey1 = KeyCode.Alpha1;
-    [SerializeField] KeyCode abilityKey2 = KeyCode.Alpha2;
-    [SerializeField] KeyCode abilityKey3 = KeyCode.Alpha3;
-    [SerializeField] KeyCode abilityKey4 = KeyCode.Alpha4;
+    [ReadOnly] int currentSequenceIndex = 0;
 
 
     [SerializeField] float abilitySequenceResetTime = 3.0f;
-     float currentAbilitySequenceResetTime = 3.0f;
+    [ReadOnly] float currentAbilitySequenceResetTime = 3.0f;
 
 
 
@@ -58,7 +64,7 @@ public class PlayerSpellSystem : MonoBehaviour
 
         CheckInputs();
 
-        TickCooldowns();
+        //TickCooldowns();
     }
 
 
@@ -68,25 +74,24 @@ public class PlayerSpellSystem : MonoBehaviour
         if (abilityUseState != E_AbilityUseState.Ready) { return; }
 
 
-        if (Input.GetKeyDown(abilityKeyBasic))
-        {
-            UseBasicAbility();
-        }
+       // if (Input.GetKeyDown(abilityKeyBasic))
+       // {
+       //     UseBasicAbility();
+       // }
 
 
-        ability1.abilityPrefab.Use();
     }
 
 
     public void UseBasicAbility()
     {
         //cant cast spell if it is on cooldown
-        if (basicAbilitySequence[currentSequenceIndex].IsOnCooldown()) { return; }
+        //if (basicAbilitySequence[currentSequenceIndex].IsOnCooldown()) { return; }
 
-        basicAbilitySequence[currentSequenceIndex].Use(null, null, new Vector3 (transform.position.x, transform.position.y + 2 + (0.5f * currentSequenceIndex), transform.position.z));
+        //basicAbilitySequence[currentSequenceIndex].Use(null, null, new Vector3 (transform.position.x, transform.position.y + 2 + (0.5f * currentSequenceIndex), transform.position.z));
 
-        var aaAbility = basicAbilitySequence[currentSequenceIndex].InitialiseAbility();
-        aaAbility.use();
+        var aaAbility = basicAbilitySequence[currentSequenceIndex].InitialiseAbility(null,null,Vector3.zero);
+        //aaAbility.use();
        // aaAbility.Destroy(); To be done in the script
 
         //increment the sequence
@@ -97,7 +102,7 @@ public class PlayerSpellSystem : MonoBehaviour
         }
 
         //starts the cooldown of the next ability
-        basicAbilitySequence[currentSequenceIndex].StartCooldown();
+       // basicAbilitySequence[currentSequenceIndex].StartCooldown();
 
 
         //start cooldowns for sequence resetting
@@ -110,50 +115,86 @@ public class PlayerSpellSystem : MonoBehaviour
     public void UseAbility(AbilitySO _abilityToUse)
     {
         if (!_abilityToUse) { return; }
-        if (_abilityToUse.IsOnCooldown()) { return; }
+       // if (_abilityToUse.IsOnCooldown()) { return; }
 
 
 
-        _abilityToUse.Use(null, null, Vector3.zero);
+        //_abilityToUse.Use(null, null, Vector3.zero);
 
-        _abilityToUse.StartCooldown();
+        //_abilityToUse.StartCooldown();
     }
 
 
-    void TickCooldowns()
-    {
-        //tick basic ability cooldown
-        basicAbilitySequence[currentSequenceIndex].TickCooldown(Time.deltaTime);
-        
-        //tick all other cooldowns
 
 
 
-        //Ability sequence reset time
-        if(currentAbilitySequenceResetTime > 0.0f)
-        {
-            currentAbilitySequenceResetTime -= Time.deltaTime;
-
-            if(currentAbilitySequenceResetTime <=0.0f)
-            {
-                currentAbilitySequenceResetTime = 0.0f;
-
-                //reset the sequence index
-                currentSequenceIndex = 0;
-
-                //sequence UI
-            }
-        }
-    }
-
-
-    void interruptcastings()
-    {
-       // CancelInvoke castings ll''
-    }
-
-    IEnumerator CastChannelledSpell()
-    {
-        yield return null;
-    }
+   //
+   // void TickCooldowns()
+   // {
+   //     //tick basic ability cooldown
+   //     basicAbilitySequence[currentSequenceIndex].TickCooldown(Time.deltaTime);
+   //     
+   //     //tick all other cooldowns
+   //
+   //
+   //
+   //     //Ability sequence reset time
+   //     if(currentAbilitySequenceResetTime > 0.0f)
+   //     {
+   //         currentAbilitySequenceResetTime -= Time.deltaTime;
+   //
+   //         if(currentAbilitySequenceResetTime <=0.0f)
+   //         {
+   //             currentAbilitySequenceResetTime = 0.0f;
+   //
+   //             //reset the sequence index
+   //             currentSequenceIndex = 0;
+   //
+   //             //sequence UI
+   //         }
+   //     }
+   // }
+   //
+   //
+   //
+   //
+   //
+   //
+   // public void StartCooldown()
+   // {
+   //     currentCooldown = cooldownBase;
+   // }
+   //
+   // public void SetCurrentCooldown(float _cooldown)
+   // {
+   //     currentCooldown = _cooldown;
+   // }
+   //
+   // public void TickCooldown(float _cooldownTicked)
+   // {
+   //     //if ability is on cooldown, reduce by an amount
+   //     if (currentCooldown > 0.0f)
+   //     {
+   //         currentCooldown -= _cooldownTicked;
+   //
+   //         //if cooldown is less than 0, set it to zero
+   //         if (currentCooldown < 0.0f)
+   //         {
+   //             currentCooldown = 0.0f;
+   //         }
+   //     }
+   //
+   //
+   //     //update ui
+   // }
+   //
+   // public bool IsOnCooldown()
+   // {
+   //     if (currentCooldown > 0.0f)
+   //     {
+   //         return true;
+   //     }
+   //
+   //     return false;
+   // }
 }

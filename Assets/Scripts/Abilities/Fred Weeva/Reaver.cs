@@ -17,4 +17,9 @@ public class Reaver : Ability
             other.gameObject.SetActive(false);
         }
     }
+
+    public override void UseSpellEffect()
+    {
+
+    }
 }
