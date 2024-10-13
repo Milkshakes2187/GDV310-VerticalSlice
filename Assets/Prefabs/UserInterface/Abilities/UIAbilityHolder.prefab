@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 512328057680949012}
   - component: {fileID: 2559890810182442871}
   m_Layer: 5
-  m_Name: AbilityHolder
+  m_Name: UIAbilityHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -430,7 +430,7 @@ MonoBehaviour:
   fillImages:
   - {fileID: 5073040423462533803}
   - {fileID: 6312431405566844225}
-  fillAmount: 0.99
+  fillAmount: 1
 --- !u!114 &2559890810182442871
 MonoBehaviour:
   m_ObjectHideFlags: 0
