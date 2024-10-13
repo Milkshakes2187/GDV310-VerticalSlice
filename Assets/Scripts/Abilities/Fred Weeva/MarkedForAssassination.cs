@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class MarkedForAssassination : MonoBehaviour
 {
+    // TODO: make sure to rework this ability to work with georges ability system
+    // TODO: Comment once reworked
+
     public GameObject target;
     public GameObject indicatorPF;
     public GameObject echoPF;

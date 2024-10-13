@@ -4,6 +4,7 @@ using UnityEngine;
 public class AbyssalKnives : MonoBehaviour
 {
     // TODO: make sure to rework this ability to work with georges ability system
+    // TODO: Comment once reworked
 
     public Vector3 targetDirection;
     public GameObject projectilePF;
