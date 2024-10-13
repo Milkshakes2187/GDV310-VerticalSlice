@@ -12,6 +12,7 @@ public class MPUIGradientController : MonoBehaviour
     public GradientEffect gradient;
 
     // Update is called once per frame
+    //
 
     [OnValueChanged("gradient")]
     void UpdateGradient()
