@@ -134,7 +134,7 @@ public class ThreadManager : MonoBehaviour
         }
     }
 
-    void InterwovenThreads() // TODO: Efficientize this + comments (Move to own script)
+    public void InterwovenThreads() // TODO: Efficientize this + comments (Move to own script)
     {
         ResetThreads();
 

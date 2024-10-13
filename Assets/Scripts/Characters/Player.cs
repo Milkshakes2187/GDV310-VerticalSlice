@@ -18,14 +18,25 @@ public class Player : Character
 
     public static Player instance;
 
-    [Tab("Main")]
+    //[Tab("Main")]
     //[Header("Stats")]
     //public float fMaxHealth = 100.0f;
     //public float fHealth;
     //public float fMoveSpeed = 10.0f;
-    public bool bCanMove = true;
-    Vector3 v3MoveVec = Vector3.zero;
-    Quaternion qCamRotation = Quaternion.identity;
+
+    [Tab("Movement")]
+    public bool canMove = true;
+    Vector3 moveVelocity = Vector3.zero;
+    Vector3 camRotation = Vector3.zero;
+
+    public float gravity = 9.81f;
+
+    [SerializeField] private float coyoteTime = 0.25f;
+    [SerializeField] private float coyoteTimer = 0.0f;
+
+    public float acceleration = 4.0f;
+    public AnimationCurve frictionCurve;
+    public float stopFriction = 4.0f;
 
     //[Foldout("Dash Vars")]
     //[SerializeField] private float fDashDistance = 10.0f;
@@ -100,82 +111,100 @@ public class Player : Character
     {
         //playerAnim.SetBool("canMove", bCanMove);
 
-        v3MoveVec = Vector3.zero;
+        Vector3 moveInput = Vector3.zero;
 
-        // Forward and backward
-        if (Input.GetKey(KeyCode.W))
-        {
-            v3MoveVec.z += 1.0f;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            v3MoveVec.z -= 1.0f;
-        }
-
-        // Left and right
-        if (Input.GetKey(KeyCode.A))
-        {
-            v3MoveVec.x -= 1.0f;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            v3MoveVec.x += 1.0f;
-        }
+        // Get movement input
+        moveInput.z += Input.GetKey(KeyCode.W) ? 1.0f : 0.0f;   // Forwards
+        moveInput.z -= Input.GetKey(KeyCode.S) ? 1.0f : 0.0f;   // Backwards
+        moveInput.x += Input.GetKey(KeyCode.D) ? 1.0f : 0.0f;   // Right
+        moveInput.x -= Input.GetKey(KeyCode.A) ? 1.0f : 0.0f;   // Left
 
         // Apply movement according to camera facing direction
-        v3MoveVec = v3MoveVec.normalized;
-        v3MoveVec = camTarget.transform.right * v3MoveVec.x +
-            camTarget.transform.forward * v3MoveVec.z;
+        moveInput = camTarget.transform.right * moveInput.x +
+            camTarget.transform.forward * moveInput.z;
 
-        float velocity = 0.0f;
-        if (bCanMove)
+        // Ensures moving diagonally is not faster
+        if (moveInput.sqrMagnitude > 1.0f)
         {
-            charController.Move(v3MoveVec * moveSpeed * speedMultiplier * Time.deltaTime);
-            velocity = charController.velocity.magnitude;
+            moveInput.Normalize();
         }
 
+
+        // Coyote time
+        coyoteTimer -= Time.deltaTime;
+        if ((charController.collisionFlags & CollisionFlags.Below) != 0)    // Grounded check
+        //if (charController.isGrounded)    // Grounded check
+        {
+            coyoteTimer = coyoteTime;
+            moveVelocity.y = -1.0f;
+        }
+
+        // Jumping
+        if (Input.GetKeyDown(KeyCode.Space)) // && coyoteTimer > 0.0f)
+        {
+            moveVelocity.y = 12.0f; // Jump speed
+            coyoteTimer = 0.0f;
+        }
+
+        moveVelocity.y -= gravity * Time.deltaTime;
+        moveVelocity += moveInput * acceleration * Time.deltaTime;
+
+        // Apply friction - more friction if no movement input
+        float frictionVal = frictionCurve.Evaluate(moveVelocity.magnitude);
+        float frictionMod = (moveInput.sqrMagnitude < 0.01f) ? stopFriction : 1.0f;
+        moveVelocity -= moveVelocity.normalized * frictionVal * frictionMod * acceleration * Time.deltaTime;
+        
+        Vector3 velocity = moveVelocity;
+        velocity.x *= moveSpeed * speedMultiplier;
+        velocity.z *= moveSpeed * speedMultiplier;
+
+        charController.Move(velocity * Time.deltaTime);
+        //if (canMove)
+        //{
+        //    charController.Move(moveVelocity * Time.deltaTime);
+        //    velocity = charController.velocity.magnitude;
+        //}
+
         // This is gravity
-        charController.Move(Vector3.up * -9.81f * Time.deltaTime * 2);
+        //charController.Move(Vector3.up * -9.81f * Time.deltaTime * 2);
 
         // Update animator according to movement
-        playerAnim.SetFloat("Velocity", velocity);
+        playerAnim.SetFloat("Velocity", charController.velocity.magnitude);
     }
 
     void ProcessRotations()
     {
-        qCamRotation = camTarget.transform.rotation;
+        camRotation = camTarget.transform.forward;
 
         // Reset Y vector to 0 to discount camera rotation
         // And prevent gravity from affecting player rotation
-        v3MoveVec.y = 0;
+        //moveVelocity.y = 0;
 
         // Rotate player in desired direction
-        if (v3MoveVec != Vector3.zero)
+        if (moveVelocity != Vector3.zero)
         {
-            Quaternion targetRot = Quaternion.LookRotation(camTarget.transform.forward);
+            Quaternion targetRot = Quaternion.LookRotation(new Vector3(camRotation.x, 0.0f, camRotation.z));
             transform.rotation = Quaternion.Slerp(body.transform.rotation, targetRot, 10.0f * Time.deltaTime);
         }
 
         // Reset cam target rotation and rotate to match camera rotation
-        camTarget.transform.rotation = qCamRotation;
+        //camTarget.transform.rotation = camRotation;
         Vector3 rotDiff = CMvcam.transform.eulerAngles - camTarget.transform.eulerAngles;
         camTarget.transform.eulerAngles += rotDiff;
     }
 
-    public void TurnOffCanMove()
-    {
-        bCanMove = false;
-        v3MoveVec = Vector3.zero;
-        float velocity = 0.0f;
-
-        charController.Move(v3MoveVec * moveSpeed * Time.deltaTime);
-        velocity = charController.velocity.magnitude;
-
-
-        // Update animator according to movement
-        playerAnim.SetFloat("Velocity", velocity);
-
-    }
+    //public void TurnOffCanMove()
+    //{
+    //    canMove = false;
+    //    moveVelocity = Vector3.zero;
+    //    float velocity = 0.0f;
+    //
+    //    charController.Move(moveVelocity * moveSpeed * Time.deltaTime);
+    //    velocity = charController.velocity.magnitude;
+    //
+    //    // Update animator according to movement
+    //    playerAnim.SetFloat("Velocity", velocity);
+    //}
 
     //IEnumerator Dash()
     //{
@@ -197,10 +226,10 @@ public class Player : Character
     //    float fElapsedTime = 0.0f;
     //    Vector3 origPos = transform.position;
     //    Vector3 targetPos = Vector3.zero;
-    //    if (v3MoveVec != Vector3.zero)
+    //    if (moveVelocity != Vector3.zero)
     //    {
     //        // Dash in the player's movement input direction
-    //        targetPos = origPos + v3MoveVec * fDashDistance;
+    //        targetPos = origPos + moveVelocity * fDashDistance;
     //    }
     //    else
     //    {
