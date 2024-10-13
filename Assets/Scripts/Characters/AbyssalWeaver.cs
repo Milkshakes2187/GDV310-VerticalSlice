@@ -1,13 +1,21 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static PB_FSM;
 
 public class AbyssalWeaver : Enemy
 {
     float timeBetweenCasts = 5f;
-    float tbcElapsed = 0f; // timeBetweenCasts elapsed
+    float tbcElapsed = 5f; // timeBetweenCasts elapsed
 
     float abilityCastCD = 2f;
-    float abilityCastElapsed = 0f;
+    float abilityCastElapsed = 2f;
+
+    float tempMFACD = 3.5f;
+    float tempMFAElapsed = 3.5f;
+
+    int mfaCountThisRotation = 0;
+
+    bool mfaCast = false;
 
     enum States
     {
@@ -33,6 +41,8 @@ public class AbyssalWeaver : Enemy
 
     private void Awake()
     {
+        agent = GetComponent<NavMeshAgent>();
+
         var threadArena = Instantiate(threadManagerPF, transform.position, Quaternion.identity);
         threadManager = threadArena.GetComponent<ThreadManager>();
     }
@@ -112,11 +122,19 @@ public class AbyssalWeaver : Enemy
             // Happens when threads are first created and after each intermission
             case States.INTERWOVENTHREADS:
 
-                threadManager.InterwovenThreads();
+                abilityCastElapsed -= Time.deltaTime;
 
-                // move between 
-                currentState = States.AGGRESSIVE;
-                nextState = States.MFA;
+                if (abilityCastElapsed <= 0)
+                {
+                    threadManager.InterwovenThreads();
+
+                    // at the start of each rotation after interwoven threads reset MFA count to 0;
+                    mfaCountThisRotation = 0;
+
+                    // Set state transitions
+                    currentState = States.AGGRESSIVE;
+                    nextState = States.MFA;
+                }
 
                 break;
 
@@ -125,8 +143,36 @@ public class AbyssalWeaver : Enemy
             // Once the ability finishes a phantom assassin should be spawned where the player was when the ability finished
             case States.MFA:
 
-                Instantiate(markedForAssassinationPF, transform.position, Quaternion.identity);
+                if (!mfaCast)
+                {
+                    var mfa = Instantiate(markedForAssassinationPF, transform.position, Quaternion.identity);
+                }
 
+                tempMFAElapsed -= Time.deltaTime;
+
+                if (tempMFAElapsed <= 0)
+                {
+                    currentState = States.AGGRESSIVE;
+
+                    mfaCountThisRotation++;
+
+                    switch (mfaCountThisRotation)
+                    {
+                        case 0:
+                            nextState = States.ENTWINEDABYSS;
+                            break;
+
+                        case 1:
+                            nextState = States.THREADEDSLIP;
+                            break;
+
+                        case 2:
+                            nextState = States.INTERMISSION;
+                            break;
+                    }
+
+                    mfaCast = false;
+                }
                 break;
 
             // Beam which blasts out in front of the boss, boss will slowly rotate towards the player

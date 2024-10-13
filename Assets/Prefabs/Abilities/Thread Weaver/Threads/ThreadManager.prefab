@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2696490181125908779
+--- !u!1 &1618098391873643487
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,44 +8,50 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3421061942410739776}
-  - component: {fileID: 8344094047272226288}
+  - component: {fileID: 815150932344788533}
+  - component: {fileID: 8351299042675330819}
   m_Layer: 0
-  m_Name: MarkedForAssassination
+  m_Name: ThreadManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3421061942410739776
+--- !u!4 &815150932344788533
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2696490181125908779}
+  m_GameObject: {fileID: 1618098391873643487}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4118633, y: 18.183311, z: -44.878933}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8344094047272226288
+--- !u!114 &8351299042675330819
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2696490181125908779}
+  m_GameObject: {fileID: 1618098391873643487}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ec52579ad9993c49b69d58c981b773e, type: 3}
+  m_Script: {fileID: 11500000, guid: 2398b621dfe040343940f18c1ca18767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  indicatorPF: {fileID: 6434061528602989899, guid: 8f59f953c703a86449f93a9086ca2f48, type: 3}
-  echoPF: {fileID: 3286839393940212142, guid: d48b16fa0660f794c9973405a3acba62, type: 3}
-  castTime: 5
-  elapsedTime: 0
+  fInnerRadius: 20
+  fOuterRadius: 40
+  iTotalPoints: 6
+  interwovenThreadsCount: 5
+  wovenRealityCount: 3
+  ThreadInnerPoints: []
+  ThreadOuterPoints: []
+  edgeThreads: []
+  inbetweenThreads: []
+  ThreadPF: {fileID: 3331948630723726842, guid: 1d631855b6f302a4b8dde0294e535757, type: 3}
+  ThreadPointPF: {fileID: 5982159138515845284, guid: 4c36a66bcf760fb44ac5a3802fbdacb2, type: 3}

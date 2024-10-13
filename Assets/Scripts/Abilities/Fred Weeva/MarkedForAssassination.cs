@@ -16,6 +16,7 @@ public class MarkedForAssassination : MonoBehaviour
 
     private void Start()
     {
+        target = FindFirstObjectByType<Player>().gameObject;
         indicator = Instantiate(indicatorPF, target.transform.position, Quaternion.identity);
         Destroy(indicator, castTime);
     }
