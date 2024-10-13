@@ -89,6 +89,7 @@ public class AbyssalWeaver : Enemy
             case States.AGGRESSIVE:
 
                 agent.isStopped = false;
+                agent.destination = player.transform.position;
 
                 // tick down basic attack cooldown and time between next attack timers
                 basicAttackElapsed -= Time.deltaTime;
@@ -107,11 +108,14 @@ public class AbyssalWeaver : Enemy
                 }
 
                 // when the time between casts cooldown finishes move to the state transition state
-                if (tbcElapsed < 0)
+                if (tbcElapsed <= 0)
                 {
+                    // set the agents destination to its current position to stop it from finishing its current destination command
+                    agent.destination = transform.position;
+
                     // reset elapsed Timers
-                    tbcElapsed = 0;
-                    abilityCastElapsed = 0;
+                    tbcElapsed = timeBetweenCasts;
+                    abilityCastElapsed = abilityCastCD;
 
                     // move to next state
                     currentState = nextState;
@@ -145,6 +149,7 @@ public class AbyssalWeaver : Enemy
 
                 if (!mfaCast)
                 {
+                    mfaCast = true;
                     var mfa = Instantiate(markedForAssassinationPF, transform.position, Quaternion.identity);
                 }
 
