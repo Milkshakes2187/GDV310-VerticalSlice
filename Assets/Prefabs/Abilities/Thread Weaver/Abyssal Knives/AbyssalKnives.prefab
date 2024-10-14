@@ -44,5 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81e1db749995b04a863f64dd41fee88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDirection: {x: 0, y: 0, z: 0}
+  owner: {fileID: 0}
+  target: {fileID: 0}
+  targetLocation: {x: 0, y: 0, z: 0}
+  abilityData: {fileID: 0}
+  canMoveWhileCasting: 1
+  timeToCast: 0
+  currentCastTime: 0
+  targetPosShifted: {x: 0, y: 0, z: 0}
   projectilePF: {fileID: 3807595630680384291, guid: 57c147b8a96e5934dacb82403c85268f, type: 3}
+  projectileSpeed: 50
+  range: 20

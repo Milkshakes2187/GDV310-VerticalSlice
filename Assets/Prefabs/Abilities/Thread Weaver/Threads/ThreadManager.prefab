@@ -44,14 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2398b621dfe040343940f18c1ca18767, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  target: {fileID: 0}
+  targetLocation: {x: 0, y: 0, z: 0}
+  abilityData: {fileID: 0}
+  canMoveWhileCasting: 1
+  currentCastTime: 0
   fInnerRadius: 20
   fOuterRadius: 40
   iTotalPoints: 6
-  interwovenThreadsCount: 5
-  wovenRealityCount: 3
   ThreadInnerPoints: []
   ThreadOuterPoints: []
   edgeThreads: []
   inbetweenThreads: []
+  interwovenThreads: {fileID: 11400000, guid: 77fa7a924bfa0fe45b06923089962888, type: 2}
+  wovenReality: {fileID: 11400000, guid: 99eb00aaffc347645abe0503d52da1bc, type: 2}
   ThreadPF: {fileID: 3331948630723726842, guid: 1d631855b6f302a4b8dde0294e535757, type: 3}
   ThreadPointPF: {fileID: 5982159138515845284, guid: 4c36a66bcf760fb44ac5a3802fbdacb2, type: 3}

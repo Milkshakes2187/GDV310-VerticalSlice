@@ -1,44 +1,49 @@
 using UnityEngine;
 
-public class MarkedForAssassination : MonoBehaviour
+public class MarkedForAssassination : Ability
 {
-    // TODO: make sure to rework this ability to work with georges ability system
-    // TODO: Comment once reworked
-
-    public GameObject target;
     public GameObject indicatorPF;
-    public GameObject echoPF;
+    public GameObject assassinPF;
 
     GameObject indicator;
 
-    public float castTime = 5f;
-    public float elapsedTime = 0f;
-
-    private void Start()
-    {
-        target = FindFirstObjectByType<Player>().gameObject;
-        indicator = Instantiate(indicatorPF, target.transform.position, Quaternion.identity);
-        Destroy(indicator, castTime);
-    }
-
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
-
-        if (elapsedTime > castTime)
-        {
-            ActivateAbility();
-            Destroy(gameObject);
-        }
-
+        // if the indicator exists, keep it tracked above the player
         if (indicator)
         {
             indicator.transform.position = new Vector3(target.transform.position.x, target.transform.position.y + 4, target.transform.position.z);
         }
     }
 
-    void ActivateAbility()
+    /***********************************************
+    * UseSpellEffect: Overriden spell effect, creates a shadow assassin on targets position
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    public override void UseSpellEffect()
     {
-        Instantiate(echoPF, target.transform.position, Quaternion.identity);
+        Instantiate(assassinPF, target.transform.position, Quaternion.identity);
+
+        // If the abyssal weaver is the one casting this ability set its next state to be agressive (auto attack state)
+        if (owner.GetComponent<AbyssalWeaver>())
+        {
+            owner.GetComponent<AbyssalWeaver>().nextState = AbyssalWeaver.States.AGGRESSIVE;
+        }
+
+        Destroy(gameObject);
+    }
+
+    /***********************************************
+    * UseSpellEffect: Overriden inituial setup. Instantiates the indicator of where the shadow assassin will be placed
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    public override void InitialSetup()
+    {
+        indicator = Instantiate(indicatorPF, target.transform.position, Quaternion.identity);
+        Destroy(indicator, abilityData.timeToCast);
     }
 }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffeb83188ec511545940ebd97b376d92, type: 3}
+  m_Name: MarkedForAssassination
+  m_EditorClassIdentifier: 
+  abilityName: Marked For Assassination
+  image: {fileID: 0}
+  animatorOverrideController: {fileID: 0}
+  abilityPrefab: {fileID: 2696490181125908779, guid: 5b6cd055b3a5e45419692e4b9f13f593, type: 3}
+  cooldown: 0
+  timeToCast: 3.5
+  timeToChannel: 0
+  primaryDamage: 0
+  secondaryDamage: 0
+  tertiaryDamage: 0
+  primaryEffectDuration: 0
+  secondaryEffectDuration: 0
+  tertiaryEffectDuration: 0
+  primaryEffectStrength: 0
+  secondaryEffectStrength: 0
+  tertiaryEffectStrength: 0
+  primaryRange: 0
+  secondaryRange: 0
+  info: 
