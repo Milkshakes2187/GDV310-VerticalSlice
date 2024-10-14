@@ -2801,6 +2801,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_BossHealthBar
       objectReference: {fileID: 0}
+    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.b
+      value: 0.8330811
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8330811
+      objectReference: {fileID: 0}
+    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9150943
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
