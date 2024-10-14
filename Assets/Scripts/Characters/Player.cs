@@ -148,7 +148,6 @@ public class Player : Character
         }
 
         float airMultiplier = (coyoteTimer > 0.2f) ? 1.0f : airMod;
-        Debug.Log(airMultiplier);
 
         moveVelocity.y -= gravity * Time.deltaTime;
         float cacheY = moveVelocity.y;
