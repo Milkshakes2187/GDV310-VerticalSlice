@@ -12,15 +12,20 @@ public abstract class Ability : MonoBehaviour
     [HideInInspector] public Vector3 targetLocation;
     [HideInInspector] public AbilitySO abilityData;
 
-
     [Header("Base Ability Variables")]
     public bool canMoveWhileCasting = true;
-    public float timeToCast = 0.0f;
     [HideInInspector] public float currentCastTime = 0.0f;
 
-
+    //Coroutine to remember
     Coroutine castTimerCrouton;
 
+    /***********************************************
+    InitialSetup: Virtual function to perform inituial setup. Can be overridden, default does nothing.
+    @author: George White
+    @parameter:
+    @return: virtual void
+    ************************************************/
+    public virtual void InitialSetup() { }
 
     /***********************************************
    * UseSpellEffect: Abstract function to use a spell's effect. Overridden by children
@@ -30,7 +35,6 @@ public abstract class Ability : MonoBehaviour
    ************************************************/
     public abstract void UseSpellEffect();
 
-
     /***********************************************
     * CastSpell: Calls "UseSpellEffect" either instantly, or after the required cast time
     * @author: George White
@@ -39,7 +43,7 @@ public abstract class Ability : MonoBehaviour
     ************************************************/
     public void CastSpell()
     {
-        if (timeToCast == 0.0f)
+        if (abilityData.timeToCast == 0.0f)
         {
             //instantly use the spell effect if there is no time to cast
             UseSpellEffect();
@@ -47,11 +51,10 @@ public abstract class Ability : MonoBehaviour
         else
         {
             //start the cast timer coroutine
-            currentCastTime = timeToCast;
+            currentCastTime = abilityData.timeToCast;
             castTimerCrouton = StartCoroutine(CastTimer());
         }
     }
-
 
     /***********************************************
     * IsCasting: Returns wether the spell is currently being cast or not
@@ -68,7 +71,6 @@ public abstract class Ability : MonoBehaviour
         return false;
     }
 
-
     /***********************************************
     * Interrupt: Stops the spell from casting, and destroys the ability gameobject
     * @author: George White
@@ -80,7 +82,6 @@ public abstract class Ability : MonoBehaviour
         StopCoroutine(castTimerCrouton);
         Destroy(gameObject);
     }
-
 
     /***********************************************
    * CastTimer: Coroutine to count down the spell's casting time, and casts the spell when done
@@ -99,5 +100,4 @@ public abstract class Ability : MonoBehaviour
         //cast the spell
         UseSpellEffect();
     }
-    
 }

@@ -15,5 +15,19 @@ MonoBehaviour:
   abilityName: Ab2
   image: {fileID: 0}
   animatorOverrideController: {fileID: 0}
-  cooldown: 1
   abilityPrefab: {fileID: 1645567380262440351, guid: 22092ae0330010c4e99b79ca7c73ab19, type: 3}
+  cooldown: 1
+  timeToCast: 0.2
+  timeToChannel: 0
+  primaryDamage: 3
+  secondaryDamage: 0
+  tertiaryDamage: 0
+  primaryEffectDuration: 0
+  secondaryEffectDuration: 0
+  tertiaryEffectDuration: 0
+  primaryEffectStrength: 0
+  secondaryEffectStrength: 0
+  tertiaryEffectStrength: 0
+  primaryRange: 0
+  secondaryRange: 0
+  info: 

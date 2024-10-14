@@ -1,23 +1,43 @@
 using MPUIKIT;
 using Unity.VisualScripting;
 using UnityEngine;
+using VInspector;
 using static UnityEngine.UI.GridLayoutGroup;
 
 [CreateAssetMenu(fileName = "AbilitySO", menuName = "Scriptable Objects/AbilitySO")]
 public  class AbilitySO : ScriptableObject
 {
-    //Basic variables
+    [Header("----Core Ability Assets----")]
     public string abilityName;
     public Sprite image;
-    public AnimatorOverrideController animatorOverrideController;   //Or at least a string with the ability animation override key?
-
-
-    public float cooldown; //TODO is this needed?
-
+    public AnimatorOverrideController animatorOverrideController;   //Or at least a string with the ability animation override key?]
 
     //prefab of ability that the scriptable object references
     public GameObject abilityPrefab = null;
 
+    [Header("----Ability variables----")]
+    [Header("Time")]
+    public float cooldown;
+    public float timeToCast;
+    public float timeToChannel;
+
+    [Header("Damage")]
+    public float primaryDamage; 
+    public float secondaryDamage; 
+    public float tertiaryDamage;
+    [Header("Effect Duration")]
+    public float primaryEffectDuration;
+    public float secondaryEffectDuration;
+    public float tertiaryEffectDuration;
+    [Header("Effect Strength")]
+    public float primaryEffectStrength;
+    public float secondaryEffectStrength;
+    public float tertiaryEffectStrength;
+    [Header("Range")]
+    public float primaryRange;
+    public float secondaryRange;
+    [Header("Text")]
+    public string info;
 
     /***********************************************
    * InitialiseAbility: Instantiates an ability so it is ready to use, assigning relevant variables

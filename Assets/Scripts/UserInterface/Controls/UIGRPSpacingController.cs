@@ -14,7 +14,7 @@ public class UIGRPSpacingController : MonoBehaviour
 
     private void Start()
     {
-        SpacingChanged();
+        UpdateSpacing();
     }
 
     [Button]
@@ -27,8 +27,9 @@ public class UIGRPSpacingController : MonoBehaviour
         }
     }
 
+    [Button]
     [OnValueChanged("spacing", "vertical")]
-    public void SpacingChanged()
+    public void UpdateSpacing()
     {
         rectTransform = GetComponent<RectTransform>();
         Vector2 dirVector = Vector2.right;
