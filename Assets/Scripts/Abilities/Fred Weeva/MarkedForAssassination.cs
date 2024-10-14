@@ -44,8 +44,6 @@ public class MarkedForAssassination : Ability
     public override void InitialSetup()
     {
         indicator = Instantiate(indicatorPF, target.transform.position, Quaternion.identity);
-        Destroy(indicator, timeToCast);
+        Destroy(indicator, abilityData.timeToCast);
     }
-
-    
 }

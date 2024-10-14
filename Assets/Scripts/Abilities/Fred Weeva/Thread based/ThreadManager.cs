@@ -2,16 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
 
-public class ThreadManager : MonoBehaviour
+public class ThreadManager : Ability
 {
     [Tab("Values")]
     public float fInnerRadius = 20;
     public float fOuterRadius = 40;
 
     public int iTotalPoints = 6; // set the amount of points on the circle to place a thread point (e.g. 6 = Hexagon)
-
-    public int interwovenThreadsCount = 5;
-    public int wovenRealityCount = 3;
 
     //public List<GameObject> ReaverSpawns;
     //public List<GameObject> ReaverOppositeSpawns;
@@ -26,6 +23,11 @@ public class ThreadManager : MonoBehaviour
     public List<GameObject> inbetweenThreads;
 
     [Tab("References")]
+    [Header("Abilities")]
+    public AbilitySO interwovenThreads;
+    public AbilitySO wovenReality;
+
+    [Header("Prefabs")]
     public GameObject ThreadPF;
     public GameObject ThreadPointPF;
     //public GameObject ReaverPF;
@@ -41,6 +43,17 @@ public class ThreadManager : MonoBehaviour
         {
             InterwovenThreads();
         }
+    }
+
+    /***********************************************
+    * UseSpellEffect: Overriden spell effect, creates a shadow assassin on targets position
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    public override void UseSpellEffect()
+    {
+        InitializeArenaThreads();
     }
 
     /***********************************************
@@ -119,6 +132,7 @@ public class ThreadManager : MonoBehaviour
         threadMesh.transform.localScale = new Vector3(0.1f, 1, fDistBetweenPoints);
         threadMesh.transform.localPosition = new Vector3(0, 0, fDistBetweenPoints/2);
 
+        // face thread towards next point
         thread.transform.LookAt(_v3LookDir);
 
         _threadList.Add(thread);
@@ -126,42 +140,42 @@ public class ThreadManager : MonoBehaviour
         return thread;
     }
 
-    void ResetThreads()
+    /***********************************************
+    * ResetThreads: Resets all threads to inactive
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    public void ResetThreads()
     {
+        // Search through all edge threads and deactivate them
         foreach (var thread in edgeThreads)
         {
             thread.GetComponent<Thread>().ChangeThreadState(false);
         }
     }
 
-    public void InterwovenThreads() // TODO: Efficientize this + comments (Move to own script)
+    /***********************************************
+    * InterwovenThreads: casts Interwoven threads
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    public void InterwovenThreads()
     {
-        ResetThreads();
-
-        int threadsActive = 0;
-
-        while (threadsActive < interwovenThreadsCount)
-        {
-            int randomThread = Random.Range(0, edgeThreads.Count);
-
-            if (!edgeThreads[randomThread].GetComponent<Thread>().isThreadActive)
-            {
-                edgeThreads[randomThread].GetComponent<Thread>().ChangeThreadState(true);
-
-                threadsActive++;
-            }
-        }
+        var ability = interwovenThreads.InitialiseAbility(owner, target, Vector3.zero);
+        ability.GetComponent<Ability>().CastSpell();
     }
 
+    /***********************************************
+    * WovenReality: Casts Woven Reality which starts the intermission
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
     void WovenReality() // TODO: Efficientize this + comments
     {
-        int threadsActive = 0;
-
-        while (threadsActive < wovenRealityCount)
-        {
-            int randomThread = Random.Range(0, inbetweenThreads.Count);
-        }
-
+        wovenReality.InitialiseAbility(owner, target, Vector3.zero);
     }
 
 }

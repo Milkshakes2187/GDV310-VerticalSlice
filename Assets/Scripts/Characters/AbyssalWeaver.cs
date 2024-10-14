@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using static PB_FSM;
 
 public class AbyssalWeaver : Enemy
 {
@@ -146,26 +145,26 @@ public class AbyssalWeaver : Enemy
                     mfa.GetComponent<Ability>().CastSpell();
                 }
 
-                currentState = States.AGGRESSIVE;
+                //currentState = States.AGGRESSIVE;
 
-                mfaCountThisRotation++;
-
-                switch (mfaCountThisRotation)
-                {
-                    case 0:
-                        nextState = States.ENTWINEDABYSS;
-                        break;
-
-                    case 1:
-                        nextState = States.THREADEDSLIP;
-                        break;
-
-                    case 2:
-                        nextState = States.INTERMISSION;
-                        break;
-                }
-
-                mfaCast = false;
+                //mfaCountThisRotation++;
+                //
+                //switch (mfaCountThisRotation)
+                //{
+                //    case 0:
+                //        nextState = States.ENTWINEDABYSS;
+                //        break;
+                //
+                //    case 1:
+                //        nextState = States.THREADEDSLIP;
+                //        break;
+                //
+                //    case 2:
+                //        nextState = States.INTERMISSION;
+                //        break;
+                //}
+                //
+                //mfaCast = false;
                 
                 break;
 
