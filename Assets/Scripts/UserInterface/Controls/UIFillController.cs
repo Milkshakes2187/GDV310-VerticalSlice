@@ -20,6 +20,7 @@ public class UIFillController : MonoBehaviour
         }
     }
 
+    //
     // Update is called once per frame
     void Update()
     {
