@@ -38,6 +38,8 @@ public class Player : Character
     public AnimationCurve frictionCurve;
     public float stopFriction = 4.0f;
 
+    public float airMod = 0.1f;
+
     //[Foldout("Dash Vars")]
     //[SerializeField] private float fDashDistance = 10.0f;
     //[SerializeField] private float fDashTime = 0.3f;
@@ -112,6 +114,14 @@ public class Player : Character
         //playerAnim.SetBool("canMove", bCanMove);
 
         Vector3 moveInput = Vector3.zero;
+        Vector3 playerRight = camTarget.transform.right;
+        Vector3 playerForward = camTarget.transform.forward;
+        
+        playerRight.y = 0.0f;
+        playerForward.y = 0.0f;
+
+        playerRight.Normalize();
+        playerForward.Normalize();
 
         // Get movement input
         moveInput.z += Input.GetKey(KeyCode.W) ? 1.0f : 0.0f;   // Forwards
@@ -120,8 +130,9 @@ public class Player : Character
         moveInput.x -= Input.GetKey(KeyCode.A) ? 1.0f : 0.0f;   // Left
 
         // Apply movement according to camera facing direction
-        moveInput = camTarget.transform.right * moveInput.x +
-            camTarget.transform.forward * moveInput.z;
+        moveInput = playerRight * moveInput.x +
+            playerForward * moveInput.z;
+
 
         // Ensures moving diagonally is not faster
         if (moveInput.sqrMagnitude > 1.0f)
@@ -129,36 +140,45 @@ public class Player : Character
             moveInput.Normalize();
         }
 
-
-        // Coyote time
-        coyoteTimer -= Time.deltaTime;
-        if ((charController.collisionFlags & CollisionFlags.Below) != 0)    // Grounded check
-        //if (charController.isGrounded)    // Grounded check
-        {
-            coyoteTimer = coyoteTime;
-            moveVelocity.y = -1.0f;
-        }
-
         // Jumping
-        if (Input.GetKeyDown(KeyCode.Space)) // && coyoteTimer > 0.0f)
+        if (Input.GetKeyDown(KeyCode.Space) && coyoteTimer > 0.0f)
         {
             moveVelocity.y = 12.0f; // Jump speed
             coyoteTimer = 0.0f;
         }
 
+        float airMultiplier = (coyoteTimer > 0.2f) ? 1.0f : airMod;
+        Debug.Log(airMultiplier);
+
         moveVelocity.y -= gravity * Time.deltaTime;
-        moveVelocity += moveInput * acceleration * Time.deltaTime;
+        float cacheY = moveVelocity.y;
+        moveVelocity.y = 0.0f;
+
+        moveVelocity += moveInput * airMultiplier * acceleration * Time.deltaTime;
 
         // Apply friction - more friction if no movement input
         float frictionVal = frictionCurve.Evaluate(moveVelocity.magnitude);
         float frictionMod = (moveInput.sqrMagnitude < 0.01f) ? stopFriction : 1.0f;
-        moveVelocity -= moveVelocity.normalized * frictionVal * frictionMod * acceleration * Time.deltaTime;
-        
+        moveVelocity -= moveVelocity.normalized * airMultiplier * 
+            frictionVal * frictionMod * 
+            acceleration * Time.deltaTime;
+
+        moveVelocity.y = cacheY;
+
         Vector3 velocity = moveVelocity;
         velocity.x *= moveSpeed * speedMultiplier;
         velocity.z *= moveSpeed * speedMultiplier;
 
         charController.Move(velocity * Time.deltaTime);
+
+        // Coyote time
+        coyoteTimer -= Time.deltaTime;
+        //if ((charController.collisionFlags & CollisionFlags.Below) != 0)    // Grounded check
+        if (charController.isGrounded)    // Grounded check
+        {
+            coyoteTimer = coyoteTime;
+            moveVelocity.y = -1.0f;
+        }
         //if (canMove)
         //{
         //    charController.Move(moveVelocity * Time.deltaTime);
