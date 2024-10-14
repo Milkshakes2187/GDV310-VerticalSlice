@@ -2718,6 +2718,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 328259320}
     m_Modifications:
+    - target: {fileID: 3040344194982035233, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 13.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063361585830855386, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.a
+      value: 0.78431374
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063361585830855386, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.b
+      value: 0.1509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063361585830855386, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.g
+      value: 0.06051976
+      objectReference: {fileID: 0}
+    - target: {fileID: 3063361585830855386, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.r
+      value: 0.073817365
+      objectReference: {fileID: 0}
     - target: {fileID: 3256110905605266303, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2798,6 +2818,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3630923460461848323, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: fillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4720419253335827829, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_fontSize
       value: 16
@@ -2817,6 +2841,10 @@ PrefabInstance:
     - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_Color.r
       value: 0.7264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.943
       objectReference: {fileID: 0}
     - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_GradientEffect.m_Enabled
