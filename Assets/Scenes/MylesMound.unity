@@ -351,6 +351,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7979632818625698619, guid: 2d70a6a817a31f241889807a020e76cf, type: 3}
+      propertyPath: m_WarningMessage
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'jnt_L_shoulder'\n\tTransform 'jnt_R_clavicle'\n\tTransform
+        'jnt_R_thumb_3'\n\tTransform 'jnt_L_clavicle'\n\tTransform 'jnt_chest'\n\tTransform
+        'jnt_hips'\n\tTransform 'jnt_groin'\n\tTransform 'jnt_R_thumb_1'\n\tTransform
+        'jnt_R_pinky_1'\n\tTransform 'jnt_R_pinky_2'\n\tand more ...\n\tFrom animation
+        clip 'anim_PC_idleCombat'\n\tFrom animation clip 'anim_PC_idleNutural'"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
