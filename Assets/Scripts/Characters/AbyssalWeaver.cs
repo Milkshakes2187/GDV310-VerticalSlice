@@ -1,16 +1,23 @@
 using UnityEngine;
 using UnityEngine.AI;
+using static PB_FSM;
 
 public class AbyssalWeaver : Enemy
 {
     float timeBetweenCasts = 5f;
     float tbcElapsed = 5f; // timeBetweenCasts elapsed
 
+    float abilityCastCD = 2f;
+    float abilityCastElapsed = 2f;
+
+    float tempMFACD = 3.5f;
+    float tempMFAElapsed = 3.5f;
+
     int mfaCountThisRotation = 0;
 
     bool mfaCast = false;
 
-    public enum States
+    enum States
     {
         IDLE,
         STUNNED,
@@ -23,14 +30,14 @@ public class AbyssalWeaver : Enemy
     }
 
     NavMeshAgent agent;
-    public AbilitySO abyssalKnives;
-    public AbilitySO markedForAssassination;
+    public GameObject abyssalKnivesPF;
+    public GameObject markedForAssassinationPF;
     public GameObject threadManagerPF;
 
     ThreadManager threadManager;
 
-    [HideInInspector] public States currentState = States.IDLE;
-    [HideInInspector] public States nextState = States.INTERWOVENTHREADS;
+    States currentState = States.IDLE;
+    States nextState = States.INTERWOVENTHREADS;
 
     private void Awake()
     {
@@ -61,17 +68,13 @@ public class AbyssalWeaver : Enemy
             case States.IDLE:
 
                 // Set state starting variables
-                agent.isStopped = true;               
+                agent.isStopped = true;
 
                 // if player is in aggro range begin the fight
                 if (distToPlayer <= 10)
                 {
                     currentState = nextState;
                 }
-
-                //var ak = abyssalKnives.InitialiseAbility(this, player, this.transform.position);
-                //ak.GetComponent<Ability>().CastSpell();
-
                 break;
 
             // Boss has no movement and stunned timer ticks down
@@ -112,6 +115,7 @@ public class AbyssalWeaver : Enemy
 
                     // reset elapsed Timers
                     tbcElapsed = timeBetweenCasts;
+                    abilityCastElapsed = abilityCastCD;
 
                     // move to next state
                     currentState = nextState;
@@ -121,14 +125,20 @@ public class AbyssalWeaver : Enemy
 
             // Happens when threads are first created and after each intermission
             case States.INTERWOVENTHREADS:
-                threadManager.InterwovenThreads();
 
-                // at the start of each rotation after interwoven threads reset MFA count to 0;
-                mfaCountThisRotation = 0;
+                abilityCastElapsed -= Time.deltaTime;
 
-                // Set state transitions
-                currentState = States.AGGRESSIVE;
-                nextState = States.MFA;
+                if (abilityCastElapsed <= 0)
+                {
+                    threadManager.InterwovenThreads();
+
+                    // at the start of each rotation after interwoven threads reset MFA count to 0;
+                    mfaCountThisRotation = 0;
+
+                    // Set state transitions
+                    currentState = States.AGGRESSIVE;
+                    nextState = States.MFA;
+                }
 
                 break;
 
@@ -140,32 +150,34 @@ public class AbyssalWeaver : Enemy
                 if (!mfaCast)
                 {
                     mfaCast = true;
-                    var mfa = markedForAssassination.InitialiseAbility(this, player, player.transform.position);
-                    mfa.GetComponent<Ability>().InitialSetup();
-                    mfa.GetComponent<Ability>().CastSpell();
+                    var mfa = Instantiate(markedForAssassinationPF, transform.position, Quaternion.identity);
                 }
 
-                //currentState = States.AGGRESSIVE;
+                tempMFAElapsed -= Time.deltaTime;
 
-                //mfaCountThisRotation++;
-                //
-                //switch (mfaCountThisRotation)
-                //{
-                //    case 0:
-                //        nextState = States.ENTWINEDABYSS;
-                //        break;
-                //
-                //    case 1:
-                //        nextState = States.THREADEDSLIP;
-                //        break;
-                //
-                //    case 2:
-                //        nextState = States.INTERMISSION;
-                //        break;
-                //}
-                //
-                //mfaCast = false;
-                
+                if (tempMFAElapsed <= 0)
+                {
+                    currentState = States.AGGRESSIVE;
+
+                    mfaCountThisRotation++;
+
+                    switch (mfaCountThisRotation)
+                    {
+                        case 0:
+                            nextState = States.ENTWINEDABYSS;
+                            break;
+
+                        case 1:
+                            nextState = States.THREADEDSLIP;
+                            break;
+
+                        case 2:
+                            nextState = States.INTERMISSION;
+                            break;
+                    }
+
+                    mfaCast = false;
+                }
                 break;
 
             // Beam which blasts out in front of the boss, boss will slowly rotate towards the player

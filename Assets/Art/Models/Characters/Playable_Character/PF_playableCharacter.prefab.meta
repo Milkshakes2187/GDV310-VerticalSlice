@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Art/Models/Characters/Playable_Character/PF_playableCharacter.prefab.meta
 guid: 2d70a6a817a31f241889807a020e76cf
+========
+guid: 27c8c4a9e8232934b9e7db87446718cc
+>>>>>>>> main:Assets/Prefabs/UserInterface/PlayerHUD/Components/UI_BossCastBar.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
