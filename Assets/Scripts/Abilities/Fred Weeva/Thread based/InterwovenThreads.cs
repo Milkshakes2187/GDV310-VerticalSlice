@@ -33,5 +33,6 @@ public class InterwovenThreads : Ability
         }
 
         Destroy(gameObject);
+        Debug.Log("Test");
     }
 }
