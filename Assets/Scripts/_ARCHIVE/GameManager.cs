@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameTimeText;
     public GameObject playerHUD;
 
+    // TODO: REWORK NEXT
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
