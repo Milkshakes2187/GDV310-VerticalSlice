@@ -19,6 +19,7 @@ MonoBehaviour:
     - 800299151bb3bc64eb2de3c08c4e79c7
     - 8e7e756bb33f49c408fcd0cf1bdb2d12
     - d0d907e4b5c7ede47aef0a772b62fc19
+    - 99c9720ab356a0642a771bea13969a05
     values:
     - goDatas_byGlobalId:
         keys:
@@ -74,3 +75,15 @@ MonoBehaviour:
           iconNameOrGuid: AvatarMask On Icon
         - colorIndex: 2
           iconNameOrGuid: ParticleSystem Icon
+    - goDatas_byGlobalId:
+        keys:
+        - globalObjectIdString: GlobalObjectId_V1-2-99c9720ab356a0642a771bea13969a05-8617857774365792271-111569122
+        - globalObjectIdString: GlobalObjectId_V1-2-99c9720ab356a0642a771bea13969a05-8882869361881832430-184037172
+        - globalObjectIdString: GlobalObjectId_V1-2-99c9720ab356a0642a771bea13969a05-1100361952106994781-650607420
+        values:
+        - colorIndex: 0
+          iconNameOrGuid: AvatarMask On Icon
+        - colorIndex: 0
+          iconNameOrGuid: Settings Icon
+        - colorIndex: 0
+          iconNameOrGuid: PreMatSphere
