@@ -424,6 +424,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6392944685951695462, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392944685951695462, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392944685951695462, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392944685951695462, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392944685951695462, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392944685951695462, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -200
+      objectReference: {fileID: 0}
     - target: {fileID: 8882869361881832430, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
       propertyPath: m_Name
       value: GameManager
