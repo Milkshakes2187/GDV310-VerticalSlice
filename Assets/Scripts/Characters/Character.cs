@@ -21,6 +21,12 @@ public class Character : MonoBehaviour
         health = maxHealth;
     }
 
+    /***********************************************
+    * TakeDamage: Reduces character's health based on damage.
+    * @author: Justhine Nisperos
+    * @parameter: float
+    * @return: void
+    ************************************************/
     public void TakeDamage(float _fDamage)
     {
         health -= _fDamage;
@@ -31,11 +37,23 @@ public class Character : MonoBehaviour
         }
     }
 
+    /***********************************************
+    * Heal: Increases character's health based on heal amount.
+    * @author: Justhine Nisperos
+    * @parameter: float
+    * @return: void
+    ************************************************/
     protected void Heal(float _fHealAmount)
     {
         health = health + _fHealAmount > maxHealth ? maxHealth : health + _fHealAmount;
     }
 
+    /***********************************************
+    * TriggerDeath: Run end-of-life functions and destroy game object.
+    * @author: Justhine Nisperos
+    * @parameter: 
+    * @return: void
+    ************************************************/
     protected void TriggerDeath()
     {
         Debug.Log(gameObject.name + " HAS DIED.");
