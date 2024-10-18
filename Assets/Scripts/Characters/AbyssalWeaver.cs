@@ -5,25 +5,16 @@ using static UnityEngine.UI.GridLayoutGroup;
 
 public class AbyssalWeaver : Enemy
 {
-    float timeBetweenCasts = 5f;
-    float tbcElapsed = 5f; // timeBetweenCasts elapsed
-
-    public float turnSpeed = 5f;
-
-    int mfaCountThisRotation = 0;
-
-    bool currentAbilityCreated = false;
-
-    public enum States
+    public enum STATES
     {
         IDLE,
         STUNNED,
-        AGGRESSIVE,     
-        INTERWOVENTHREADS,
-        MFA,            // Marked for Assassination
-        ENTWINEDABYSS, 
-        THREADEDSLIP, 
-        INTERMISSION,   // Woven Reality
+        AGGRESSIVE,
+        INTERWOVEN_THREADS,
+        MFA,                // Marked for Assassination
+        ENTWINED_ABYSS,
+        THREADED_SLIP,
+        INTERMISSION,       // Woven Reality
     }
 
     NavMeshAgent agent;
@@ -32,12 +23,19 @@ public class AbyssalWeaver : Enemy
     public AbilitySO abyssalKnives;
     public AbilitySO markedForAssassination;
     public AbilitySO EntwinedAbyss;
-    
+    public AbilitySO ThreadedSlip;
     public GameObject threadManagerPF;
     ThreadManager threadManager;
 
-    States currentState = States.IDLE;
-    States nextState = States.INTERWOVENTHREADS;
+    public float turnSpeed = 5f;
+    float timeBetweenCasts = 5f;
+    float tbcElapsed = 5f; // timeBetweenCasts elapsed
+    int mfaCountThisRotation = 0;
+
+    bool currentAbilityCreated = false;
+
+    STATES currentState = STATES.IDLE;
+    STATES nextState = STATES.INTERWOVEN_THREADS;
 
     private void Awake()
     {
@@ -77,13 +75,13 @@ public class AbyssalWeaver : Enemy
         switch (currentState)
         {
             // Boss has not been aggro'd
-            case States.IDLE:
+            case STATES.IDLE:
 
                 IdleState(distToPlayer);
                 break;
 
             // Boss has no movement and stunned timer ticks down
-            case States.STUNNED:
+            case STATES.STUNNED:
 
                 // Set state starting variables
                 agent.isStopped = true;
@@ -91,13 +89,13 @@ public class AbyssalWeaver : Enemy
                 break;
             
             // During this state the boss chases and auto attacks the player
-            case States.AGGRESSIVE:
+            case STATES.AGGRESSIVE:
 
                 AggressiveState(distToPlayer);
                 break;
 
             // Happens when threads are first created and after each intermission
-            case States.INTERWOVENTHREADS:
+            case STATES.INTERWOVEN_THREADS:
 
                 InterwovenThreadState();
                 break;
@@ -105,25 +103,27 @@ public class AbyssalWeaver : Enemy
             // Marks the player for assassination, placing a marker above their head
             // This is a channeled ability so the boss shouldn't move until the cast goes off
             // Once the ability finishes a phantom assassin should be spawned where the player was when the ability finished
-            case States.MFA:
+            case STATES.MFA:
 
                 MFAState();
                 break;
 
             // Beam which blasts out in front of the boss, boss will slowly rotate towards the player
             // Beam also triggers phantom assassins to become unstable, causing them to pulse with damage and then destroy themselves
-            case States.ENTWINEDABYSS:
+            case STATES.ENTWINED_ABYSS:
 
                 EntwinedAbyssState();
                 break;
 
             // Dashes towards the player quickly, if the boss hits a thread they are stunned
-            case States.THREADEDSLIP:
+            case STATES.THREADED_SLIP:
+
+                ThreadedSlipState();
                 break;
 
             // During intermission the boss will move to the center and will bind threads to pillars
             // Boss does not move during this state
-            case States.INTERMISSION:
+            case STATES.INTERMISSION:
                 break;
         }
     }
@@ -201,8 +201,8 @@ public class AbyssalWeaver : Enemy
         mfaCountThisRotation = 0;
 
         // Set state transitions
-        currentState = States.AGGRESSIVE;
-        nextState = States.ENTWINEDABYSS;
+        currentState = STATES.AGGRESSIVE;
+        nextState = STATES.MFA;
     }
 
     /***********************************************
@@ -225,20 +225,20 @@ public class AbyssalWeaver : Enemy
         {
             currentAbilityCreated = false;
 
-            currentState = States.AGGRESSIVE;
+            currentState = STATES.AGGRESSIVE;
 
             switch (mfaCountThisRotation)
             {
                 case 0:
-                    nextState = States.ENTWINEDABYSS;
+                    nextState = STATES.ENTWINED_ABYSS;
                     break;
 
                 case 1:
-                    nextState = States.THREADEDSLIP;
+                    nextState = STATES.THREADED_SLIP;
                     break;
 
                 case 2:
-                    nextState = States.INTERMISSION;
+                    nextState = STATES.INTERWOVEN_THREADS;
                     break;
             }
 
@@ -275,8 +275,54 @@ public class AbyssalWeaver : Enemy
         if (!currentAbility && currentAbilityCreated)
         {
             currentAbilityCreated = false;
-            nextState = States.THREADEDSLIP;
-            currentState = States.AGGRESSIVE;
+            nextState = STATES.MFA;
+            currentState = STATES.AGGRESSIVE;
+        }
+    }
+
+    /***********************************************
+    * ThreadedSlipState: Handles the creation of Entwined abyss ability and turning the boss to face the player during the ability
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    void ThreadedSlipState()
+    {
+        // if the ability hasn't been created, create it first
+        if (!currentAbilityCreated)
+        {
+            currentAbilityCreated = true;
+            currentAbility = ThreadedSlip.InitialiseAbility(this, player, player.transform.position);
+            currentAbility.GetComponent<Ability>().InitialSetup();
+            currentAbility.GetComponent<Ability>().CastSpell();
+        }
+
+        // if the ability has been created once during this state and it has not been destroyed yet
+        if (currentAbility && currentAbilityCreated)
+        {
+            // rotate the boss slowly towards the player
+            TurnTowardsPlayer();
+        }
+
+        // State transitions when the ability has been created once during this state
+        // And the ability does not exist anymore
+        if (!currentAbility && currentAbilityCreated)
+        {
+            currentAbilityCreated = false;
+            nextState = STATES.MFA;
+            currentState = STATES.AGGRESSIVE;
+        }
+    }
+
+    void CheckForTransition(STATES _nextState)
+    {
+        // State transitions when the ability has been created once during this state
+        // And the ability does not exist anymore
+        if (!currentAbility && currentAbilityCreated)
+        {
+            currentAbilityCreated = false;
+            nextState = STATES.INTERWOVEN_THREADS;
+            currentState = STATES.AGGRESSIVE;
         }
     }
 

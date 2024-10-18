@@ -6,6 +6,7 @@ public class EntwinedAbyss : Ability
 
     private void Update()
     {
+        // Set the direction of the ability towards the forward direction of the owning character
         transform.forward = owner.transform.forward;
     }
 

@@ -30,11 +30,11 @@ public abstract class Ability : MonoBehaviour
     public virtual void InitialSetup() { }
 
     /***********************************************
-   * UseSpellEffect: Abstract function to use a spell's effect. Overridden by children
-   * @author: George White
-   * @parameter:
-   * @return: abstract void
-   ************************************************/
+    * UseSpellEffect: Abstract function to use a spell's effect. Overridden by children
+    * @author: George White
+    * @parameter:
+    * @return: abstract void
+    ************************************************/
     public abstract void UseSpellEffect();
 
     /***********************************************
@@ -45,6 +45,8 @@ public abstract class Ability : MonoBehaviour
     ************************************************/
     public void CastSpell()
     {
+        InitialSetup();
+
         if (abilityData.timeToCast == 0.0f)
         {
             //instantly use the spell effect if there is no time to cast
@@ -86,12 +88,12 @@ public abstract class Ability : MonoBehaviour
         Destroy(gameObject);
     }
 
-   /***********************************************
-   * CastTimer: Coroutine to count down the spell's casting time, and casts the spell when done
-   * @author: George White
-   * @parameter:
-   * @return: IEnumerator
-   ************************************************/
+    /***********************************************
+    * CastTimer: Coroutine to count down the spell's casting time, and casts the spell when done
+    * @author: George White
+    * @parameter:
+    * @return: IEnumerator
+    ************************************************/
     IEnumerator CastTimer()
     {
         while (currentCastTime > 0.0f)
@@ -117,11 +119,11 @@ public abstract class Ability : MonoBehaviour
     }
 
     /***********************************************
-   * ChannelTimer: Courtine to count down the spell's channel time, destroys the spell when the channel is doen
-   * @author: Juan Le Roux
-   * @parameter:
-   * @return: IEnumerator
-   ************************************************/
+    * ChannelTimer: Courtine to count down the spell's channel time, destroys the spell when the channel is doen
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: IEnumerator
+    ************************************************/
     IEnumerator ChannelTimer()
     {
         while (currentChannelTime > 0.0f)

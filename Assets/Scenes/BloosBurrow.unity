@@ -737,11 +737,11 @@ MonoBehaviour:
   speedMultiplier: 1
   damageMultiplier: 1
   aggroRange: 1
+  turnSpeed: 5
   abyssalKnives: {fileID: 11400000, guid: 42803130371ae524eb74dc2318d36eff, type: 2}
   markedForAssassination: {fileID: 11400000, guid: 5143948a532220a4dbb280dace1b0fb8, type: 2}
+  EntwinedAbyss: {fileID: 11400000, guid: 52b0a373be53762409f903f10debfa4a, type: 2}
   threadManagerPF: {fileID: 1618098391873643487, guid: ebebb455086e49f4591b4667b531dd87, type: 3}
-  currentState: 0
-  nextState: 3
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,63 +1320,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1521580693}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &3278816225395541378
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1342755337380672548, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_Name
-      value: WovenReality
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -13.542744
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 8.220804
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -40.53464
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796948090286357258, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 0f791e9c0ee1aa649bf5ae0425a5ab4f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1393,4 +1336,3 @@ SceneRoots:
   - {fileID: 1992672852}
   - {fileID: 267750203}
   - {fileID: 260922965}
-  - {fileID: 3278816225395541378}

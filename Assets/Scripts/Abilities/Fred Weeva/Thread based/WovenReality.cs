@@ -18,10 +18,12 @@ public class WovenReality : Ability
 
         int threadsActive = 0;
 
+        // Loop until all threads have beenn placed
         while (threadsActive < wovenRealityCount)
         {
             int randomThread = Random.Range(0, threadManager.inbetweenThreads.Count);
 
+            // if the selected random thread hasn't been activate it, activate it and its outer counterpart
             if (!threadManager.edgeThreads[randomThread].GetComponent<Thread>().isThreadActive)
             {
                 threadManager.edgeThreads[randomThread].GetComponent<Thread>().ChangeThreadState(true);
