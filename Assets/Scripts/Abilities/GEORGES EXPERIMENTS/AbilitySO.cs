@@ -2,7 +2,6 @@ using MPUIKIT;
 using Unity.VisualScripting;
 using UnityEngine;
 using VInspector;
-using static UnityEngine.UI.GridLayoutGroup;
 
 [CreateAssetMenu(fileName = "AbilitySO", menuName = "Scriptable Objects/AbilitySO")]
 public  class AbilitySO : ScriptableObject

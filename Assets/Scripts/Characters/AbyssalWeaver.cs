@@ -1,14 +1,18 @@
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class AbyssalWeaver : Enemy
 {
     float timeBetweenCasts = 5f;
     float tbcElapsed = 5f; // timeBetweenCasts elapsed
 
+    public float turnSpeed = 5f;
+
     int mfaCountThisRotation = 0;
 
-    bool mfaCast = false;
+    bool currentAbilityCreated = false;
 
     public enum States
     {
@@ -23,14 +27,17 @@ public class AbyssalWeaver : Enemy
     }
 
     NavMeshAgent agent;
+
+    GameObject currentAbility;
     public AbilitySO abyssalKnives;
     public AbilitySO markedForAssassination;
+    public AbilitySO EntwinedAbyss;
+    
     public GameObject threadManagerPF;
-
     ThreadManager threadManager;
 
-    [HideInInspector] public States currentState = States.IDLE;
-    [HideInInspector] public States nextState = States.INTERWOVENTHREADS;
+    States currentState = States.IDLE;
+    States nextState = States.INTERWOVENTHREADS;
 
     private void Awake()
     {
@@ -43,8 +50,17 @@ public class AbyssalWeaver : Enemy
     // Update is called once per frame
     void Update()
     {
-        float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        RunStateMachine();
+    }
 
+    /***********************************************
+    * RunStateMachine: Handles the different states that the boss can transition into with a switch case
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    void RunStateMachine()
+    {
         // Boss rotation
         // 1. Interwoven Threads
         // 2. Marked for Assassination
@@ -55,23 +71,15 @@ public class AbyssalWeaver : Enemy
         // 7. Intermission
         // 
         // With a chance between each ability to cast abyssal Daggers
+
+        float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
+
         switch (currentState)
         {
-            // The boss has not been aggro'd and is idle in the center of his arena
+            // Boss has not been aggro'd
             case States.IDLE:
 
-                // Set state starting variables
-                agent.isStopped = true;               
-
-                // if player is in aggro range begin the fight
-                if (distToPlayer <= 10)
-                {
-                    currentState = nextState;
-                }
-
-                //var ak = abyssalKnives.InitialiseAbility(this, player, this.transform.position);
-                //ak.GetComponent<Ability>().CastSpell();
-
+                IdleState(distToPlayer);
                 break;
 
             // Boss has no movement and stunned timer ticks down
@@ -81,55 +89,17 @@ public class AbyssalWeaver : Enemy
                 agent.isStopped = true;
 
                 break;
-
-            // the state in which the boss will chase the player and auto attack
+            
+            // During this state the boss chases and auto attacks the player
             case States.AGGRESSIVE:
 
-                agent.isStopped = false;
-                agent.destination = player.transform.position;
-
-                // tick down basic attack cooldown and time between next attack timers
-                basicAttackElapsed -= Time.deltaTime;
-                tbcElapsed -= Time.deltaTime;
-
-                if (basicAttackElapsed <= 0)
-                {
-                    if (distToPlayer <= agent.stoppingDistance)
-                    {
-                        // activate basic attack animation
-
-                        // deal damage and reset cd timer
-                        player.TakeDamage(5);
-                        basicAttackElapsed = basicAttackCD;
-                    }
-                }
-
-                // when the time between casts cooldown finishes move to the state transition state
-                if (tbcElapsed <= 0)
-                {
-                    // set the agents destination to its current position to stop it from finishing its current destination command
-                    agent.destination = transform.position;
-
-                    // reset elapsed Timers
-                    tbcElapsed = timeBetweenCasts;
-
-                    // move to next state
-                    currentState = nextState;
-                }
-
+                AggressiveState(distToPlayer);
                 break;
 
             // Happens when threads are first created and after each intermission
             case States.INTERWOVENTHREADS:
-                threadManager.InterwovenThreads();
 
-                // at the start of each rotation after interwoven threads reset MFA count to 0;
-                mfaCountThisRotation = 0;
-
-                // Set state transitions
-                currentState = States.AGGRESSIVE;
-                nextState = States.MFA;
-
+                InterwovenThreadState();
                 break;
 
             // Marks the player for assassination, placing a marker above their head
@@ -137,40 +107,14 @@ public class AbyssalWeaver : Enemy
             // Once the ability finishes a phantom assassin should be spawned where the player was when the ability finished
             case States.MFA:
 
-                if (!mfaCast)
-                {
-                    mfaCast = true;
-                    var mfa = markedForAssassination.InitialiseAbility(this, player, player.transform.position);
-                    mfa.GetComponent<Ability>().InitialSetup();
-                    mfa.GetComponent<Ability>().CastSpell();
-                }
-
-                //currentState = States.AGGRESSIVE;
-
-                //mfaCountThisRotation++;
-                //
-                //switch (mfaCountThisRotation)
-                //{
-                //    case 0:
-                //        nextState = States.ENTWINEDABYSS;
-                //        break;
-                //
-                //    case 1:
-                //        nextState = States.THREADEDSLIP;
-                //        break;
-                //
-                //    case 2:
-                //        nextState = States.INTERMISSION;
-                //        break;
-                //}
-                //
-                //mfaCast = false;
-                
+                MFAState();
                 break;
 
             // Beam which blasts out in front of the boss, boss will slowly rotate towards the player
             // Beam also triggers phantom assassins to become unstable, causing them to pulse with damage and then destroy themselves
             case States.ENTWINEDABYSS:
+
+                EntwinedAbyssState();
                 break;
 
             // Dashes towards the player quickly, if the boss hits a thread they are stunned
@@ -182,5 +126,176 @@ public class AbyssalWeaver : Enemy
             case States.INTERMISSION:
                 break;
         }
+    }
+
+    /***********************************************
+    * IdleState: During this state the boss has not been aggro'd and is idle in the center of his arena
+    * @author: Juan Le Roux
+    * @parameter: float
+    * @return: void
+    ************************************************/
+    void IdleState(float _distToPlayer)
+    {
+        // Set state starting variables
+        agent.isStopped = true;
+
+        // if player is in aggro range begin the fight
+        if (_distToPlayer <= 10)
+        {
+            currentState = nextState;
+        }
+    }
+
+    /***********************************************
+    * AggressiveState: During this state the boss will chase the player and auto attack
+    * @author: Juan Le Roux
+    * @parameter: float
+    * @return: void
+    ************************************************/
+    void AggressiveState(float _distToPlayer)
+    {
+        agent.isStopped = false;
+        agent.destination = player.transform.position;
+
+        // tick down basic attack cooldown and time between next attack timers
+        basicAttackElapsed -= Time.deltaTime;
+        tbcElapsed -= Time.deltaTime;
+
+        if (basicAttackElapsed <= 0)
+        {
+            if (_distToPlayer <= agent.stoppingDistance)
+            {
+                // activate basic attack animation
+
+                // deal damage and reset cd timer
+                player.TakeDamage(5);
+                basicAttackElapsed = basicAttackCD;
+            }
+        }
+
+        // when the time between casts cooldown finishes move to the state transition state
+        if (tbcElapsed <= 0)
+        {
+            // set the agents destination to its current position to stop it from finishing its current destination command
+            agent.destination = transform.position;
+
+            // reset elapsed Timers
+            tbcElapsed = timeBetweenCasts;
+
+            // move to next state
+            currentState = nextState;
+        }
+    }
+
+    /***********************************************
+    * InterwovenThreadState: Creates the interwoven threads and resets the mfa count
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    void InterwovenThreadState()
+    {
+        threadManager.InterwovenThreads();
+
+        // at the start of each rotation after interwoven threads reset MFA count to 0;
+        mfaCountThisRotation = 0;
+
+        // Set state transitions
+        currentState = States.AGGRESSIVE;
+        nextState = States.ENTWINEDABYSS;
+    }
+
+    /***********************************************
+    * MFAState: Handles the creation of the MFA ability and switches states based on how many times this ability has been case this rotation
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    void MFAState()
+    {
+        if (!currentAbilityCreated)
+        {
+            currentAbilityCreated = true;
+            currentAbility = markedForAssassination.InitialiseAbility(this, player, player.transform.position);
+            currentAbility.GetComponent<Ability>().InitialSetup();
+            currentAbility.GetComponent<Ability>().CastSpell();
+        }
+
+        if (!currentAbility && currentAbilityCreated)
+        {
+            currentAbilityCreated = false;
+
+            currentState = States.AGGRESSIVE;
+
+            switch (mfaCountThisRotation)
+            {
+                case 0:
+                    nextState = States.ENTWINEDABYSS;
+                    break;
+
+                case 1:
+                    nextState = States.THREADEDSLIP;
+                    break;
+
+                case 2:
+                    nextState = States.INTERMISSION;
+                    break;
+            }
+
+            mfaCountThisRotation++;
+        }
+    }
+
+    /***********************************************
+    * EntwinedAbyssState: Handles the creation of Entwined abyss ability and turning the boss to face the player during the ability
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    void EntwinedAbyssState()
+    {
+        // if the ability hasn't been created, create it first
+        if (!currentAbilityCreated)
+        {
+            currentAbilityCreated = true;
+            currentAbility = EntwinedAbyss.InitialiseAbility(this, player, transform.position);
+            currentAbility.GetComponent<Ability>().InitialSetup();
+            currentAbility.GetComponent<Ability>().CastSpell();
+        }
+
+        // if the ability has been created once during this state and it has not been destroyed yet
+        if (currentAbility && currentAbilityCreated)
+        {
+            // rotate the boss slowly towards the player
+            TurnTowardsPlayer();
+        }
+
+        // State transitions when the ability has been created once during this state
+        // And the ability does not exist anymore
+        if (!currentAbility && currentAbilityCreated)
+        {
+            currentAbilityCreated = false;
+            nextState = States.THREADEDSLIP;
+            currentState = States.AGGRESSIVE;
+        }
+    }
+
+    /***********************************************
+    * TurnTowardsPlayer: Turns the boss towards the player
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    void TurnTowardsPlayer()
+    {
+        // get the player direction
+        Vector3 direction = Player.instance.transform.position - transform.position;
+        direction.y = 0;
+
+        // set the desired look rotation towards the players look direction
+        Quaternion rotation = Quaternion.LookRotation(direction);
+
+        // Slerp the rotation towards the player at a designated turn speed
+        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
     }
 }

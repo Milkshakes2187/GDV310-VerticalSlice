@@ -26,12 +26,6 @@ public class MarkedForAssassination : Ability
     {
         Instantiate(assassinPF, target.transform.position, Quaternion.identity);
 
-        // If the abyssal weaver is the one casting this ability set its next state to be agressive (auto attack state)
-        if (owner.GetComponent<AbyssalWeaver>())
-        {
-            owner.GetComponent<AbyssalWeaver>().nextState = AbyssalWeaver.States.AGGRESSIVE;
-        }
-
         Destroy(gameObject);
     }
 

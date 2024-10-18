@@ -15,9 +15,11 @@ public abstract class Ability : MonoBehaviour
     [Header("Base Ability Variables")]
     public bool canMoveWhileCasting = true;
     [HideInInspector] public float currentCastTime = 0.0f;
+    [HideInInspector] public float currentChannelTime = 0.0f;
 
     //Coroutine to remember
     Coroutine castTimerCrouton;
+    Coroutine channelTimerCrouton;
 
     /***********************************************
     InitialSetup: Virtual function to perform inituial setup. Can be overridden, default does nothing.
@@ -80,10 +82,11 @@ public abstract class Ability : MonoBehaviour
     public void Interrupt()
     {
         StopCoroutine(castTimerCrouton);
+        StopCoroutine(channelTimerCrouton);
         Destroy(gameObject);
     }
 
-    /***********************************************
+   /***********************************************
    * CastTimer: Coroutine to count down the spell's casting time, and casts the spell when done
    * @author: George White
    * @parameter:
@@ -99,5 +102,35 @@ public abstract class Ability : MonoBehaviour
 
         //cast the spell
         UseSpellEffect();
+    }
+
+    /***********************************************
+    * CastSpell: Activates the channel timer
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    public void StartChannel()
+    {
+        currentChannelTime = abilityData.timeToChannel;
+        channelTimerCrouton = StartCoroutine(ChannelTimer());
+    }
+
+    /***********************************************
+   * ChannelTimer: Courtine to count down the spell's channel time, destroys the spell when the channel is doen
+   * @author: Juan Le Roux
+   * @parameter:
+   * @return: IEnumerator
+   ************************************************/
+    IEnumerator ChannelTimer()
+    {
+        while (currentChannelTime > 0.0f)
+        {
+            currentChannelTime -= Time.deltaTime;
+            yield return new WaitForSeconds(0.0f);
+        }
+
+        //cast the spell
+        Destroy(gameObject);
     }
 }
