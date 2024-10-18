@@ -6,10 +6,12 @@ public class Character : MonoBehaviour
     public float maxHealth;
     public float maxMoveSpeed;
     public float baseDamage;
+    public float maxArmour;
 
     [Header("Current Stats")]
     public float health;
     public float moveSpeed;
+    public float armour;
 
     [Header("Multipliers")]
     public float speedMultiplier;
@@ -29,7 +31,10 @@ public class Character : MonoBehaviour
     ************************************************/
     public void TakeDamage(float _fDamage)
     {
-        health -= _fDamage;
+        // Calculate damage reduced based on armour
+        // 1 armour = 1% less damage
+        float damageReduction = (100.0f - armour) * 0.1f;
+        health -= _fDamage * damageReduction;
 
         if (health <= 0)
         {

@@ -1,8 +1,9 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Slow : StatusEffect
 {
-    public float slowMultiplier = 0.5f;
+    public float slowMultiplier;
 
     protected override void Start()
     {
@@ -21,18 +22,20 @@ public class Slow : StatusEffect
     }
 
     /***********************************************
-    * ApplyEffect: Applies the status effect to target.
+    * ApplyEffect: Applies slow multiplier to target's current speed multiplier.
     * @author: Justhine Nisperos
     * @parameter:
     * @return: void
     ************************************************/
     protected override void ApplyEffect()
     {
+        // Apply this multiplier to current speed multiplier
+        // Allows speed-related status effects to stack
         target.speedMultiplier *= slowMultiplier;
     }
 
     /***********************************************
-    * RemoveEffect: Remove status effect from target and destroy this object.
+    * RemoveEffect: Remove the slow multiplier from target's speed multiplier and destroys this effect.
     * @author: Justhine Nisperos
     * @parameter:
     * @return: void
