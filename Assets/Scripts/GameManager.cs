@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     [Foldout("Dev Keys")]
     public KeyCode toggleCursor = KeyCode.BackQuote;
     public KeyCode togglePause = KeyCode.Escape;
+    public KeyCode triggerLevelChoice = KeyCode.L;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -62,6 +63,12 @@ public class GameManager : MonoBehaviour
         {
             bool cursorState = Cursor.visible;
             ToggleFreeCursor(!cursorState);
+        }
+
+        // ---------- DEV TESTING ----------
+        if (Input.GetKeyDown(triggerLevelChoice))
+        {
+            WorldManager.instance.WorldLevelUp();
         }
     }
 
