@@ -569,10 +569,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 811826475770514033, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 842605538034811164, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
       propertyPath: CMvcam
       value: 
       objectReference: {fileID: 1247119827}
+    - target: {fileID: 2840003465715919570, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4179989437618786010, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -616,6 +624,18 @@ PrefabInstance:
     - target: {fileID: 8617857774365792271, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8617857774365792271, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8658679611272567619, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9049239440055531041, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -753,6 +773,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 808105547113099089, guid: 18854615f21566046aa79f7392e3c261, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2689503459964464203, guid: 18854615f21566046aa79f7392e3c261, type: 3}
       propertyPath: m_StreamingVersion
       value: 20241001

@@ -7216,8 +7216,10 @@ MonoBehaviour:
   endTimeText: {fileID: 5627332377605895747}
   gameTimeText: {fileID: 2599229223372115991}
   playerHUD: {fileID: 959689023432838177}
+  cmBrain: {fileID: 6530414658237206903}
   toggleCursor: 96
   togglePause: 27
+  triggerLevelChoice: 108
 --- !u!1 &8896351928799124222
 GameObject:
   m_ObjectHideFlags: 0
@@ -8298,6 +8300,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d766e3a632364e7418dcfddeb20c2d6b, type: 3}
+--- !u!114 &6530414658237206903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 247904365664911823, guid: d766e3a632364e7418dcfddeb20c2d6b, type: 3}
+  m_PrefabInstance: {fileID: 6471683922471309496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6536800309159672240 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 245282362569681160, guid: d766e3a632364e7418dcfddeb20c2d6b, type: 3}
