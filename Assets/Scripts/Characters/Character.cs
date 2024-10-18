@@ -54,8 +54,10 @@ public class Character : MonoBehaviour
     * @parameter: 
     * @return: void
     ************************************************/
-    protected void TriggerDeath()
+    protected virtual void TriggerDeath()
     {
         Debug.Log(gameObject.name + " HAS DIED.");
+
+        // Trash mob/enemy to check for worldevent
     }
 }

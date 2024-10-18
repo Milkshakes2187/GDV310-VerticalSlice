@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
     public KeyCode toggleCursor = KeyCode.BackQuote;
     public KeyCode togglePause = KeyCode.Escape;
 
-    // TODO: REWORK NEXT
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -143,7 +141,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1.0f;
 
         // TODO: Reloads current scene. Swap for commented option below when main menu scene implemented.
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
         //SceneManager.LoadScene(0);
     }
 

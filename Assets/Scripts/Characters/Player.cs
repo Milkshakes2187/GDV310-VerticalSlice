@@ -109,6 +109,12 @@ public class Player : Character
         }
     }
 
+    /***********************************************
+    * ProcessMovement: Processes character movement according to movement input.
+    * @author: Justhine Nisperos
+    * @parameter: 
+    * @return: void
+    ************************************************/
     void ProcessMovement()
     {
         //playerAnim.SetBool("canMove", bCanMove);
@@ -172,12 +178,13 @@ public class Player : Character
 
         // Coyote time
         coyoteTimer -= Time.deltaTime;
-        //if ((charController.collisionFlags & CollisionFlags.Below) != 0)    // Grounded check
-        if (charController.isGrounded)    // Grounded check
+        if ((charController.collisionFlags & CollisionFlags.Below) != 0)    // Grounded check
+        //if (charController.isGrounded)    // Grounded check
         {
             coyoteTimer = coyoteTime;
             moveVelocity.y = -1.0f;
         }
+
         //if (canMove)
         //{
         //    charController.Move(moveVelocity * Time.deltaTime);
@@ -191,6 +198,12 @@ public class Player : Character
         playerAnim.SetFloat("Velocity", charController.velocity.magnitude);
     }
 
+    /***********************************************
+    * ProcessRotations: Processes character and camera rotation based on mouse input.
+    * @author: Justhine Nisperos
+    * @parameter: 
+    * @return: void
+    ************************************************/
     void ProcessRotations()
     {
         camRotation = camTarget.transform.forward;
@@ -225,94 +238,14 @@ public class Player : Character
     //    playerAnim.SetFloat("Velocity", velocity);
     //}
 
-    //IEnumerator Dash()
-    //{
-    //    // Disable dash ability
-    //    bCanDash = false;
-    //    OnDash?.Invoke(fDashTime);
-    //    
-    //    // TEDDY SOUND Dash sound
-    //    if (AudioLibrary.instance.audioDash.clip)
-    //    {
-    //        AudioLibrary.instance.audioDash.PlayOneShot(AudioLibrary.instance.audioDash.clip, 1);
-    //    }
-    //    
-    //    // Turn player invisible & disable controller for manual movement
-    //    body.SetActive(false);
-    //    charController.enabled = false;
-    //    
-    //    // LERP player to dash position over the dash time
-    //    float fElapsedTime = 0.0f;
-    //    Vector3 origPos = transform.position;
-    //    Vector3 targetPos = Vector3.zero;
-    //    if (moveVelocity != Vector3.zero)
-    //    {
-    //        // Dash in the player's movement input direction
-    //        targetPos = origPos + moveVelocity * fDashDistance;
-    //    }
-    //    else
-    //    {
-    //        // No direction input - Dash in direction character is facing
-    //        targetPos = origPos + body.transform.forward * fDashDistance;
-    //    }
-    //    
-    //    
-    //    while (fElapsedTime < fDashTime)
-    //    {
-    //        transform.position = Vector3.Lerp(origPos, targetPos, fElapsedTime / fDashTime);
-    //        fElapsedTime += Time.deltaTime;
-    //    
-    //        yield return null;
-    //    }
-    //    
-    //    // Turn player visible & reenable controller
-    //    body.SetActive(true);
-    //    charController.enabled = true;
-    //    
-    //    // Wait for dash cooldown before reenabling dash
-    //    while (fDashCDTimer <= fDashCooldown)
-    //    {
-    //        fDashCDTimer += Time.deltaTime;
-    //        yield return null;
-    //    }
-    //    
-    //    bCanDash = true;
-    //    fDashCDTimer = 0.0f;
-    //}
-
-    //IEnumerator Knockback(Vector3 _source, float _fDist)
-    //{
-    //    bCanMove = false;
-    //    charController.enabled = false;
-    //
-    //    // Get direction of player from knockback source & zero out y-value
-    //    Vector3 forceDir = transform.position - _source;
-    //    forceDir.Normalize();
-    //    forceDir.y = 0.0f;
-    //
-    //    Vector3 origPos = transform.position;
-    //    Vector3 targetPos = origPos + forceDir * _fDist;
-    //    float fKnockbackTime = 0.1f;
-    //    float fElapsedTime = 0.0f;
-    //
-    //    while (fElapsedTime < fKnockbackTime)
-    //    {
-    //        transform.position = Vector3.Lerp(origPos, targetPos, fElapsedTime / fKnockbackTime);
-    //        fElapsedTime += Time.deltaTime;
-    //
-    //        yield return null;
-    //    }
-    //    
-    //    // Apply movement cooldown after knockback
-    //    yield return new WaitForSeconds(0.5f);
-    //
-    //    charController.enabled = true;
-    //    bCanMove = true;
-    //}
-
+    /***********************************************
+    * Step: Footsteps audio trigger matched to animation.
+    * @author: Justhine Nisperos
+    * @parameter: 
+    * @return: void
+    ************************************************/
     public void Step()
     {
-        // TEDDY SOUND Footsteps
         if (AudioLibrary.instance.audioStep.clip)
         {
             AudioLibrary.instance.audioStep.PlayOneShot(AudioLibrary.instance.audioStep.clip, 1);
