@@ -6,10 +6,12 @@ public class Character : MonoBehaviour
     public float maxHealth;
     public float maxMoveSpeed;
     public float baseDamage;
+    public float maxArmour;
 
     [Header("Current Stats")]
     public float health;
     public float moveSpeed;
+    public float armour;
 
     [Header("Multipliers")]
     public float speedMultiplier;
@@ -21,9 +23,18 @@ public class Character : MonoBehaviour
         health = maxHealth;
     }
 
+    /***********************************************
+    * TakeDamage: Reduces character's health based on damage.
+    * @author: Justhine Nisperos
+    * @parameter: float
+    * @return: void
+    ************************************************/
     public void TakeDamage(float _fDamage)
     {
-        health -= _fDamage;
+        // Calculate damage reduced based on armour
+        // 1 armour = 1% less damage
+        float damageReduction = (100.0f - armour) * 0.1f;
+        health -= _fDamage * damageReduction;
 
         if (health <= 0)
         {
@@ -31,13 +42,27 @@ public class Character : MonoBehaviour
         }
     }
 
+    /***********************************************
+    * Heal: Increases character's health based on heal amount.
+    * @author: Justhine Nisperos
+    * @parameter: float
+    * @return: void
+    ************************************************/
     protected void Heal(float _fHealAmount)
     {
         health = health + _fHealAmount > maxHealth ? maxHealth : health + _fHealAmount;
     }
 
-    protected void TriggerDeath()
+    /***********************************************
+    * TriggerDeath: Run end-of-life functions and destroy game object.
+    * @author: Justhine Nisperos
+    * @parameter: 
+    * @return: void
+    ************************************************/
+    protected virtual void TriggerDeath()
     {
         Debug.Log(gameObject.name + " HAS DIED.");
+
+        // Trash mob/enemy to check for worldevent
     }
 }

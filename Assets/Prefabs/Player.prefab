@@ -226,8 +226,10 @@ MonoBehaviour:
   maxHealth: 100
   maxMoveSpeed: 50
   baseDamage: 10
+  maxArmour: 50
   health: 0
   moveSpeed: 20
+  armour: 0
   speedMultiplier: 1
   damageMultiplier: 1
   canMove: 1

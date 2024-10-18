@@ -43,7 +43,7 @@ public class StatusEffect : MonoBehaviour
     ************************************************/
     protected virtual void ApplyEffect()
     {
-        // To be overwritten by the actual status effects
+        // To be overwritten by the specific status effects
     }
 
     /***********************************************
