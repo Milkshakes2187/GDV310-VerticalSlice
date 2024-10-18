@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Tanky : StatusEffect
+public class DefenseAbuilityBuff : StatusEffect
 {
     [Tooltip("1 Armour = 1% less damage.")]
     public float addedArmour;
@@ -12,10 +12,10 @@ public class Tanky : StatusEffect
 
         // Check whether a tanky effect is already applied
         // If so, destroy it (refreshes duration)
-        Tanky existingTanky = target.GetComponentInChildren<Tanky>();
-        if (existingTanky != null && existingTanky != this)
+        DefenseAbuilityBuff existingDAbuff = target.GetComponentInChildren<DefenseAbuilityBuff>();
+        if (existingDAbuff != null && existingDAbuff != this)
         {
-            Destroy(existingTanky.gameObject);
+            Destroy(existingDAbuff.gameObject);
             return;
         }
 

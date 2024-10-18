@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5544309920733441290}
   - component: {fileID: 9068279198149293440}
   m_Layer: 0
-  m_Name: TankBuff
+  m_Name: DefenseAbilityBuff
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
