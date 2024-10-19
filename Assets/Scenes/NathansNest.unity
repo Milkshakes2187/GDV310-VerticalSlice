@@ -3363,6 +3363,118 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2500844510143078116}
     m_Modifications:
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.ctime0
+      value: 24287
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.ctime1
+      value: 30262
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.ctime2
+      value: 39321
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.ctime3
+      value: 52235
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.ctime4
+      value: 52235
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.ctime5
+      value: 52235
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key0.g
+      value: 0.6933962
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key0.r
+      value: 0.7838695
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key1.g
+      value: 0.42844406
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key1.r
+      value: 0.2028302
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key2.b
+      value: 0.5921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key2.g
+      value: 0.01568629
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key2.r
+      value: 0.23546565
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key3.b
+      value: 0.2735849
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key3.g
+      value: 0.06581523
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key3.r
+      value: 0.17889793
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key4.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key4.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key4.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key5.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key5.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.key5.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
+      propertyPath: m_GradientEffect.m_Gradient.m_NumColorKeys
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 4315002136626248371, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
       propertyPath: m_Name
       value: UI_BossEnergyBar
