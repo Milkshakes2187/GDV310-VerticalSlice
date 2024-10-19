@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffeb83188ec511545940ebd97b376d92, type: 3}
-  m_Name: AbyssalKnives
+  m_Name: EntwinedAbyss
   m_EditorClassIdentifier: 
-  abilityName: Abyssal Knives
+  abilityName: Entwined Abyss
   image: {fileID: 0}
   animatorOverrideController: {fileID: 0}
-  abilityPrefab: {fileID: 8774507104299533834, guid: b364ef49420a4474eb320ff38c08e20e, type: 3}
-  cooldown: 1
-  timeToCast: 0
-  timeToChannel: 0
-  primaryDamage: 2
+  abilityPrefab: {fileID: 6791289981925368127, guid: f6bacee06eeb6324e9ed56d2349eea3a, type: 3}
+  cooldown: 0
+  timeToCast: 1
+  timeToChannel: 5
+  primaryDamage: 0
   secondaryDamage: 0
   tertiaryDamage: 0
   primaryEffectDuration: 0

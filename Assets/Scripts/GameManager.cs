@@ -1,5 +1,6 @@
 using System;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VInspector;
@@ -19,13 +20,16 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI endTimeText;
 
-    [Header("Vars")]
+    [Header("In Game UI")]
     public TextMeshProUGUI gameTimeText;
     public GameObject playerHUD;
+
+    public CinemachineBrain cmBrain;
 
     [Foldout("Dev Keys")]
     public KeyCode toggleCursor = KeyCode.BackQuote;
     public KeyCode togglePause = KeyCode.Escape;
+    public KeyCode triggerLevelChoice = KeyCode.L;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -62,6 +66,12 @@ public class GameManager : MonoBehaviour
         {
             bool cursorState = Cursor.visible;
             ToggleFreeCursor(!cursorState);
+        }
+
+        // ---------- DEV TESTING ----------
+        if (Input.GetKeyDown(triggerLevelChoice))
+        {
+            WorldManager.instance.DisplayLevelChoice();
         }
     }
 
@@ -180,6 +190,7 @@ public class GameManager : MonoBehaviour
 
     /***********************************************
     * ToggleFreeCursor: Toggles the cursor visibility and lock state.
+    *                   Disconnects camera from mouse movement.
     * @author: Justhine Nisperos
     * @parameter: bool
     * @return: void
@@ -190,11 +201,13 @@ public class GameManager : MonoBehaviour
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
+            cmBrain.enabled = true;
         }
         else
         {
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.None;
+            cmBrain.enabled = false;
         }
     }
 }

@@ -2,7 +2,6 @@ using MPUIKIT;
 using Unity.VisualScripting;
 using UnityEngine;
 using VInspector;
-using static UnityEngine.UI.GridLayoutGroup;
 
 [CreateAssetMenu(fileName = "AbilitySO", menuName = "Scriptable Objects/AbilitySO")]
 public  class AbilitySO : ScriptableObject
@@ -40,11 +39,11 @@ public  class AbilitySO : ScriptableObject
     public string info;
 
     /***********************************************
-   * InitialiseAbility: Instantiates an ability so it is ready to use, assigning relevant variables
-   * @author: George White
-   * @parameter: Character , Character , Vector3 
-   * @return: GameObject
-   ************************************************/
+    * InitialiseAbility: Instantiates an ability so it is ready to use, assigning relevant variables
+    * @author: George White
+    * @parameter: Character , Character , Vector3 
+    * @return: GameObject
+    ************************************************/
     public GameObject InitialiseAbility(Character _owner, Character _target, Vector3 _targetLocation)
     {
         //instantiating ability

@@ -3,7 +3,7 @@ using UnityEngine;
 public class MarkedForAssassination : Ability
 {
     public GameObject indicatorPF;
-    public GameObject assassinPF;
+    public AbilitySO phantomAssassin;
 
     GameObject indicator;
 
@@ -17,21 +17,20 @@ public class MarkedForAssassination : Ability
     }
 
     /***********************************************
-    * UseSpellEffect: Overriden spell effect, creates a shadow assassin on targets position
+    * UseSpellEffect: Overriden spell effect, creates a phantom assassin on targets position
     * @author: Juan Le Roux
     * @parameter:
     * @return: void
     ************************************************/
     public override void UseSpellEffect()
     {
-        Instantiate(assassinPF, target.transform.position, Quaternion.identity);
+        var ability = phantomAssassin.InitialiseAbility(owner, target, target.transform.position);
 
-        // If the abyssal weaver is the one casting this ability set its next state to be agressive (auto attack state)
         if (owner.GetComponent<AbyssalWeaver>())
         {
-            owner.GetComponent<AbyssalWeaver>().nextState = AbyssalWeaver.States.AGGRESSIVE;
+            owner.GetComponent<AbyssalWeaver>().phantomAssassinList.Add(ability.GetComponent<PhantomAssassin>());
         }
-
+        
         Destroy(gameObject);
     }
 
