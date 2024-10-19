@@ -218,8 +218,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Abyssal Weaver
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 6f71f79146a3c2d4799a114f54b530e2, type: 2}
-  m_sharedMaterial: {fileID: -4594390381996949952, guid: 6f71f79146a3c2d4799a114f54b530e2, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bfb5a8c4cb2a9da49ac035625c2d7f62, type: 2}
+  m_sharedMaterial: {fileID: -3142563090601286598, guid: bfb5a8c4cb2a9da49ac035625c2d7f62, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -345,7 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8773585, g: 0.64068896, b: 0.624911, a: 1}
+  m_Color: {r: 0.9056604, g: 0.6234044, b: 0.58526164, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -404,19 +404,19 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.5471698, g: 0.37058133, b: 0.33810964, a: 1}
+      key0: {r: 0.509434, g: 0.32315773, b: 0.29076186, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0.61960787, g: 0.3803922, b: 0.3254902, a: 0}
-      key3: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0}
-      key4: {r: 0.4528302, g: 0.4528302, b: 0.4528302, a: 0}
+      key3: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 0}
+      key4: {r: 0.61960787, g: 0.3803922, b: 0.3254902, a: 0}
       key5: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 0}
       key6: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 0}
       key7: {r: 1, g: 1, b: 1, a: 0}
-      ctime0: 21588
+      ctime0: 16384
       ctime1: 33153
-      ctime2: 42405
-      ctime3: 65535
-      ctime4: 65535
+      ctime2: 42598
+      ctime3: 42598
+      ctime4: 45875
       ctime5: 65535
       ctime6: 61680
       ctime7: 65535
@@ -437,7 +437,7 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
-    m_Rotation: 5.83
+    m_Rotation: -270
 --- !u!1 &7279022085744201686
 GameObject:
   m_ObjectHideFlags: 0
