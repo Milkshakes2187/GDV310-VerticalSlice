@@ -27,4 +27,9 @@ public class Enemy : Character
         WorldManager.instance.UpdateEnemyList(this, false);
         Destroy(gameObject);
     }
+
+    protected void OnDestroy()
+    {
+        TriggerDeath();
+    }
 }
