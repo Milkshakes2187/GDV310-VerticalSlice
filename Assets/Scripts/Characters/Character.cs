@@ -14,8 +14,8 @@ public class Character : MonoBehaviour
     public float armour;
 
     [Header("Multipliers")]
-    public float speedMultiplier;
-    public float damageMultiplier;
+    public float speedMultiplier = 1.0f;
+    public float damageMultiplier = 1.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()

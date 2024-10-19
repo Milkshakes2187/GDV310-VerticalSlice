@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VInspector;
+using VInspector.Libs;
 
 public class WorldManager : MonoBehaviour
 {
@@ -8,13 +11,15 @@ public class WorldManager : MonoBehaviour
 
     public int worldLevel = 1;
 
+    public List<Enemy> allEnemies = new List<Enemy>();
+
     public event Action onWorldLevelUp;
+    public event Action<Enemy> onEnemyListChange;
 
     [Foldout("UI References")]
     public GameObject levelChoiceUI;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -24,6 +29,12 @@ public class WorldManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+
     }
 
     /***********************************************
@@ -69,5 +80,22 @@ public class WorldManager : MonoBehaviour
         // TODO: Implement actual world level skip
         Debug.Log("WORLD LEVEL " + _level + " SELECTED.");
         GameManager.instance.ToggleFreeCursor(false);
+    }
+
+    public void UpdateEnemyList(Enemy _enemy, bool _added)
+    {
+        // Check if the enemy is being added or destroyed
+        if (_added)
+        {
+            // Add the enemy to list and invoke action with enemy.
+            allEnemies.Add(_enemy);
+            onEnemyListChange?.Invoke(_enemy);
+        }
+        else
+        {
+            // Remove enemy from list and invoke action with null.
+            allEnemies.Remove(_enemy);
+            onEnemyListChange?.Invoke(null);
+        }
     }
 }
