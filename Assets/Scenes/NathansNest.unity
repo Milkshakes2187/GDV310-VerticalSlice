@@ -3264,10 +3264,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_BossCastBar
       objectReference: {fileID: 0}
-    - target: {fileID: 3861970663263763576, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7647888967566582275, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
