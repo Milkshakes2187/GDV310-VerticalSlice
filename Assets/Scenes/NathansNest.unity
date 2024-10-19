@@ -2955,9 +2955,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.b
+      value: 0.19579923
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.g
+      value: 0.19579923
+      objectReference: {fileID: 0}
+    - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_Color.r
+      value: 0.754717
+      objectReference: {fileID: 0}
     - target: {fileID: 7279022085744201686, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_Name
       value: UI_BossResourceBars
+      objectReference: {fileID: 0}
+    - target: {fileID: 8424968489584356681, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8525522236282094995, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
