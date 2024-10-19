@@ -2876,10 +2876,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2500844510143078116}
     m_Modifications:
-    - target: {fileID: 3040344194982035233, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 15.3
-      objectReference: {fileID: 0}
     - target: {fileID: 3256110905605266303, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2960,33 +2956,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.b
-      value: 0.2991723
-      objectReference: {fileID: 0}
-    - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.g
-      value: 0.2991723
-      objectReference: {fileID: 0}
-    - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.r
-      value: 0.7830189
-      objectReference: {fileID: 0}
     - target: {fileID: 7279022085744201686, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_Name
       value: UI_BossHealthBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.b
-      value: 0.56287825
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.g
-      value: 0.5973664
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.r
-      value: 0.8584906
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3289,73 +3261,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2500844510143078116}
     m_Modifications:
-    - target: {fileID: 1346785803357067307, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1346785803357067307, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.g
-      value: 0.2665094
-      objectReference: {fileID: 0}
-    - target: {fileID: 1346785803357067307, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.r
-      value: 0.3345164
-      objectReference: {fileID: 0}
-    - target: {fileID: 2059195630604643797, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 4f86efaf414a89e4ea7cea1ed95091c1, type: 2}
-    - target: {fileID: 2059195630604643797, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -3142563090601286598, guid: 4f86efaf414a89e4ea7cea1ed95091c1, type: 2}
-    - target: {fileID: 2059195630604643797, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_hasFontAssetChanged
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3861970663263763576, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
       propertyPath: m_Name
       value: UI_BossCastBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 5007458395231768229, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 90.6078
-      objectReference: {fileID: 0}
-    - target: {fileID: 5007458395231768229, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 19.0778
-      objectReference: {fileID: 0}
-    - target: {fileID: 5007458395231768229, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 62.52452
-      objectReference: {fileID: 0}
-    - target: {fileID: 5007458395231768229, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -12.1233015
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431684463282027666, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.b
-      value: 0.52420795
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431684463282027666, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.g
-      value: 0.54415
-      objectReference: {fileID: 0}
-    - target: {fileID: 5431684463282027666, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.r
-      value: 0.7169812
-      objectReference: {fileID: 0}
-    - target: {fileID: 6384551868143152618, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.b
-      value: 0.6698113
-      objectReference: {fileID: 0}
-    - target: {fileID: 6384551868143152618, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.g
-      value: 0.42653078
-      objectReference: {fileID: 0}
-    - target: {fileID: 6384551868143152618, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.r
-      value: 0.49808383
       objectReference: {fileID: 0}
     - target: {fileID: 7647888967566582275, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
       propertyPath: m_Pivot.x
@@ -3455,26 +3363,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2500844510143078116}
     m_Modifications:
-    - target: {fileID: 932140405897952311, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0.19999981
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
-      propertyPath: m_Color.b
-      value: 0.9056604
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
-      propertyPath: m_Color.g
-      value: 0.41438237
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
-      propertyPath: m_Color.r
-      value: 0.62233067
-      objectReference: {fileID: 0}
-    - target: {fileID: 1383507598128895681, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
-      propertyPath: m_GradientEffect.m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4315002136626248371, guid: 62fac0a487b9a774198d147ed3f46758, type: 3}
       propertyPath: m_Name
       value: UI_BossEnergyBar

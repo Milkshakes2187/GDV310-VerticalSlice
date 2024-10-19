@@ -34,8 +34,6 @@ public class UIUnitFrameController : MonoBehaviour
 
         // Generate Average bounds of character
         UpdateCharacterOffset();
-
-        Debug.Log("Reinitialized");
     }
 
     public void UpdateCharacterOffset()
