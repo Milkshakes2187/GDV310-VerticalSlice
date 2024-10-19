@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class AbyssalWeaver : Enemy
 {
@@ -9,6 +10,7 @@ public class AbyssalWeaver : Enemy
         IDLE,
         STUNNED,
         AGGRESSIVE,
+        ABYSSAL_KNIVES,
         INTERWOVEN_THREADS,
         MFA,                // Marked for Assassination
         ENTWINED_ABYSS,
@@ -41,6 +43,7 @@ public class AbyssalWeaver : Enemy
     {
         agent = GetComponent<NavMeshAgent>();
 
+        // create the thread manager
         var threadArena = Instantiate(threadManagerPF, transform.position, Quaternion.identity);
         threadManager = threadArena.GetComponent<ThreadManager>();
     }
@@ -48,6 +51,7 @@ public class AbyssalWeaver : Enemy
     // Update is called once per frame
     void Update()
     {
+        // update state machine every frame
         RunStateMachine();
     }
 
@@ -92,6 +96,11 @@ public class AbyssalWeaver : Enemy
             case STATES.AGGRESSIVE:
 
                 AggressiveState(distToPlayer);
+                break;
+
+            case STATES.ABYSSAL_KNIVES:
+
+                AbyssalKnivesState();
                 break;
 
             // Happens when threads are first created and after each intermission
@@ -183,6 +192,34 @@ public class AbyssalWeaver : Enemy
             tbcElapsed = timeBetweenCasts;
 
             // move to next state
+            currentState = STATES.ABYSSAL_KNIVES;
+        }
+    }
+
+    /***********************************************
+    * AbyssalKnivesState: State for when the boss uses the abyssal knives attack, this happens once between every attack
+    * @author: Juan Le Roux
+    * @parameter:
+    * @return: void
+    ************************************************/
+    void AbyssalKnivesState()
+    {
+        if (!currentAbilityCreated)
+        {
+            currentAbilityCreated = true;
+            currentAbility = abyssalKnives.InitialiseAbility(this, player, this.transform.position);
+            currentAbility.GetComponent<Ability>().InitialSetup();
+            currentAbility.GetComponent<Ability>().CastSpell();
+
+            foreach (var assassin in phantomAssassinList)
+            {
+                assassin.GetComponent<Ability>().CastSpell();
+            }
+        }
+
+        if (!currentAbility && currentAbilityCreated)
+        {
+            currentAbilityCreated = false;
             currentState = nextState;
         }
     }

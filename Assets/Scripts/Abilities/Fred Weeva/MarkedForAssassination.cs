@@ -17,15 +17,20 @@ public class MarkedForAssassination : Ability
     }
 
     /***********************************************
-    * UseSpellEffect: Overriden spell effect, creates a shadow assassin on targets position
+    * UseSpellEffect: Overriden spell effect, creates a phantom assassin on targets position
     * @author: Juan Le Roux
     * @parameter:
     * @return: void
     ************************************************/
     public override void UseSpellEffect()
     {
-        phantomAssassin.InitialiseAbility(owner, target, targetLocation);
+        var ability = phantomAssassin.InitialiseAbility(owner, target, target.transform.position);
 
+        if (owner.GetComponent<AbyssalWeaver>())
+        {
+            owner.GetComponent<AbyssalWeaver>().phantomAssassinList.Add(ability.GetComponent<PhantomAssassin>());
+        }
+        
         Destroy(gameObject);
     }
 
