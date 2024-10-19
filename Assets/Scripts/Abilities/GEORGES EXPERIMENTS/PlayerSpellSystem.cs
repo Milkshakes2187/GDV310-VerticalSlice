@@ -24,6 +24,9 @@ public class PlayerSpellSystem : MonoBehaviour
 
     [Tab("Main spell tab")]
 
+    public float spellCharge = 0.0f;
+    public float spellChargeMax = 100.0f;
+
     [SerializeField] List<AbilityDataHolder> abilityHolders = new List<AbilityDataHolder>();
     [SerializeField] KeyCode basicKey = KeyCode.Q;
   
@@ -163,5 +166,35 @@ public class PlayerSpellSystem : MonoBehaviour
             }
         }
     }
+
+
+    public bool spendSpellCharge(float _cost)
+    {
+        if(_cost > spellCharge)
+        {
+            return false;
+        }
+        else
+        {
+            spellCharge -= _cost;
+            //update UI
+
+            return true;
+        }
+    }
+
+
+    public void regenerateSpellCharge(float _charge)
+    {
+        spellCharge += _charge;
+
+        if (spellCharge > spellChargeMax)
+        {
+            spellCharge = spellChargeMax;
+        }
+
+        //update UI
+    }
+
 
 }

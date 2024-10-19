@@ -37,14 +37,27 @@ public abstract class Ability : MonoBehaviour
     ************************************************/
     public abstract void UseSpellEffect();
 
+
+    
+
     /***********************************************
     * CastSpell: Calls "UseSpellEffect" either instantly, or after the required cast time
     * @author: George White
     * @parameter:
     * @return: void
     ************************************************/
-    public void CastSpell()
+    public void CastSpell(bool _useSpellCost = false)
     {
+
+        if(_useSpellCost)
+        {
+            if(owner)
+            {
+                //remove the casting cost from the player spell system, if possible.
+               // if not, return.
+            }
+        }
+
         InitialSetup();
 
         if (abilityData.timeToCast == 0.0f)
