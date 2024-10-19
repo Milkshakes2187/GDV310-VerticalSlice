@@ -16,8 +16,7 @@ public class WorldManager : MonoBehaviour
     [Foldout("UI References")]
     public GameObject levelChoiceUI;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -27,6 +26,12 @@ public class WorldManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
     }
 
     /***********************************************
