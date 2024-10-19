@@ -8,14 +8,23 @@ public class Enemy : Character
     protected float basicAttackCD = 1f; //cooldown
     protected float basicAttackElapsed = 0f; // elapsedTime of basicAttack Cooldown
 
-    protected virtual void Start()
+    protected override void Start()
     {
-        health = maxHealth;
+        base.Start();
 
         // find first object with player script and set it to the player var
         player = FindFirstObjectByType<Player>();
 
         // Add this enemy to world manager's list of all enemies
-        WorldManager.instance.allEnemies.Add(this);
+        WorldManager.instance.UpdateEnemyList(this, true);
+    }
+
+    protected override void TriggerDeath()
+    {
+        base.TriggerDeath();
+
+        // Call world manager to update enemy list and destroy this enemy.
+        WorldManager.instance.UpdateEnemyList(this, false);
+        Destroy(gameObject);
     }
 }
