@@ -3260,14 +3260,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2500844510143078116}
     m_Modifications:
-    - target: {fileID: 381740038777687087, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.a
-      value: 0.39215687
-      objectReference: {fileID: 0}
-    - target: {fileID: 381740038777687087, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.g
-      value: 0.70822835
-      objectReference: {fileID: 0}
     - target: {fileID: 3861970663263763576, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
       propertyPath: m_Name
       value: UI_BossCastBar
