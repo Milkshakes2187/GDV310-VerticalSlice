@@ -14,5 +14,8 @@ public class Enemy : Character
 
         // find first object with player script and set it to the player var
         player = FindFirstObjectByType<Player>();
+
+        // Add this enemy to world manager's list of all enemies
+        WorldManager.instance.allEnemies.Add(this);
     }
 }

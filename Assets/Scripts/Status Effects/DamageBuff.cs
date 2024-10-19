@@ -21,12 +21,6 @@ public class DamageBuff : StatusEffect
         ApplyEffect();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     /***********************************************
     * ApplyEffect: Applies damage multiplier to target's current damage multiplier.
     * @author: Justhine Nisperos

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
 
@@ -8,13 +9,14 @@ public class WorldManager : MonoBehaviour
 
     public int worldLevel = 1;
 
+    public List<Enemy> allEnemies = new List<Enemy>();
+
     public event Action onWorldLevelUp;
 
     [Foldout("UI References")]
     public GameObject levelChoiceUI;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -24,6 +26,12 @@ public class WorldManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
     }
 
     /***********************************************
