@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffeb83188ec511545940ebd97b376d92, type: 3}
-  m_Name: AbyssalKnives
+  m_Name: PhantomAssassin
   m_EditorClassIdentifier: 
-  abilityName: Abyssal Knives
+  abilityName: Phantom Assassin
   image: {fileID: 0}
   animatorOverrideController: {fileID: 0}
-  abilityPrefab: {fileID: 8774507104299533834, guid: b364ef49420a4474eb320ff38c08e20e, type: 3}
-  cooldown: 1
+  abilityPrefab: {fileID: 1296727751826070032, guid: 460a62be99ffa5040913487128993f52, type: 3}
+  cooldown: 0
   timeToCast: 0
   timeToChannel: 0
-  primaryDamage: 2
+  primaryDamage: 0
   secondaryDamage: 0
   tertiaryDamage: 0
   primaryEffectDuration: 0

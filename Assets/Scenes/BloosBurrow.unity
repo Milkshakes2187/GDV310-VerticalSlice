@@ -689,7 +689,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 272997027}
@@ -732,16 +732,20 @@ MonoBehaviour:
   maxHealth: 1000
   maxMoveSpeed: 5
   baseDamage: 5
+  maxArmour: 0
   health: 1000
   moveSpeed: 5
+  armour: 0
   speedMultiplier: 1
   damageMultiplier: 1
   aggroRange: 1
-  turnSpeed: 5
   abyssalKnives: {fileID: 11400000, guid: 42803130371ae524eb74dc2318d36eff, type: 2}
   markedForAssassination: {fileID: 11400000, guid: 5143948a532220a4dbb280dace1b0fb8, type: 2}
   EntwinedAbyss: {fileID: 11400000, guid: 52b0a373be53762409f903f10debfa4a, type: 2}
+  ThreadedSlip: {fileID: 0}
   threadManagerPF: {fileID: 1618098391873643487, guid: ebebb455086e49f4591b4667b531dd87, type: 3}
+  turnSpeed: 5
+  phantomAssassinList: []
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
