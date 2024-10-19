@@ -3,7 +3,7 @@ using UnityEngine;
 public class MarkedForAssassination : Ability
 {
     public GameObject indicatorPF;
-    public GameObject assassinPF;
+    public AbilitySO phantomAssassin;
 
     GameObject indicator;
 
@@ -24,7 +24,7 @@ public class MarkedForAssassination : Ability
     ************************************************/
     public override void UseSpellEffect()
     {
-        Instantiate(assassinPF, target.transform.position, Quaternion.identity);
+        phantomAssassin.InitialiseAbility(owner, target, targetLocation);
 
         Destroy(gameObject);
     }

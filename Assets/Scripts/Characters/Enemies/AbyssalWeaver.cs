@@ -1,7 +1,6 @@
-using System.Threading;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class AbyssalWeaver : Enemy
 {
@@ -33,6 +32,7 @@ public class AbyssalWeaver : Enemy
     int mfaCountThisRotation = 0;
 
     bool currentAbilityCreated = false;
+    [HideInInspector] public List<PhantomAssassin> phantomAssassinList = new List<PhantomAssassin>();
 
     STATES currentState = STATES.IDLE;
     STATES nextState = STATES.INTERWOVEN_THREADS;
