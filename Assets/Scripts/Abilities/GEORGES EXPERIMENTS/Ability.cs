@@ -2,6 +2,7 @@ using MPUIKIT;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder.MeshOperations;
 
 
 public abstract class Ability : MonoBehaviour
@@ -30,6 +31,14 @@ public abstract class Ability : MonoBehaviour
     public virtual void InitialSetup() { }
 
     /***********************************************
+    * OnDestroy: virtual function that occurs when the ability is destroyed
+    * @author: George White
+    * @parameter:
+    * @return: virtual void
+    ************************************************/
+    public virtual void OnDestroy() { }
+
+    /***********************************************
     * UseSpellEffect: Abstract function to use a spell's effect. Overridden by children
     * @author: George White
     * @parameter:
@@ -37,13 +46,13 @@ public abstract class Ability : MonoBehaviour
     ************************************************/
     public abstract void UseSpellEffect();
 
+  
 
-    
 
     /***********************************************
-    * CastSpell: Calls "UseSpellEffect" either instantly, or after the required cast time
+    * CastSpell: Calls "UseSpellEffect" either instantly, or after the required cast time. Can try to use a spell cost if needed.
     * @author: George White
-    * @parameter:
+    * @parameter: bool _useSpellCost = false
     * @return: void
     ************************************************/
     public void CastSpell(bool _useSpellCost = false)
@@ -51,10 +60,21 @@ public abstract class Ability : MonoBehaviour
 
         if(_useSpellCost)
         {
-            if(owner)
+            if(owner.GetComponent<Player>().spellSystem)
             {
                 //remove the casting cost from the player spell system, if possible.
-               // if not, return.
+                if(owner.GetComponent<Player>().spellSystem.SpendSpellCharge(abilityData.castingCost))
+                {
+                    //ability successfully paid for
+                }
+                else
+                {
+                    //ability cost spending failed - not enough charge
+
+                    //effect for failiure?
+                    return;
+                }
+                
             }
         }
 

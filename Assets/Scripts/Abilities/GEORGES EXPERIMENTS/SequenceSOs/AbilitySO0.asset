@@ -19,6 +19,9 @@ MonoBehaviour:
   cooldown: 1
   timeToCast: 0.2
   timeToChannel: 0
+  castingCost: 0
+  castingCostGain: 3
+  CastingCostMultiplier: 0
   primaryDamage: 1
   secondaryDamage: 0
   tertiaryDamage: 0

@@ -18,9 +18,16 @@ public class BasicAbility : Ability
          {
              var tempobj =  Instantiate(tempAttack, new Vector3(targetLocation.x, targetLocation.y + abilityData.primaryDamage, targetLocation.z), Quaternion.identity);
              Destroy(tempobj, 1);
+
+
+
          }
 
         //animation trigger, maybe do sword
+
+
+        
+        owner.GetComponent<Player>().spellSystem.RegenerateSpellCharge(abilityData.castingCostGain);
 
         //Destroy the ability
         Destroy(gameObject);

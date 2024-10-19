@@ -19,6 +19,9 @@ public enum E_AbilityUseState
 
 public class PlayerSpellSystem : MonoBehaviour
 {
+    [SerializeField, ReadOnly] Player owner = null;
+    [SerializeField, ReadOnly] Character target = null;
+    [SerializeField, ReadOnly] Ability currentCast = null;
 
     public E_AbilityUseState abilityUseState = E_AbilityUseState.Ready;
 
@@ -44,9 +47,19 @@ public class PlayerSpellSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //add the basic ability to the list of abilite holders
-        var newHolder = new AbilityDataHolder(basicAbilitySequence[0], basicKey, 0.0f);
-        abilityHolders.Insert(0, newHolder);
+        if(basicAbilitySequence.Count > 0)
+        {
+            //add the basic ability to the list of abilite holders
+            var newHolder = new AbilityDataHolder(basicAbilitySequence[0], basicKey, 0.0f);
+            abilityHolders.Insert(0, newHolder);
+        }
+       
+
+        //assigning player
+        if(GetComponentInParent<Player>())
+        {
+            owner = GetComponentInParent<Player>();
+        }
     }
 
     // Update is called once per frame
@@ -71,10 +84,14 @@ public class PlayerSpellSystem : MonoBehaviour
         if (abilityUseState != E_AbilityUseState.Ready) { return; }
 
         //checks JUST THE BASIC - to improve
-        if (Input.GetKeyDown(abilityHolders[0].keybind))
+        if(abilityHolders.Count > 0)
         {
-            UseBasicAbility();
+            if (Input.GetKeyDown(abilityHolders[0].keybind))
+            {
+                UseBasicAbility();
+            }
         }
+        
     }
 
     /***********************************************
@@ -90,8 +107,8 @@ public class PlayerSpellSystem : MonoBehaviour
 
 
         //Instantiate and use the ability
-        var aaAbility = abilityHolders[0].ability.InitialiseAbility(null,null,transform.position);
-        aaAbility.GetComponent<Ability>().CastSpell();
+        var aaAbility = abilityHolders[0].ability.InitialiseAbility(owner,target,transform.position);
+        aaAbility.GetComponent<Ability>().CastSpell(true);
 
 
         //increment the sequence
@@ -126,8 +143,8 @@ public class PlayerSpellSystem : MonoBehaviour
 
 
         //instantiate ability, use ability, and start the cooldown
-        _abilityData.ability.InitialiseAbility(null, null, Vector3.zero); ;
-        _abilityData.ability.GetComponent<Ability>().CastSpell();
+        _abilityData.ability.InitialiseAbility(owner, target, Vector3.zero); ;
+        _abilityData.ability.GetComponent<Ability>().CastSpell(true);
         _abilityData.StartCooldown();
     }
 
@@ -148,16 +165,20 @@ public class PlayerSpellSystem : MonoBehaviour
             }
         }
    
-        //Tick basic sequence reset timer
-        if(currentAbilitySequenceResetTime > 0.0f)
+
+        if(abilityHolders.Count > 0)
         {
-            currentAbilitySequenceResetTime -= Time.deltaTime;
+            //Tick basic sequence reset timer
+            if (currentAbilitySequenceResetTime > 0.0f)
+            {
+                currentAbilitySequenceResetTime -= Time.deltaTime;
+            }
 
             // Resets the basic ability sequence if cooldown has expired
-            if (currentAbilitySequenceResetTime <=0.0f)
+            if (currentAbilitySequenceResetTime <= 0.0f)
             {
                 currentAbilitySequenceResetTime = 0.0f;
-   
+
                 //reset the sequence index
                 currentSequenceIndex = 0;
                 abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
@@ -165,10 +186,11 @@ public class PlayerSpellSystem : MonoBehaviour
                 //sequence UI
             }
         }
+        
     }
 
 
-    public bool spendSpellCharge(float _cost)
+    public bool SpendSpellCharge(float _cost)
     {
         if(_cost > spellCharge)
         {
@@ -184,7 +206,7 @@ public class PlayerSpellSystem : MonoBehaviour
     }
 
 
-    public void regenerateSpellCharge(float _charge)
+    public void RegenerateSpellCharge(float _charge)
     {
         spellCharge += _charge;
 
@@ -196,5 +218,10 @@ public class PlayerSpellSystem : MonoBehaviour
         //update UI
     }
 
+
+    public void AssignTarget()
+    {
+        //spherical raycast here!
+    }
 
 }
