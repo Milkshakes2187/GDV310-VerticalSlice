@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.62233067, g: 0.41438237, b: 0.9056604, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -169,21 +169,21 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.52156866, g: 0.52156866, b: 0.52156866, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
-      key3: {r: 0.35408157, g: 0.1786668, b: 0.6886792, a: 0}
-      key4: {r: 0.35408157, g: 0.1786668, b: 0.6886792, a: 0}
-      key5: {r: 0.41176474, g: 0.08627451, b: 0.08627451, a: 0}
-      key6: {r: 0.3137255, g: 0.09019608, b: 0.06666667, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 0.7802366, g: 0.6901961, b: 1, a: 1}
+      key2: {r: 0.26266837, g: 0.5319608, b: 0.83068967, a: 1}
+      key3: {r: 0.19249156, g: 0.01690993, b: 0.7169812, a: 0}
+      key4: {r: 0.17275138, g: 0.015175803, b: 0.64345413, a: 0}
+      key5: {r: 0.15929538, g: 0.013993724, b: 0.593334, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 386
-      ctime1: 32768
-      ctime2: 65535
-      ctime3: 65535
-      ctime4: 65535
-      ctime5: 59945
-      ctime6: 65535
+      ctime0: 23516
+      ctime1: 25636
+      ctime2: 29298
+      ctime3: 35466
+      ctime4: 37394
+      ctime5: 39128
+      ctime6: 52235
       ctime7: 0
       atime0: 0
       atime1: 65535
@@ -195,11 +195,11 @@ MonoBehaviour:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 3
+      m_NumColorKeys: 7
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
-    m_Rotation: 0
+    m_Rotation: -90
