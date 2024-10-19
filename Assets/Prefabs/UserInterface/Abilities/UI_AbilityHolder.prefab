@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+  m_Color: {r: 0.5660378, g: 0.5660378, b: 0.5660378, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -154,17 +154,17 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0.5471698, g: 0.5471698, b: 0.5471698, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+      key2: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 0}
       key3: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 386
-      ctime1: 20817
-      ctime2: 47802
+      ctime0: 193
+      ctime1: 47802
+      ctime2: 65535
       ctime3: 65535
       ctime4: 0
       ctime5: 0
@@ -180,7 +180,7 @@ MonoBehaviour:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 4
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
     - {r: 0, g: 0, b: 0, a: 0}
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -515,7 +515,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6340064456231841443}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -544,7 +544,7 @@ MonoBehaviour:
   fillImages:
   - {fileID: 4890194321470354340}
   - {fileID: 7131962906902804013}
-  fillAmount: 1
+  fillAmount: 0
 --- !u!114 &2480460420555083424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,6 +557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e025e57a08e48b44e8f1e53a1a2da4e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseColorControls: 0
+  baseColor: {r: 0, g: 0, b: 0, a: 0}
   gradientImages:
   - {fileID: 4890194321470354340}
   - {fileID: 7131962906902804013}
@@ -653,7 +655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9811321, g: 0.9811321, b: 0.9811321, a: 1}
+  m_Color: {r: 0.6084906, g: 0.6430122, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -665,7 +667,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -712,9 +714,9 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.3020366, g: 0.2171591, b: 0.754717, a: 1}
-      key1: {r: 0.11992703, g: 0.14017661, b: 0.5188679, a: 1}
-      key2: {r: 0.045887727, g: 0.02950339, b: 0.16037738, a: 1}
+      key0: {r: 0.5424528, g: 0.78117317, b: 1, a: 1}
+      key1: {r: 0.7319343, g: 0.3066038, b: 1, a: 1}
+      key2: {r: 0.079645306, g: 0.06354573, b: 0.26415092, a: 1}
       key3: {r: 0.12941177, g: 0, b: 0.85882354, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -722,7 +724,7 @@ MonoBehaviour:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 386
       ctime1: 23708
-      ctime2: 52428
+      ctime2: 55127
       ctime3: 65535
       ctime4: 0
       ctime5: 0
