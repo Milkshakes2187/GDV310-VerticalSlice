@@ -169,20 +169,20 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 0.7802366, g: 0.6901961, b: 1, a: 1}
-      key2: {r: 0.26266837, g: 0.5319608, b: 0.83068967, a: 1}
-      key3: {r: 0.19249156, g: 0.01690993, b: 0.7169812, a: 0}
-      key4: {r: 0.17275138, g: 0.015175803, b: 0.64345413, a: 0}
-      key5: {r: 0.15929538, g: 0.013993724, b: 0.593334, a: 0}
+      key0: {r: 0.7838695, g: 0.6933962, b: 1, a: 1}
+      key1: {r: 0.2028302, g: 0.34998918, b: 1, a: 1}
+      key2: {r: 0.25613508, g: 0, b: 0.46226418, a: 1}
+      key3: {r: 0.17889793, g: 0.06581523, b: 0.2735849, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 23516
-      ctime1: 25636
-      ctime2: 29298
-      ctime3: 35466
-      ctime4: 37394
-      ctime5: 39128
+      ctime0: 23708
+      ctime1: 31033
+      ctime2: 39321
+      ctime3: 52235
+      ctime4: 52235
+      ctime5: 52235
       ctime6: 52235
       ctime7: 0
       atime0: 0
@@ -195,7 +195,7 @@ MonoBehaviour:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 7
+      m_NumColorKeys: 4
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
     - {r: 0, g: 0, b: 0, a: 0}
