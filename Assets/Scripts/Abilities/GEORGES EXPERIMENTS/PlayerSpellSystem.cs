@@ -29,6 +29,8 @@ public class PlayerSpellSystem : MonoBehaviour
 
     public float spellCharge = 0.0f;
     public float spellChargeMax = 100.0f;
+    public float GCD = 0.4f;
+    [SerializeField, ReadOnly] float currentGCD = 0.0f;
 
     [SerializeField] List<AbilityDataHolder> abilityHolders = new List<AbilityDataHolder>();
     [SerializeField] KeyCode basicKey = KeyCode.Q;
@@ -82,6 +84,7 @@ public class PlayerSpellSystem : MonoBehaviour
     {
         //returns if the player is not in a castable state
         if (abilityUseState != E_AbilityUseState.Ready) { return; }
+        if (currentGCD > 0.0f) { return; }
 
         //checks JUST THE BASIC - to improve
         if(abilityHolders.Count > 0)
@@ -144,8 +147,13 @@ public class PlayerSpellSystem : MonoBehaviour
 
         //instantiate ability, use ability, and start the cooldown
         _abilityData.ability.InitialiseAbility(owner, target, Vector3.zero); ;
-        _abilityData.ability.GetComponent<Ability>().CastSpell(true);
-        _abilityData.StartCooldown();
+
+        if(_abilityData.ability.GetComponent<Ability>().CastSpell(true))
+        {
+            _abilityData.StartCooldown();
+            currentGCD = GCD;
+        }
+        
     }
 
     /***********************************************
@@ -156,6 +164,17 @@ public class PlayerSpellSystem : MonoBehaviour
     ************************************************/
     void TickCooldowns()
     {
+        //GCD
+        if (currentGCD > 0.0f)
+        {
+            currentGCD -= Time.deltaTime;
+            if(currentGCD < 0.0f)
+            {
+                currentGCD = 0.0f;
+            }
+        }
+
+
         //Iterates over all abilityDataHolder
         foreach (AbilityDataHolder sHolder in abilityHolders)
         {

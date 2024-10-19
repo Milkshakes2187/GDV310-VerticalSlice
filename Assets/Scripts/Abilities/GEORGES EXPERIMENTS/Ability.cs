@@ -55,7 +55,7 @@ public abstract class Ability : MonoBehaviour
     * @parameter: bool _useSpellCost = false
     * @return: void
     ************************************************/
-    public void CastSpell(bool _useSpellCost = false)
+    public bool CastSpell(bool _useSpellCost = false)
     {
 
         if(_useSpellCost)
@@ -72,7 +72,7 @@ public abstract class Ability : MonoBehaviour
                     //ability cost spending failed - not enough charge
 
                     //effect for failiure?
-                    return;
+                    return false;
                 }
                 
             }
@@ -91,6 +91,8 @@ public abstract class Ability : MonoBehaviour
             currentCastTime = abilityData.timeToCast;
             castTimerCrouton = StartCoroutine(CastTimer());
         }
+
+        return true;
     }
 
     /***********************************************
