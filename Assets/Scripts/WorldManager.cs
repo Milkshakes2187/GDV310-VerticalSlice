@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VInspector;
 
@@ -7,6 +8,8 @@ public class WorldManager : MonoBehaviour
     public static WorldManager instance;
 
     public int worldLevel = 1;
+
+    public List<Enemy> allEnemies = new List<Enemy>();
 
     public event Action onWorldLevelUp;
 
