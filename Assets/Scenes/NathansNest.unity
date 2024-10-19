@@ -1938,7 +1938,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.36078432}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78431374}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1961,7 +1961,7 @@ MonoBehaviour:
   m_StrokeWidth: 0
   m_OutlineWidth: 0
   m_OutlineColor: {r: 0, g: 0, b: 0, a: 1}
-  m_FalloffDistance: 0
+  m_FalloffDistance: 25
   m_ConstrainRotation: 1
   m_ShapeRotation: 0
   m_FlipHorizontal: 0
@@ -2956,6 +2956,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3630923460461848323, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
+      propertyPath: fillAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7279022085744201686, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_Name
       value: UI_BossHealthBar
@@ -3473,7 +3477,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -16.7}
+  m_AnchoredPosition: {x: 0, y: -28.2}
   m_SizeDelta: {x: 830, y: 64}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &8356972323864296116
