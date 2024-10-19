@@ -1,17 +1,104 @@
 using UnityEngine;
-
+using System;
+using System.Linq;
+using System.Collections.Generic;
+using System.Collections;
+using VInspector;
+using UnityEngine.TextCore.Text;
 public class UIUnitFrameGroupManager : MonoBehaviour
 {
-    public GameObject unitFramePrefab;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private WorldManager worldManager;
+    private Dictionary<Character, UIUnitFrameController> unitFrames = new Dictionary<Character, UIUnitFrameController>();
+
+    [Serializable]
+    public class UnitFrameSettings
     {
-        
+        public GameObject unitFramePrefab;
+        public Vector3 generalOffset = Vector3.zero;
+        public float frameScale = 1;
+    }
+
+    public UnitFrameSettings unitFrameSettings;
+ 
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Awake()
+    {
+        worldManager = WorldManager.instance;
+        if(worldManager == null)
+        {
+            enabled = false;
+            Debug.LogError("World Manager does not exist for unit frames");
+            return;
+        }
+
+        worldManager.onEnemyListChange += UpdateUnitFrames;
     }
 
     // Update is called once per frame
-    void Update()
+    void UpdateUnitFrames(Character unit)
     {
-        
+        bool containsNullKey = false;
+        Debug.Log(unit);
+
+        if(unit == null)
+        {
+            foreach(KeyValuePair<Character, UIUnitFrameController> _unitPair in unitFrames)
+            {
+                if(_unitPair.Key == null)
+                {
+                    containsNullKey = true;
+                    Destroy(_unitPair.Value.gameObject);
+                }
+            }
+        }
+        else if(!unitFrames.ContainsKey(unit))
+        {
+            CreateNewUnitFrame(unit);
+        }
+        else
+        {
+            Debug.LogError("Unit frame already exists in dictionary\nAsk nathan about this, its a problem");
+        }
+
+        if(containsNullKey) EmptyNullKeys();
     }
+
+    private void EmptyNullKeys()
+    {
+        foreach (var key in unitFrames.Keys.ToArray())
+        {
+            if (key == null)
+            {
+                unitFrames.Remove(key);
+            }
+        }
+    }
+
+    #region Frame Management
+
+    private void CreateNewUnitFrame(Character character)
+    {
+        UIUnitFrameController newUnitFrame = Instantiate(unitFrameSettings.unitFramePrefab, transform).GetComponent<UIUnitFrameController>();
+        unitFrames.Add(character, newUnitFrame);
+
+        InitializeFrame(newUnitFrame, character);
+    }
+
+    private void InitializeFrame(UIUnitFrameController frame, Character character) => frame.Initialize(character, unitFrameSettings);
+
+
+    [OnValueChanged("unitFrameSettings")]
+    private void ReinitializeFrames()
+    {
+        foreach (KeyValuePair<Character, UIUnitFrameController> _unitPair in unitFrames)
+        {
+            if (_unitPair.Key != null && _unitPair.Value != null)
+            {
+                InitializeFrame(_unitPair.Value, _unitPair.Key);
+            }
+        }
+    }
+
+    #endregion
 }
