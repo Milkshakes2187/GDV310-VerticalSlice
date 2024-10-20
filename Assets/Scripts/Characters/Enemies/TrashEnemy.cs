@@ -29,17 +29,16 @@ public class TrashEnemy : Enemy
         float distFromPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         // Check if the enemy has already been aggroed by the player.
-        //
         if (isAggroed) // ---------- ENEMY ALREADY AGGRO-ED ----------
         {
             // Check if enemy is within attack range
-            //if (nmAgent.remainingDistance <= attackRange)
             if (distFromPlayer <= attackRange)
             {
                 // Stop moving and start attacking
                 nmAgent.speed = 0.0f;
                 Debug.Log(gameObject.name + " is Attacking the Player.");
             }
+
             // Check if player is past de-aggro range
             else if (distFromPlayer > deAggroRange)
             {
@@ -48,15 +47,13 @@ public class TrashEnemy : Enemy
                 isAggroed = false;
                 Debug.Log(gameObject.name + " deaggroed");
             }
+
             else
             {
                 // Continue chasing the player
                 nmAgent.speed = moveSpeed;
                 nmAgent.SetDestination(player.transform.position);
             }
-
-            
-            
         }
         else // -------------------- ENEMY NOT AGGRO-ED ----------
         {
