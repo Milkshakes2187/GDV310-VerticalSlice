@@ -357,7 +357,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.471
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -646,7 +646,7 @@ MonoBehaviour:
   fillImages:
   - {fileID: 3357438544664165095}
   - {fileID: 0}
-  fillAmount: 1
+  fillAmount: 0.471
 --- !u!1 &4610100847193469375
 GameObject:
   m_ObjectHideFlags: 0

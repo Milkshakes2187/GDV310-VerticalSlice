@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8938177, g: 0.8915094, b: 1, a: 1}
+  m_Color: {r: 0.68559533, g: 0.504717, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -158,9 +158,9 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.18203259, g: 0.1745283, b: 1, a: 1}
+      key0: {r: 0.17647058, g: 0.2690369, b: 1, a: 1}
       key1: {r: 0.9052176, g: 0.7688679, b: 1, a: 1}
-      key2: {r: 0.42184836, g: 0.15686274, b: 1, a: 0}
+      key2: {r: 0.15686274, g: 0.20561199, b: 1, a: 0}
       key3: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
       key4: {r: 0, g: 0.016898155, b: 1, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
@@ -168,7 +168,7 @@ MonoBehaviour:
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 23323
       ctime1: 31418
-      ctime2: 38165
+      ctime2: 40863
       ctime3: 65535
       ctime4: 40478
       ctime5: 0
@@ -419,13 +419,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 1
-  m_colorMode: 2
+  m_enableVertexGradient: 0
+  m_colorMode: 0
   m_fontColorGradient:
-    topLeft: {r: 0.94320697, g: 0.7122642, b: 1, a: 1}
-    topRight: {r: 0.94320697, g: 0.7122642, b: 1, a: 1}
-    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 0.71532375, g: 0.6367924, b: 1, a: 1}
+    topRight: {r: 0.71532375, g: 0.6367924, b: 1, a: 1}
+    bottomLeft: {r: 0.71532375, g: 0.6367924, b: 1, a: 1}
+    bottomRight: {r: 0.71532375, g: 0.6367924, b: 1, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -544,7 +544,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aa6c9696a8bbcb445860c9a8398dd96c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3a9b382ae6564594c8c2606ee114adcb, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

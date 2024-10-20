@@ -1406,7 +1406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 235}
+  m_AnchoredPosition: {x: 0, y: 230}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1498066522 stripped
@@ -2029,6 +2029,10 @@ PrefabInstance:
     - target: {fileID: 6703571734608632825, guid: 170c3f429b277544b9675abe6b150efd, type: 3}
       propertyPath: m_Name
       value: HealthBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6703571734608632825, guid: 170c3f429b277544b9675abe6b150efd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7537710507548655856, guid: 170c3f429b277544b9675abe6b150efd, type: 3}
       propertyPath: m_Pivot.x
@@ -2874,14 +2878,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_PlayerCastBar
       objectReference: {fileID: 0}
-    - target: {fileID: 3357438544664165095, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
-      propertyPath: m_FillAmount
-      value: 0.562
-      objectReference: {fileID: 0}
-    - target: {fileID: 5764851453355341752, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
-      propertyPath: fillAmount
-      value: 0.471
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3029,25 +3025,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6795564189024102271, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7279022085744201686, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
       propertyPath: m_Name
       value: UI_BossResourceBars
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.b
-      value: 0.5752492
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.g
-      value: 0.6155305
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015451031148448648, guid: 6821f73cd8f781647ba1f39f6d5354ef, type: 3}
-      propertyPath: m_Color.r
-      value: 0.8773585
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3150,102 +3130,6 @@ PrefabInstance:
     - target: {fileID: 889707066479995734, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1798299328840549398, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3227645163170189082, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 3a9b382ae6564594c8c2606ee114adcb, type: 3}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_colorMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_enableVertexGradient
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.topLeft.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.topLeft.g
-      value: 0.6367924
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.topLeft.r
-      value: 0.71532375
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.topRight.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.topRight.g
-      value: 0.6367924
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.topRight.r
-      value: 0.71532375
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.bottomLeft.g
-      value: 0.6367924
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.bottomLeft.r
-      value: 0.71532375
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.bottomRight.g
-      value: 0.6367924
-      objectReference: {fileID: 0}
-    - target: {fileID: 3237128524837356493, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_fontColorGradient.bottomRight.r
-      value: 0.71532375
-      objectReference: {fileID: 0}
-    - target: {fileID: 7666005262315455400, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_Color.g
-      value: 0.504717
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_Color.r
-      value: 0.68559533
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.ctime2
-      value: 40863
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key0.g
-      value: 0.2690369
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key0.r
-      value: 0.17647058
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key2.g
-      value: 0.20561199
-      objectReference: {fileID: 0}
-    - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_GradientEffect.m_Gradient.key2.r
-      value: 0.15686274
-      objectReference: {fileID: 0}
-    - target: {fileID: 8970612243497968864, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3538,18 +3422,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2500844510143078116}
     m_Modifications:
-    - target: {fileID: 381740038777687087, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.b
-      value: 0.8349056
-      objectReference: {fileID: 0}
-    - target: {fileID: 381740038777687087, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.g
-      value: 0.9644853
-      objectReference: {fileID: 0}
-    - target: {fileID: 381740038777687087, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3861970663263763576, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
       propertyPath: m_Name
       value: UI_BossCastBar
