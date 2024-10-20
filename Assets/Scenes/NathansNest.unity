@@ -1361,7 +1361,7 @@ RectTransform:
   m_GameObject: {fileID: 1457364820}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1894901785}
@@ -2952,7 +2952,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2012103150029091523, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -100
+      value: -85
       objectReference: {fileID: 0}
     - target: {fileID: 2012103150029091523, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -3057,6 +3057,10 @@ PrefabInstance:
     - target: {fileID: 5183727780471696459, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
       propertyPath: m_Color.r
       value: 0.8679245
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183727780471696459, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
+      propertyPath: m_GradientEffect.m_Rotation
+      value: -100
       objectReference: {fileID: 0}
     - target: {fileID: 5764851453355341752, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
       propertyPath: fillAmount
@@ -3521,6 +3525,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2500844510143078116}
     m_Modifications:
+    - target: {fileID: 1346785803357067307, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6132076
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346785803357067307, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
+      propertyPath: m_Color.g
+      value: 0.34420612
+      objectReference: {fileID: 0}
+    - target: {fileID: 1346785803357067307, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
+      propertyPath: m_Color.r
+      value: 0.4287891
+      objectReference: {fileID: 0}
     - target: {fileID: 3861970663263763576, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
       propertyPath: m_Name
       value: UI_BossCastBar
