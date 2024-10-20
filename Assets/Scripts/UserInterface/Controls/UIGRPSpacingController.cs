@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +8,23 @@ using VInspector;
 public class UIGRPSpacingController : MonoBehaviour
 {
     public List<RectTransform> spacingTransforms = new List<RectTransform>();
-    public bool vertical = false;
-    public float spacing = 0;
     private RectTransform rectTransform;
+
+    public GRPSpacingSettings spacingSettings;
+
+
+    [Serializable]
+    public class GRPSpacingSettings
+    {
+        public bool vertical = false;
+        public float spacing = 0;
+
+        public bool overrideSize = false;
+
+        [ShowIf("overrideSize")]
+        public Vector2 size = new Vector2();
+
+    }
 
     private void Start()
     {
@@ -28,23 +42,28 @@ public class UIGRPSpacingController : MonoBehaviour
     }
 
     [Button]
-    [OnValueChanged("spacing", "vertical")]
+    [OnValueChanged("spacingSettings")]
     public void UpdateSpacing()
     {
         rectTransform = GetComponent<RectTransform>();
         Vector2 dirVector = Vector2.right;
-        if(vertical) dirVector = Vector2.up;
+        if(spacingSettings.vertical) dirVector = Vector2.up;
 
         int postionIndex = 0;
         foreach (RectTransform _sTransform in spacingTransforms)
         {
-            _sTransform.anchoredPosition = rectTransform.anchoredPosition
-                + (dirVector * spacing * postionIndex)
-                - (dirVector * spacing * spacingTransforms.Count) /2f
-                + (dirVector * spacing/2f);
+            _sTransform.anchoredPosition = Vector2.zero
+                + (dirVector * spacingSettings.spacing * postionIndex)
+                - (dirVector * spacingSettings.spacing * spacingTransforms.Count) /2f
+                + (dirVector * spacingSettings.spacing / 2f);
 
             _sTransform.anchoredPosition = dirVector * _sTransform.anchoredPosition;
             postionIndex++;
+
+            if(spacingSettings.overrideSize)
+            {
+                _sTransform.sizeDelta = spacingSettings.size;
+            }
         }
     }
 }

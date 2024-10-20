@@ -24,7 +24,7 @@ public class AbyssalWeaver : Enemy
     public AbilitySO markedForAssassination;
     public AbilitySO EntwinedAbyss;
     public AbilitySO ThreadedSlip;
-    public GameObject threadManagerPF;
+    public AbilitySO threadManagerAbility;
     ThreadManager threadManager;
 
     public float turnSpeed = 5f;
@@ -49,7 +49,7 @@ public class AbyssalWeaver : Enemy
         agent = GetComponent<NavMeshAgent>();
 
         // create the thread manager
-        var threadArena = Instantiate(threadManagerPF, transform.position, Quaternion.identity);
+        var threadArena = threadManagerAbility.InitialiseAbility(this, null, transform.position);
         threadManager = threadArena.GetComponent<ThreadManager>();
     }
 
@@ -111,6 +111,9 @@ public class AbyssalWeaver : Enemy
             // Happens when threads are first created and after each intermission
             case STATES.INTERWOVEN_THREADS:
 
+                // Set the next state within the rotation
+                nextState = STATES.MFA;
+
                 InterwovenThreadState();
                 break;
 
@@ -119,6 +122,22 @@ public class AbyssalWeaver : Enemy
             // Once the ability finishes a phantom assassin should be spawned where the player was when the ability finished
             case STATES.MFA:
 
+                // Set the next state within the rotation
+                switch (mfaCountThisRotation)
+                {
+                    case 0:
+                        nextState = STATES.ENTWINED_ABYSS;
+                        break;
+
+                    case 1:
+                        nextState = STATES.THREADED_SLIP;
+                        break;
+
+                    case 2:
+                        nextState = STATES.INTERWOVEN_THREADS;
+                        break;
+                }
+
                 MFAState();
                 break;
 
@@ -126,11 +145,17 @@ public class AbyssalWeaver : Enemy
             // Beam also triggers phantom assassins to become unstable, causing them to pulse with damage and then destroy themselves
             case STATES.ENTWINED_ABYSS:
 
+                // Set the next state within the rotation
+                nextState = STATES.MFA;
+
                 EntwinedAbyssState();
                 break;
 
             // Dashes towards the player quickly, if the boss hits a thread they are stunned
             case STATES.THREADED_SLIP:
+
+                // Set the next state within the rotation
+                nextState = STATES.MFA;
 
                 ThreadedSlipState();
                 break;
@@ -154,7 +179,7 @@ public class AbyssalWeaver : Enemy
         agent.isStopped = true;
 
         // if player is in aggro range begin the fight
-        if (_distToPlayer <= 10)
+        if (_distToPlayer <= 20)
         {
             currentState = nextState;
         }
@@ -241,7 +266,7 @@ public class AbyssalWeaver : Enemy
             }
         }
 
-        CheckForTransition();
+        CheckForTransition(nextState);
     }
 
     /***********************************************
@@ -252,8 +277,6 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void InterwovenThreadState()
     {
-        nextState = STATES.MFA;
-
         threadManager.InterwovenThreads();
         currentAbilityCreated = true;
 
@@ -272,31 +295,18 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void MFAState()
     {
-        switch (mfaCountThisRotation)
-        {
-            case 0:
-                nextState = STATES.ENTWINED_ABYSS;
-                break;
-
-            case 1:
-                nextState = STATES.THREADED_SLIP;
-                break;
-
-            case 2:
-                nextState = STATES.INTERWOVEN_THREADS;
-                break;
-        }
-
         if (!currentAbilityCreated)
         {
             currentAbilityCreated = true;
             currentAbility = markedForAssassination.InitialiseAbility(this, player, player.transform.position);
             currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
+
+            // Increment the amount of times marked for assassination has been cast this rotation
+            mfaCountThisRotation++;
         }
 
         CheckForTransition();
-        mfaCountThisRotation++;
     }
 
     /***********************************************
@@ -307,8 +317,6 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void EntwinedAbyssState()
     {
-        nextState = STATES.MFA;
-
         // if the ability hasn't been created, create it first
         if (!currentAbilityCreated)
         {
@@ -336,8 +344,6 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void ThreadedSlipState()
     {
-        nextState = STATES.MFA;
-
         // if the ability hasn't been created, create it first
         if (!currentAbilityCreated)
         {
@@ -357,14 +363,14 @@ public class AbyssalWeaver : Enemy
         CheckForTransition();
     }
 
-    void CheckForTransition()
+    void CheckForTransition(STATES _nextState = STATES.AGGRESSIVE)
     {
         // State transitions when the ability has been created once during this state
         // And the ability does not exist anymore
         if (!currentAbility && currentAbilityCreated)
         {
             currentAbilityCreated = false;
-            currentState = STATES.AGGRESSIVE;
+            currentState = _nextState;
         }
     }
 
