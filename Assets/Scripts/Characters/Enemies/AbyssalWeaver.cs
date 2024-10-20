@@ -28,6 +28,9 @@ public class AbyssalWeaver : Enemy
     ThreadManager threadManager;
 
     public float turnSpeed = 5f;
+
+    float stunTime = 3f;
+    float stunElapsed = 3f; 
     float timeBetweenCasts = 5f;
     float tbcElapsed = 5f; // timeBetweenCasts elapsed
     int mfaCountThisRotation = 0;
@@ -90,7 +93,7 @@ public class AbyssalWeaver : Enemy
             case STATES.STUNNED:
 
                 // Set state starting variables
-                agent.isStopped = true;
+                StunnedState();
 
                 break;
             
@@ -158,6 +161,25 @@ public class AbyssalWeaver : Enemy
     }
 
     /***********************************************
+    * IdleState: During this state the boss has not been aggro'd and is idle in the center of his arena
+    * @author: Juan Le Roux
+    * @parameter: float
+    * @return: void
+    ************************************************/
+    void StunnedState()
+    {
+        // Set state starting variables
+        agent.isStopped = true;
+
+        if (stunElapsed <= 0)
+        {
+            stunElapsed -= Time.deltaTime;
+            stunElapsed = stunTime;
+            currentState = nextState;
+        }
+    }
+
+    /***********************************************
     * AggressiveState: During this state the boss will chase the player and auto attack
     * @author: Juan Le Roux
     * @parameter: float
@@ -219,11 +241,7 @@ public class AbyssalWeaver : Enemy
             }
         }
 
-        if (!currentAbility && currentAbilityCreated)
-        {
-            currentAbilityCreated = false;
-            currentState = nextState;
-        }
+        CheckForTransition();
     }
 
     /***********************************************
@@ -234,14 +252,16 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void InterwovenThreadState()
     {
+        nextState = STATES.MFA;
+
         threadManager.InterwovenThreads();
+        currentAbilityCreated = true;
 
         // at the start of each rotation after interwoven threads reset MFA count to 0;
         mfaCountThisRotation = 0;
 
         // Set state transitions
-        currentState = STATES.AGGRESSIVE;
-        nextState = STATES.THREADED_SLIP;
+        CheckForTransition();
     }
 
     /***********************************************
@@ -252,6 +272,21 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void MFAState()
     {
+        switch (mfaCountThisRotation)
+        {
+            case 0:
+                nextState = STATES.ENTWINED_ABYSS;
+                break;
+
+            case 1:
+                nextState = STATES.THREADED_SLIP;
+                break;
+
+            case 2:
+                nextState = STATES.INTERWOVEN_THREADS;
+                break;
+        }
+
         if (!currentAbilityCreated)
         {
             currentAbilityCreated = true;
@@ -260,29 +295,8 @@ public class AbyssalWeaver : Enemy
             currentAbility.GetComponent<Ability>().CastSpell();
         }
 
-        if (!currentAbility && currentAbilityCreated)
-        {
-            currentAbilityCreated = false;
-
-            currentState = STATES.AGGRESSIVE;
-
-            switch (mfaCountThisRotation)
-            {
-                case 0:
-                    nextState = STATES.ENTWINED_ABYSS;
-                    break;
-
-                case 1:
-                    nextState = STATES.THREADED_SLIP;
-                    break;
-
-                case 2:
-                    nextState = STATES.INTERWOVEN_THREADS;
-                    break;
-            }
-
-            mfaCountThisRotation++;
-        }
+        CheckForTransition();
+        mfaCountThisRotation++;
     }
 
     /***********************************************
@@ -293,6 +307,8 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void EntwinedAbyssState()
     {
+        nextState = STATES.MFA;
+
         // if the ability hasn't been created, create it first
         if (!currentAbilityCreated)
         {
@@ -309,14 +325,7 @@ public class AbyssalWeaver : Enemy
             TurnTowardsPlayer();
         }
 
-        // State transitions when the ability has been created once during this state
-        // And the ability does not exist anymore
-        if (!currentAbility && currentAbilityCreated)
-        {
-            currentAbilityCreated = false;
-            nextState = STATES.MFA;
-            currentState = STATES.AGGRESSIVE;
-        }
+        CheckForTransition();
     }
 
     /***********************************************
@@ -327,6 +336,8 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void ThreadedSlipState()
     {
+        nextState = STATES.MFA;
+
         // if the ability hasn't been created, create it first
         if (!currentAbilityCreated)
         {
@@ -343,24 +354,16 @@ public class AbyssalWeaver : Enemy
             TurnTowardsPlayer();
         }
 
-        // State transitions when the ability has been created once during this state
-        // And the ability does not exist anymore
-        if (!currentAbility && currentAbilityCreated)
-        {
-            currentAbilityCreated = false;
-            nextState = STATES.MFA;
-            currentState = STATES.AGGRESSIVE;
-        }
+        CheckForTransition();
     }
 
-    void CheckForTransition(STATES _nextState)
+    void CheckForTransition()
     {
         // State transitions when the ability has been created once during this state
         // And the ability does not exist anymore
         if (!currentAbility && currentAbilityCreated)
         {
             currentAbilityCreated = false;
-            nextState = STATES.INTERWOVEN_THREADS;
             currentState = STATES.AGGRESSIVE;
         }
     }
@@ -385,15 +388,25 @@ public class AbyssalWeaver : Enemy
     }
 
     /***********************************************
-    * OnCollisionEnter: Gets called whenever a collision occurs with another object
+    * OnTriggerEnter: Gets called whenever a collision occurs with another object
     * @author: Juan Le Roux
     * @parameter: Collision
     * @return: void
     ************************************************/
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
         // add the collision to the collisions list
-        collisions.Add(collision.gameObject);
+        if (other.gameObject.GetComponentInParent<Thread>())
+        {
+            if (other.gameObject.GetComponentInParent<Thread>().isThreadActive)
+            {
+                collisions.Add(other.gameObject);
+            }
+        }
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        
     }
 
     /***********************************************
