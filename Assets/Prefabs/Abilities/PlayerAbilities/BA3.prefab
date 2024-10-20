@@ -50,9 +50,10 @@ MonoBehaviour:
   targetLocation: {x: 0, y: 0, z: 0}
   abilityData: {fileID: 0}
   canMoveWhileCasting: 1
+  requiresTarget: 0
   currentCastTime: 0
   currentChannelTime: 0
-  tempAttack: {fileID: 6947339161028381666, guid: 4587732ba71658b48b5a52c182c6c54d, type: 3}
+  VFX: {fileID: 0}
 --- !u!1 &4555399043453929699
 GameObject:
   m_ObjectHideFlags: 0
@@ -81,7 +82,7 @@ Transform:
   m_GameObject: {fileID: 4555399043453929699}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.28, y: 1.38, z: 1.74}
+  m_LocalPosition: {x: 0, y: 1.38, z: 1.74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -115,7 +115,7 @@ public class BasicAbility : Ability
             print("oh hi " + enemy.name);
 
             //DO THE DAMAGE
-            //enemy.gameObject.GetComponent<Enemy>().TakeDamage(abilityData.primaryDamage * owner.baseDamage);
+            enemy.gameObject.GetComponent<Enemy>().TakeDamage(abilityData.primaryDamage * owner.baseDamage);
             print("Dealt " + abilityData.primaryDamage * owner.baseDamage + " damage");
         }
 

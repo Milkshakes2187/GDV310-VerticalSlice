@@ -1,7 +1,7 @@
 using MPUIKIT;
 using UnityEngine;
 
-public class PlayerAbilityUI
+public class PlayerAbilityUI : MonoBehaviour
 {
     public GameObject cooldownFill;
     public GameObject inactiveFill;

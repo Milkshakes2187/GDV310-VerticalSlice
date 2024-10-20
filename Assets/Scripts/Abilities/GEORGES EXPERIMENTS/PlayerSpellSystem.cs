@@ -1,6 +1,8 @@
+using MPUIKIT;
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.Playables;
@@ -23,6 +25,10 @@ public class PlayerSpellSystem : MonoBehaviour
     [SerializeField, ReadOnly] Player owner = null;
     [SerializeField, ReadOnly] public GameObject currentAbilityCast = null;
 
+    [SerializeField] GameObject classPowerBar = null;
+    [SerializeField] GameObject castBar = null;
+    [SerializeField] GameObject castBarText = null;
+
     public E_AbilityUseState abilityUseState = E_AbilityUseState.Ready;
 
     [Header("Core Spell Variables")]
@@ -33,6 +39,7 @@ public class PlayerSpellSystem : MonoBehaviour
 
     [Header("List of Ability Holders")]
     [SerializeField] List<AbilityDataHolder> abilityHolders = new List<AbilityDataHolder>();
+    [SerializeField] GameObject basicAbilityUIHolder = null;
     [SerializeField] KeyCode basicKey = KeyCode.Q;
 
     [Header("Basic Ability Sequence")]
@@ -57,7 +64,7 @@ public class PlayerSpellSystem : MonoBehaviour
         if(basicAbilitySequence.Count > 0)
         {
             //add the basic ability to the list of abilite holders
-            var newHolder = new AbilityDataHolder(basicAbilitySequence[0], basicKey, 0.0f);
+            var newHolder = new AbilityDataHolder(basicAbilitySequence[0], basicAbilityUIHolder, basicKey, 0.0f);
             abilityHolders.Insert(0, newHolder);
         }
        
@@ -83,6 +90,9 @@ public class PlayerSpellSystem : MonoBehaviour
 
         //tick all the cooldowns of spells
         TickCooldowns();
+
+        //updates the bars
+        UpdateBars();
     }
 
     /***********************************************
@@ -233,6 +243,36 @@ public class PlayerSpellSystem : MonoBehaviour
 
                 //sequence UI
             }
+        }
+    }
+
+    /***********************************************
+   UpdateBars: updates the class power bar, the casting bar, and checks if any abiliies should be "locked"
+   @author: George White
+   @parameter: 
+   @return: void
+   ************************************************/
+    public void UpdateBars()
+    {
+        if (!classPowerBar || !castBar || !castBarText) { return; }
+
+        //class power bar
+        classPowerBar.GetComponent<MPImage>().fillAmount = classPowerCurrent / classPowerMax;
+
+
+        //casting bar
+        if(abilityUseState == E_AbilityUseState.Casting || !currentAbilityCast)
+        {
+            castBar.SetActive(true);
+            castBarText.SetActive(true);
+
+            castBar.GetComponent<UIFillController>().fillAmount = Mathf.Abs(1 - currentAbilityCast.GetComponent<Ability>().currentCastTime / currentAbilityCast.GetComponent<Ability>().abilityData.timeToCast);
+            castBarText.GetComponent<TextMeshPro>().text = currentAbilityCast.GetComponent<Ability>().abilityData.abilityName;
+        }
+        else
+        {
+            castBar.SetActive(false);
+            castBarText.SetActive(false);
         }
     }
 

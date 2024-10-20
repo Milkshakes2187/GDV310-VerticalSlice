@@ -126,6 +126,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 817496746089806596, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: basicAbilityUIHolder
+      value: 
+      objectReference: {fileID: 184037176}
+    - target: {fileID: 817496746089806596, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: abilityHolders.Array.data[0].keybind
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 817496746089806596, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: abilityHolders.Array.data[1].keybind
+      value: 101
+      objectReference: {fileID: 0}
+    - target: {fileID: 817496746089806596, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: abilityHolders.Array.data[0].abilitySO
+      value: 
+      objectReference: {fileID: 11400000, guid: 802e3d38466f5e8408c010bd32a3d13b, type: 2}
+    - target: {fileID: 817496746089806596, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: abilityHolders.Array.data[1].abilitySO
+      value: 
+      objectReference: {fileID: 11400000, guid: 2ff6205fa343e5548913e3997ab4bc8e, type: 2}
+    - target: {fileID: 817496746089806596, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: abilityHolders.Array.data[0].iconHolder
+      value: 
+      objectReference: {fileID: 184037175}
+    - target: {fileID: 817496746089806596, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: abilityHolders.Array.data[1].iconHolder
+      value: 
+      objectReference: {fileID: 184037174}
     - target: {fileID: 842605538034811164, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
       propertyPath: CMvcam
       value: 
@@ -236,6 +264,14 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 111569123}
+    - target: {fileID: 5986200692491705887, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+      propertyPath: m_FillAmount
+      value: 0.498
+      objectReference: {fileID: 0}
+    - target: {fileID: 6100692868861273620, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+      propertyPath: fillAmount
+      value: 0.425
+      objectReference: {fileID: 0}
     - target: {fileID: 8882869361881832430, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
       propertyPath: m_Name
       value: GameManager
@@ -248,6 +284,21 @@ PrefabInstance:
 --- !u!1 &184037173 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1561602152451273267, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+  m_PrefabInstance: {fileID: 184037172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &184037174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4853296846190666366, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+  m_PrefabInstance: {fileID: 184037172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &184037175 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7827476273359069722, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
+  m_PrefabInstance: {fileID: 184037172}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &184037176 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8789099540575961321, guid: 03a08f197b3337746b7503b31ba5687d, type: 3}
   m_PrefabInstance: {fileID: 184037172}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &650607420

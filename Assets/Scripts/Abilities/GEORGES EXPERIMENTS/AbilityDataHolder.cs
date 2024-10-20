@@ -17,9 +17,10 @@ public class AbilityDataHolder
   * @parameter: Character , Character , Vector3 
   * @return: GameObject
   ************************************************/
-    public AbilityDataHolder(AbilitySO _aso = null, KeyCode _code = KeyCode.None, float _cd = 0.0f, bool _active = true)
+    public AbilityDataHolder(AbilitySO _aso = null, GameObject _iconHolder = null, KeyCode _code = KeyCode.None, float _cd = 0.0f, bool _active = true)
     {
         abilitySO = _aso;
+        iconHolder = _iconHolder;
         keybind = _code;
         currentCooldown = _cd;
         active = _active;

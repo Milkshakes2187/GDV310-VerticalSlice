@@ -20,7 +20,7 @@ MonoBehaviour:
   timeToCast: 0.3
   timeToChannel: 0
   castingCost: 0
-  castingCostGain: 0
+  castingCostGain: 4
   CastingCostMultiplier: 0
   primaryDamage: 3
   secondaryDamage: 0
