@@ -38,6 +38,8 @@ public abstract class Ability : MonoBehaviour
     ************************************************/
     public virtual void OnDestroy() { }
 
+
+
     /***********************************************
     * UseSpellEffect: Abstract function to use a spell's effect. Overridden by children
     * @author: George White

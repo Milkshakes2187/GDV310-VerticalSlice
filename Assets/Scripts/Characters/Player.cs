@@ -20,6 +20,7 @@ public class Player : Character
     public static Player instance;
 
     [SerializeField, ReadOnly] public PlayerSpellSystem spellSystem = null;
+    [SerializeField, ReadOnly] public Weapon weapon = null;
 
     //[Tab("Main")]
     //[Header("Stats")]
@@ -91,6 +92,12 @@ public class Player : Character
         if (GetComponentInChildren<PlayerSpellSystem>())
         {
             spellSystem = GetComponentInChildren<PlayerSpellSystem>();
+        }
+
+        //assigning weapon
+        if (GetComponentInChildren<Weapon>())
+        {
+            weapon = GetComponentInChildren<Weapon>();
         }
     }
 

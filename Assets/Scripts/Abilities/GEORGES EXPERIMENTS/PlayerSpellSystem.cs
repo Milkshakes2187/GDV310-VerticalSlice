@@ -21,7 +21,7 @@ public class PlayerSpellSystem : MonoBehaviour
 {
     [SerializeField, ReadOnly] Player owner = null;
     [SerializeField, ReadOnly] Character target = null;
-    [SerializeField, ReadOnly] Ability currentCast = null;
+    [SerializeField, ReadOnly] public GameObject currentAbilityCast = null;
 
     public E_AbilityUseState abilityUseState = E_AbilityUseState.Ready;
 
@@ -29,7 +29,7 @@ public class PlayerSpellSystem : MonoBehaviour
 
     public float spellCharge = 0.0f;
     public float spellChargeMax = 100.0f;
-    public float GCD = 0.4f;
+    public float GCD = 0.5f;
     [SerializeField, ReadOnly] float currentGCD = 0.0f;
 
     [SerializeField] List<AbilityDataHolder> abilityHolders = new List<AbilityDataHolder>();
@@ -67,6 +67,9 @@ public class PlayerSpellSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //raycast to select target
+        AssignTarget();
+
         //Deal with spell inputs
         CheckInputs();
 
@@ -106,31 +109,41 @@ public class PlayerSpellSystem : MonoBehaviour
     public void UseBasicAbility()
     {
         //cant cast spell if it is on cooldown
-        if (abilityHolders[0].currentCooldown > 0.0f) { return; }
+        if (abilityHolders[0].currentCooldown > 0.0f || currentGCD > 0.0f) { return; }
 
 
         //Instantiate and use the ability
-        var aaAbility = abilityHolders[0].ability.InitialiseAbility(owner,target,transform.position);
-        aaAbility.GetComponent<Ability>().CastSpell(true);
-
-
-        //increment the sequence
-        currentSequenceIndex++;
-        if(currentSequenceIndex > basicAbilitySequence.Count - 1)
+        currentAbilityCast = abilityHolders[0].ability.InitialiseAbility(owner,target,transform.position);
+        
+        if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
-            currentSequenceIndex = 0;
+
+            //increment the sequence
+            currentSequenceIndex++;
+            if (currentSequenceIndex > basicAbilitySequence.Count - 1)
+            {
+                currentSequenceIndex = 0;
+            }
+
+            //set Ability0 to the current ability sequence
+            abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
+
+            //starts the cooldown of the next ability
+            abilityHolders[0].currentCooldown = basicAbilitySequence[currentSequenceIndex].cooldown;
+            currentGCD = GCD;
+
+
+            //start cooldowns for sequence resetting
+            currentAbilitySequenceResetTime = abilitySequenceResetTime;
+
+            //set ui
+        }
+        else
+        {
+            Destroy(currentAbilityCast);
         }
 
-        //set Ability0 to the current ability sequence
-        abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
 
-        //starts the cooldown of the next ability
-        abilityHolders[0].currentCooldown = basicAbilitySequence[currentSequenceIndex].cooldown;
-
-        //start cooldowns for sequence resetting
-        currentAbilitySequenceResetTime = abilitySequenceResetTime;
-
-        //set ui
     }
 
     /***********************************************
@@ -142,18 +155,23 @@ public class PlayerSpellSystem : MonoBehaviour
     public void UseAbility(AbilityDataHolder _abilityData) //WiP
     {
         if (!_abilityData || !_abilityData.ability) { return; }
-        if (_abilityData.IsOnCooldown()) { return; }
+        if (_abilityData.IsOnCooldown() || currentGCD > 0.0f) { return; }
 
 
         //instantiate ability, use ability, and start the cooldown
-        _abilityData.ability.InitialiseAbility(owner, target, Vector3.zero); ;
+        currentAbilityCast = _abilityData.ability.InitialiseAbility(owner, target, Vector3.zero); ;
+        
 
-        if(_abilityData.ability.GetComponent<Ability>().CastSpell(true))
+        if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
+            
             _abilityData.StartCooldown();
             currentGCD = GCD;
         }
-        
+        else
+        {
+            Destroy(currentAbilityCast);
+        }
     }
 
     /***********************************************
@@ -242,5 +260,10 @@ public class PlayerSpellSystem : MonoBehaviour
     {
         //spherical raycast here!
     }
+
+
+
+
+
 
 }
