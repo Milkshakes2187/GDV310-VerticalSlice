@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffeb83188ec511545940ebd97b376d92, type: 3}
-  m_Name: AbilitySO4
+  m_Name: 0AbilitySO3
   m_EditorClassIdentifier: 
-  abilityName: Ab4
+  abilityName: Ab3
   image: {fileID: 0}
   animatorOverrideController: {fileID: 0}
-  abilityPrefab: {fileID: 1645567380262440351, guid: fc5804dc3a8117547ba05ee47ec327b7, type: 3}
+  abilityPrefab: {fileID: 1645567380262440351, guid: 66edb142914b085439b827c3cfcbaf78, type: 3}
   cooldown: 1
   timeToCast: 0.2
   timeToChannel: 0
-  primaryDamage: 5
+  primaryDamage: 4
   secondaryDamage: 0
   tertiaryDamage: 0
   primaryEffectDuration: 0

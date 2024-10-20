@@ -7,7 +7,7 @@ public class BasicAbility : Ability
 {
     //Signle hitbox that will be used for a physics area check
     Collider hitbox = null;
-
+    [SerializeField] GameObject VFX = null;
 
     private void Start()
     {
@@ -18,6 +18,13 @@ public class BasicAbility : Ability
     public override void InitialSetup()
     {
         //start animation here
+
+        //VFX spawning
+        if(VFX)
+        {
+            var vfx = Instantiate(VFX, owner.gameObject.transform);
+            Destroy(vfx,3);
+        }
     }
 
 
