@@ -209,7 +209,7 @@ public class PlayerSpellSystem : MonoBehaviour
         {
             if (sHolder.IsOnCooldown())
             {
-                sHolder.TickCoolDown(Time.deltaTime);
+                sHolder.TickCoolDown(Time.deltaTime, sHolder.abilitySO.cooldown);
             }
         }
    

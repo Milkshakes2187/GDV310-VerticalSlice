@@ -6,6 +6,9 @@ public class AbilityDataHolder
 {
     //Abilityholder variables
     public AbilitySO abilitySO;
+    public GameObject cooldownFill;
+    public GameObject inactiveFill;
+    public GameObject lockedFill;
     public KeyCode keybind;
     public float currentCooldown;
     public bool active;
@@ -43,10 +46,10 @@ public class AbilityDataHolder
     /***********************************************
     * TickCoolDown: Subtracts time from a cooldown, and stabilizes at 0.0f
     * @author: George White
-    * @parameter: float 
+    * @parameter: float , float
     * @return: void
     ************************************************/
-    public void TickCoolDown(float _time)
+    public void TickCoolDown(float _time, float _cooldownMax)
     {
         //If the item is on cooldown, ticks the ability data holder cooldown
         currentCooldown = currentCooldown - _time;
@@ -56,6 +59,30 @@ public class AbilityDataHolder
         {
             currentCooldown = 0.0f;
         }
+        if(cooldownFill)
+        {
+            cooldownFill.GetComponent<UIFillController>().fillAmount = Mathf.Abs( currentCooldown / _cooldownMax);
+        }
+    }
+
+    /***********************************************
+    * ToggleAbilityIconLock: changes the appearence of an ability ui icon depending on its state of activeness
+    * @author: George White
+    * @parameter: bool
+    * @return: void
+    ************************************************/
+    public void ToggleAbilityIconLock(bool _shouldLock)
+    {
+        if (!lockedFill) { return; }
+        if(_shouldLock)
+        {
+            lockedFill.GetComponent<UIFillController>().fillAmount = 1;
+        }
+        else
+        {
+            lockedFill.GetComponent<UIFillController>().fillAmount = 0;
+        }
+        
     }
 
     /***********************************************
