@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unitFrameSettings:
     unitFramePrefab: {fileID: 1638735795283912842, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
-    generalOffset: {x: 0, y: 0, z: 0}
+    generalOffset: {x: 0, y: 0.25, z: 0}
     frameScale: 0.6
 --- !u!1 &388618786 stripped
 GameObject:
@@ -800,7 +800,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7304571319596288168, guid: d23198ccbb94bb24b978b01290adb754, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.5
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 7304571319596288168, guid: d23198ccbb94bb24b978b01290adb754, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1001,7 +1001,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1253143406}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 2
   m_BackGroundColor: {r: 0.11335564, g: 0.11165005, b: 0.122641504, a: 0}
@@ -2478,7 +2478,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -35}
+  m_AnchoredPosition: {x: 0, y: -20}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &3279686925422460090
@@ -2696,10 +2696,6 @@ PrefabInstance:
     - target: {fileID: 1638735795283912842, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
       propertyPath: m_Name
       value: UI_UnitFrame_TEST
-      objectReference: {fileID: 0}
-    - target: {fileID: 1638735795283912842, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7130981801480267581, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
       propertyPath: m_Pivot.x
