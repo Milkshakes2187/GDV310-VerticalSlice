@@ -245,7 +245,6 @@ public class AbyssalWeaver : Enemy
         {
             currentAbilityCreated = true;
             currentAbility = abyssalKnives.InitialiseAbility(this, player, this.transform.position);
-            currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
 
             foreach (var assassin in phantomAssassinList)
@@ -287,7 +286,6 @@ public class AbyssalWeaver : Enemy
         {
             currentAbilityCreated = true;
             currentAbility = markedForAssassination.InitialiseAbility(this, player, player.transform.position);
-            currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
 
             // Increment the amount of times marked for assassination has been cast this rotation
@@ -310,7 +308,6 @@ public class AbyssalWeaver : Enemy
         {
             currentAbilityCreated = true;
             currentAbility = EntwinedAbyss.InitialiseAbility(this, player, transform.position);
-            currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
         }
 
@@ -337,7 +334,6 @@ public class AbyssalWeaver : Enemy
         {
             currentAbilityCreated = true;
             currentAbility = ThreadedSlip.InitialiseAbility(this, player, player.transform.position);
-            currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
         }
 

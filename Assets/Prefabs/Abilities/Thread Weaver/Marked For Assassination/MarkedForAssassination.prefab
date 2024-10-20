@@ -49,7 +49,8 @@ MonoBehaviour:
   targetLocation: {x: 0, y: 0, z: 0}
   abilityData: {fileID: 0}
   canMoveWhileCasting: 1
+  requiresTarget: 0
   currentCastTime: 0
   currentChannelTime: 0
-  indicatorPF: {fileID: 6434061528602989899, guid: 8f59f953c703a86449f93a9086ca2f48, type: 3}
+  indicatorPF: {fileID: 1691469142347747751, guid: 84308ef5c55d6b94a933231fbb81e3ba, type: 3}
   phantomAssassin: {fileID: 11400000, guid: d74c2c3c7337ab84da0f2bfb261d9211, type: 2}

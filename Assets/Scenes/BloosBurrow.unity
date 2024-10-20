@@ -550,6 +550,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2020595472}
     - target: {fileID: 842605538034811164, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
+      propertyPath: moveSpeed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 842605538034811164, guid: 0c580eedbbd3a6342a298283a464183a, type: 3}
       propertyPath: charController
       value: 
       objectReference: {fileID: 344226970}
@@ -1739,9 +1743,77 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: turnSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
       propertyPath: threadManagerAbility
       value: 
       objectReference: {fileID: 11400000, guid: 7c3436576bbf37e4bab90703dc519bd4, type: 2}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: abilityRotation.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[1]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[2]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[3]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[4]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[5]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[6]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[7]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[8]'
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[9]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[10]'
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[11]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 848726365459475109, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: 'abilityRotation.Array.data[12]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 885355758674668985, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: m_Speed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 885355758674668985, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1277423863419099930, guid: 6f7bd145251a6df42bf572cde7fe0ff3, type: 3}
       propertyPath: m_Name
       value: Boss
