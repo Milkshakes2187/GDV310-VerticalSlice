@@ -141,6 +141,6 @@ public class ShieldSlam : Ability
 
 
         //Destroy the ability
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 1);
     }
 }

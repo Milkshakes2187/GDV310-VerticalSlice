@@ -120,6 +120,6 @@ public class BasicAbility : Ability
         }
 
         //Destroy the ability
-        Destroy(gameObject, 2);
+        Destroy(gameObject, 1);
     }
 }

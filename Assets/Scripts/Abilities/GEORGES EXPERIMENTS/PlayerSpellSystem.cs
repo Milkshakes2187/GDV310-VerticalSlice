@@ -287,9 +287,6 @@ public class PlayerSpellSystem : MonoBehaviour
         if (abilityUseState != E_AbilityUseState.Ready) { return; }
 
 
-
-
-
         RaycastHit spherecastHit;
         Physics.SphereCast(owner.GetComponent<Player>().CMvcam.transform.position, predictionSphereCastRadius, owner.GetComponent<Player>().CMvcam.transform.forward, out spherecastHit, maxCastRange);
 

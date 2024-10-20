@@ -140,6 +140,7 @@ public abstract class Ability : MonoBehaviour
             owner.GetComponent<Player>().spellSystem.abilityUseState = E_AbilityUseState.Ready;
         }
 
+        print("interrupted, unlucky ig");
         Destroy(gameObject);
     }
 
