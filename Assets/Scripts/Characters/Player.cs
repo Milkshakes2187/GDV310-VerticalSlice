@@ -44,15 +44,6 @@ public class Player : Character
 
     public float airMod = 0.1f;
 
-    //[Foldout("Dash Vars")]
-    //[SerializeField] private float fDashDistance = 10.0f;
-    //[SerializeField] private float fDashTime = 0.3f;
-    //public float fDashCooldown = 3.0f;
-    //public float fDashCDTimer = 0.0f;
-    //public bool bCanDash = true;
-    //
-    //public event Action<float> OnDash;
-
     [Tab("Dev Mode")]
     public bool bImmortal = false;
 
@@ -106,19 +97,6 @@ public class Player : Character
     {
         ProcessMovement();
         ProcessRotations();
-
-        // Check for dash input
-        //if (Input.GetKeyDown(dashKey) && bCanDash)
-        //{
-        //    Debug.Log("SCHWOOM DASH!");
-        //    StartCoroutine(Dash());
-        //}
-        //
-        //// --------------------- DEV KEYS ---------------------
-        //if (Input.GetKeyDown(knockbackKey))
-        //{
-        //    StartCoroutine(Knockback(Vector3.zero, 5.0f));
-        //}
 
         if (Input.GetKeyDown(immortalKey))
         {
@@ -241,17 +219,4 @@ public class Player : Character
         Vector3 rotDiff = CMvcam.transform.eulerAngles - camTarget.transform.eulerAngles;
         camTarget.transform.eulerAngles += rotDiff;
     }
-
-    //public void TurnOffCanMove()
-    //{
-    //    canMove = false;
-    //    moveVelocity = Vector3.zero;
-    //    float velocity = 0.0f;
-    //
-    //    charController.Move(moveVelocity * moveSpeed * Time.deltaTime);
-    //    velocity = charController.velocity.magnitude;
-    //
-    //    // Update animator according to movement
-    //    playerAnim.SetFloat("Velocity", velocity);
-    //}
 }
