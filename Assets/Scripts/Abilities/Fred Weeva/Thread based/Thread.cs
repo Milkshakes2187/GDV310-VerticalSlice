@@ -34,7 +34,7 @@ public class Thread : MonoBehaviour
         }
     }
 
-    public void CharacterCollided(Character _character)
+    public void PlayerCollided(Character _character)
     {
         _character.TakeDamage(50);
 

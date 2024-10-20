@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -41,8 +42,11 @@ public class AbyssalWeaver : Enemy
     // list of all active collisions
     [HideInInspector] public List<GameObject> collisions = new List<GameObject>();
 
+    // Ability order list, abilities in this list will happen in the order placed, the count is used to determine what point in the list the boss is up to
+    public List<STATES> abilityRotation = new List<STATES>();
+    int rotationState = 0;
+
     [HideInInspector] public STATES currentState = STATES.IDLE;
-    [HideInInspector] public STATES nextState = STATES.INTERWOVEN_THREADS;
 
     private void Awake()
     {
@@ -58,6 +62,12 @@ public class AbyssalWeaver : Enemy
     {
         // update state machine every frame
         RunStateMachine();
+
+        // Ensure the rotationState does not surpass the amount of abilities in the list
+        if (rotationState >= abilityRotation.Count)
+        {
+            rotationState = 0;
+        }
     }
 
     /***********************************************
@@ -111,9 +121,6 @@ public class AbyssalWeaver : Enemy
             // Happens when threads are first created and after each intermission
             case STATES.INTERWOVEN_THREADS:
 
-                // Set the next state within the rotation
-                nextState = STATES.MFA;
-
                 InterwovenThreadState();
                 break;
 
@@ -122,22 +129,6 @@ public class AbyssalWeaver : Enemy
             // Once the ability finishes a phantom assassin should be spawned where the player was when the ability finished
             case STATES.MFA:
 
-                // Set the next state within the rotation
-                switch (mfaCountThisRotation)
-                {
-                    case 0:
-                        nextState = STATES.ENTWINED_ABYSS;
-                        break;
-
-                    case 1:
-                        nextState = STATES.THREADED_SLIP;
-                        break;
-
-                    case 2:
-                        nextState = STATES.INTERWOVEN_THREADS;
-                        break;
-                }
-
                 MFAState();
                 break;
 
@@ -145,17 +136,11 @@ public class AbyssalWeaver : Enemy
             // Beam also triggers phantom assassins to become unstable, causing them to pulse with damage and then destroy themselves
             case STATES.ENTWINED_ABYSS:
 
-                // Set the next state within the rotation
-                nextState = STATES.MFA;
-
                 EntwinedAbyssState();
                 break;
 
             // Dashes towards the player quickly, if the boss hits a thread they are stunned
             case STATES.THREADED_SLIP:
-
-                // Set the next state within the rotation
-                nextState = STATES.MFA;
 
                 ThreadedSlipState();
                 break;
@@ -181,7 +166,8 @@ public class AbyssalWeaver : Enemy
         // if player is in aggro range begin the fight
         if (_distToPlayer <= 20)
         {
-            currentState = nextState;
+            currentState = abilityRotation[rotationState];
+            rotationState++;
         }
     }
 
@@ -196,11 +182,12 @@ public class AbyssalWeaver : Enemy
         // Set state starting variables
         agent.isStopped = true;
 
+        stunElapsed -= Time.deltaTime;
+
         if (stunElapsed <= 0)
-        {
-            stunElapsed -= Time.deltaTime;
+        {            
             stunElapsed = stunTime;
-            currentState = nextState;
+            currentState = STATES.AGGRESSIVE;
         }
     }
 
@@ -241,7 +228,8 @@ public class AbyssalWeaver : Enemy
             tbcElapsed = timeBetweenCasts;
 
             // move to next state
-            currentState = STATES.ABYSSAL_KNIVES;
+            currentState = abilityRotation[rotationState];
+            rotationState++;
         }
     }
 
@@ -266,7 +254,7 @@ public class AbyssalWeaver : Enemy
             }
         }
 
-        CheckForTransition(nextState);
+        CheckForTransition();
     }
 
     /***********************************************
@@ -363,14 +351,14 @@ public class AbyssalWeaver : Enemy
         CheckForTransition();
     }
 
-    void CheckForTransition(STATES _nextState = STATES.AGGRESSIVE)
+    void CheckForTransition()
     {
         // State transitions when the ability has been created once during this state
         // And the ability does not exist anymore
         if (!currentAbility && currentAbilityCreated)
         {
             currentAbilityCreated = false;
-            currentState = _nextState;
+            currentState = STATES.AGGRESSIVE;
         }
     }
 
