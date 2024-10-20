@@ -3217,11 +3217,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
       propertyPath: m_Color.g
-      value: 0.6991074
+      value: 0.504717
       objectReference: {fileID: 0}
     - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
       propertyPath: m_Color.r
-      value: 0.6933962
+      value: 0.68559533
       objectReference: {fileID: 0}
     - target: {fileID: 8882539565320140496, guid: 173bd86d7a2f3764e96201a252f13985, type: 3}
       propertyPath: m_GradientEffect.m_Gradient.ctime2
