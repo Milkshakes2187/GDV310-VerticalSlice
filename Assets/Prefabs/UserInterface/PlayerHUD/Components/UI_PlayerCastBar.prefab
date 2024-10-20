@@ -644,7 +644,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillImages:
   - {fileID: 3357438544664165095}
-  - {fileID: 0}
   fillAmount: 0.471
 --- !u!1 &4610100847193469375
 GameObject:

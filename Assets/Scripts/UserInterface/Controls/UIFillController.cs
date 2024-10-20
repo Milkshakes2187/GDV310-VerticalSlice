@@ -27,6 +27,7 @@ public class UIFillController : MonoBehaviour
 
         foreach (Image _img in fillImages) 
         {
+            if (_img == null) { Debug.LogError("Fill controllers image no longer exists"); continue; }
             _img.fillAmount = fillAmount;
         }
     }
