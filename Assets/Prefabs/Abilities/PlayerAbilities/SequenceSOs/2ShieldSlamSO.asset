@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffeb83188ec511545940ebd97b376d92, type: 3}
+  m_Name: 2ShieldSlamSO
+  m_EditorClassIdentifier: 
+  abilityName: ShieldSlam
+  image: {fileID: 0}
+  animatorOverrideController: {fileID: 0}
+  abilityPrefab: {fileID: 1645567380262440351, guid: fc5804dc3a8117547ba05ee47ec327b7, type: 3}
+  cooldown: 15
+  timeToCast: 0
+  timeToChannel: 0
+  castingCost: 0
+  castingCostGain: 0
+  CastingCostMultiplier: 0
+  primaryDamage: 0
+  secondaryDamage: 0
+  tertiaryDamage: 0
+  primaryEffectDuration: 8
+  secondaryEffectDuration: 0
+  tertiaryEffectDuration: 0
+  primaryEffectStrength: 20
+  secondaryEffectStrength: 0
+  tertiaryEffectStrength: 0
+  primaryRange: 0
+  secondaryRange: 0
+  info: 

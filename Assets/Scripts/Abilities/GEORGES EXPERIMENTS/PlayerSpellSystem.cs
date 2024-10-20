@@ -19,31 +19,36 @@ public enum E_AbilityUseState
 
 public class PlayerSpellSystem : MonoBehaviour
 {
+    [Header("Main References")]
     [SerializeField, ReadOnly] Player owner = null;
-    [SerializeField, ReadOnly] Character target = null;
     [SerializeField, ReadOnly] public GameObject currentAbilityCast = null;
 
     public E_AbilityUseState abilityUseState = E_AbilityUseState.Ready;
 
-    [Tab("Main spell tab")]
-
-    public float spellCharge = 0.0f;
-    public float spellChargeMax = 100.0f;
+    [Header("Core Spell Variables")]
+    public float classPowerCurrent = 0.0f;
+    public float classPowerMax = 100.0f;
     public float GCD = 0.5f;
     [SerializeField, ReadOnly] float currentGCD = 0.0f;
 
+    [Header("List of Ability Holders")]
     [SerializeField] List<AbilityDataHolder> abilityHolders = new List<AbilityDataHolder>();
     [SerializeField] KeyCode basicKey = KeyCode.Q;
-  
-    
+
+    [Header("Basic Ability Sequence")]
     [SerializeField] List<AbilitySO> basicAbilitySequence = new List<AbilitySO>();
     [ReadOnly] int currentSequenceIndex = 0;
-
 
     [SerializeField] float abilitySequenceResetTime = 3.0f;
     [ReadOnly] float currentAbilitySequenceResetTime = 3.0f;
 
-
+    [Header("Target Selection")]
+    [SerializeField, ReadOnly] public Character target = null;
+    [SerializeField, ReadOnly] public Vector3 targettedLocation = Vector3.zero;
+    public RaycastHit predictionHit;
+    public LayerMask targetRayMask;
+    public float predictionSphereCastRadius;
+    public float maxCastRange = 100.0f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -62,6 +67,9 @@ public class PlayerSpellSystem : MonoBehaviour
         {
             owner = GetComponentInParent<Player>();
         }
+
+
+        //LINK WITH UI!!!!!
     }
 
     // Update is called once per frame
@@ -87,7 +95,6 @@ public class PlayerSpellSystem : MonoBehaviour
     {
         //returns if the player is not in a castable state
         if (abilityUseState != E_AbilityUseState.Ready) { return; }
-        if (currentGCD > 0.0f) { return; }
 
         //checks JUST THE BASIC - to improve
         if(abilityHolders.Count > 0)
@@ -96,8 +103,15 @@ public class PlayerSpellSystem : MonoBehaviour
             {
                 UseBasicAbility();
             }
+
+            for(int i = 1; i < abilityHolders.Count; i++)
+            {
+                if (Input.GetKeyDown(abilityHolders[i].keybind))
+                {
+                    UseAbility(abilityHolders[i]);
+                }
+            }
         }
-        
     }
 
     /***********************************************
@@ -109,12 +123,13 @@ public class PlayerSpellSystem : MonoBehaviour
     public void UseBasicAbility()
     {
         //cant cast spell if it is on cooldown
-        if (abilityHolders[0].currentCooldown > 0.0f || currentGCD > 0.0f) { return; }
+        if (abilityHolders[0].currentCooldown > 0.0f || currentGCD > 0.0f || !abilityHolders[0].active) { return; }
 
 
         //Instantiate and use the ability
-        currentAbilityCast = abilityHolders[0].ability.InitialiseAbility(owner,target,transform.position);
+        currentAbilityCast = abilityHolders[0].abilitySO.InitialiseAbility(owner,target,transform.position);
         
+        //attempt to use basic ability sequence
         if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
 
@@ -126,7 +141,7 @@ public class PlayerSpellSystem : MonoBehaviour
             }
 
             //set Ability0 to the current ability sequence
-            abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
+            abilityHolders[0].abilitySO = basicAbilitySequence[currentSequenceIndex];
 
             //starts the cooldown of the next ability
             abilityHolders[0].currentCooldown = basicAbilitySequence[currentSequenceIndex].cooldown;
@@ -142,8 +157,6 @@ public class PlayerSpellSystem : MonoBehaviour
         {
             Destroy(currentAbilityCast);
         }
-
-
     }
 
     /***********************************************
@@ -154,17 +167,16 @@ public class PlayerSpellSystem : MonoBehaviour
    ************************************************/
     public void UseAbility(AbilityDataHolder _abilityData) //WiP
     {
-        if (!_abilityData || !_abilityData.ability) { return; }
+        if (_abilityData == null || !_abilityData.abilitySO || !_abilityData.active) { return; }
         if (_abilityData.IsOnCooldown() || currentGCD > 0.0f) { return; }
 
 
         //instantiate ability, use ability, and start the cooldown
-        currentAbilityCast = _abilityData.ability.InitialiseAbility(owner, target, Vector3.zero); ;
+        currentAbilityCast = _abilityData.abilitySO.InitialiseAbility(owner, target, transform.position);
         
-
+        //Attempt to cast the spell
         if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
-            
             _abilityData.StartCooldown();
             currentGCD = GCD;
         }
@@ -192,17 +204,16 @@ public class PlayerSpellSystem : MonoBehaviour
             }
         }
 
-
         //Iterates over all abilityDataHolder
         foreach (AbilityDataHolder sHolder in abilityHolders)
         {
-            if(sHolder.IsOnCooldown())
+            if (sHolder.IsOnCooldown())
             {
                 sHolder.TickCoolDown(Time.deltaTime);
             }
         }
    
-
+        //Basic attack sequence reset timer
         if(abilityHolders.Count > 0)
         {
             //Tick basic sequence reset timer
@@ -218,47 +229,109 @@ public class PlayerSpellSystem : MonoBehaviour
 
                 //reset the sequence index
                 currentSequenceIndex = 0;
-                abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
+                abilityHolders[0].abilitySO = basicAbilitySequence[currentSequenceIndex];
 
                 //sequence UI
             }
         }
-        
     }
 
-
-    public bool SpendSpellCharge(float _cost)
+    /***********************************************
+   SpendClassPower: Spends class power if an ability requires it, and only if enough
+   @author: George White
+   @parameter: float _cost
+   @return: bool
+   ************************************************/
+    public bool SpendClassPower(float _cost)
     {
-        if(_cost > spellCharge)
+        if(_cost > classPowerCurrent)
         {
             return false;
         }
         else
         {
-            spellCharge -= _cost;
+            classPowerCurrent -= _cost;
             //update UI
 
             return true;
         }
     }
 
-
-    public void RegenerateSpellCharge(float _charge)
+    /***********************************************
+   RegenerateClassPower: Regenerates class power
+   @author: George White
+   @parameter: float _charge
+   @return: void
+   ************************************************/
+    public void RegenerateClassPower(float _charge)
     {
-        spellCharge += _charge;
+        classPowerCurrent += _charge;
 
-        if (spellCharge > spellChargeMax)
+        if (classPowerCurrent > classPowerMax)
         {
-            spellCharge = spellChargeMax;
+            classPowerCurrent = classPowerMax;
         }
 
         //update UI
     }
 
-
+    /***********************************************
+   AssignTarget: Assigns target by raycasting/spherecasting
+   @author: George White
+   @tutorial: https://youtu.be/HPjuTK91MA8?si=9Eo0dKizRC-ol4pn&t=330
+   @parameter: 
+   @return: void
+   ************************************************/
     public void AssignTarget()
     {
-        //spherical raycast here!
+        if (abilityUseState != E_AbilityUseState.Ready) { return; }
+
+
+        RaycastHit spherecastHit;
+        Physics.SphereCast(owner.GetComponent<Player>().CMvcam.transform.position, predictionSphereCastRadius, owner.GetComponent<Player>().CMvcam.transform.forward, out spherecastHit, maxCastRange);
+
+        RaycastHit raycastHit;
+        Physics.Raycast(owner.GetComponent<Player>().CMvcam.transform.position, owner.GetComponent<Player>().CMvcam.transform.forward, out raycastHit, maxCastRange);
+
+        Vector3 realHitPoint;
+
+        //Direct hit onto enemy
+        if(raycastHit.point != Vector3.zero && raycastHit.transform.tag != "Enemy")
+        {
+            realHitPoint = raycastHit.point;
+
+            target = raycastHit.transform.root.GetComponent<Character>();
+
+            //assign ground target location
+            targettedLocation = realHitPoint;
+        }
+        //Indirect hit onto enemy
+        else if(spherecastHit.point != Vector3.zero && raycastHit.transform.tag != "Enemy")
+        {
+            realHitPoint = spherecastHit.point;
+
+            target = spherecastHit.transform.root.GetComponent<Character>();
+
+            //assign ground target location
+            targettedLocation = realHitPoint;
+        }
+        //floor location of hit
+        else if(raycastHit.point!= Vector3.zero )
+        {
+            realHitPoint = raycastHit.point;
+
+            target = null;
+            targettedLocation = realHitPoint;
+        }
+        //miss entirely
+        else
+        {
+            realHitPoint = Vector3.zero;
+        }
+
+
+        //the raycast that hit? idk bout this one
+        predictionHit = raycastHit.point == Vector3.zero ? spherecastHit : raycastHit;
     }
 
 
