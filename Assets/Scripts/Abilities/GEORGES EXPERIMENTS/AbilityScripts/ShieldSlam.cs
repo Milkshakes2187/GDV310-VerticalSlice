@@ -27,6 +27,9 @@ public class ShieldSlam : Ability
         //start animation here
 
         var slowStatus = Instantiate(defenceStatusPF, owner.gameObject.transform);
+
+        defenceStatusPF.GetComponent<DefenseAbuilityBuff>().duration = abilityData.primaryEffectDuration;
+        defenceStatusPF.GetComponent<DefenseAbuilityBuff>().addedArmour = abilityData.primaryEffectStrength;
     }
 
 
