@@ -82,6 +82,13 @@ public class WorldManager : MonoBehaviour
         GameManager.instance.ToggleFreeCursor(false);
     }
 
+    /***********************************************
+    * UpdateEnemyList: Checks if the enemy is being added or destroyed,
+    *                  adjusts the enemy list accordingly, and invokes list change Action.
+    * @author: Justhine Nisperos
+    * @parameter: Enemy, bool
+    * @return: void
+    ************************************************/
     public void UpdateEnemyList(Enemy _enemy, bool _added)
     {
         // Check if the enemy is being added or destroyed
