@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6509434, g: 0.46621284, b: 0.4452207, a: 1}
+  m_Color: {r: 0.8018868, g: 0.6601741, b: 0.6468049, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -118,7 +118,7 @@ MonoBehaviour:
     m_Gradient:
       serializedVersion: 2
       key0: {r: 0.4528302, g: 0.31874335, b: 0.2798149, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 0.8962264, g: 0.68907976, b: 0.68907976, a: 1}
       key2: {r: 0.654902, g: 0.3803922, b: 0.3019608, a: 0}
       key3: {r: 0.3773585, g: 0.3773585, b: 0.3773585, a: 0}
       key4: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.70822835, b: 0, a: 0.23529412}
+  m_Color: {r: 1, g: 0.6533595, b: 0.3820755, a: 0.49019608}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -221,7 +221,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.473
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -264,21 +264,21 @@ MonoBehaviour:
     m_CornerRadius: 0
     m_Offset: {x: 0, y: 0}
   m_GradientEffect:
-    m_Enabled: 0
+    m_Enabled: 1
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.7264151, g: 0.35211077, b: 0.0788092, a: 1}
-      key1: {r: 0.9150943, g: 0.5287931, b: 0.13381095, a: 1}
-      key2: {r: 0.9622642, g: 0.74580985, b: 0.21333215, a: 1}
+      key0: {r: 0.7264151, g: 0.2647681, b: 0, a: 1}
+      key1: {r: 1, g: 0.65497077, b: 0, a: 1}
+      key2: {r: 1, g: 0.7946038, b: 0.3537736, a: 1}
       key3: {r: 0.9339623, g: 0.54620683, b: 0.14538093, a: 0}
       key4: {r: 0.5660378, g: 0.25894, b: 0.03470988, a: 0}
       key5: {r: 0.41176474, g: 0.08627451, b: 0.08627451, a: 0}
       key6: {r: 0.3137255, g: 0.09019608, b: 0.06666667, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 0
-      ctime1: 9252
-      ctime2: 18504
+      ctime0: 8867
+      ctime1: 41056
+      ctime2: 65535
       ctime3: 33153
       ctime4: 55898
       ctime5: 59945
@@ -294,7 +294,7 @@ MonoBehaviour:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
     - {r: 0, g: 0, b: 0, a: 0}
@@ -395,7 +395,7 @@ MonoBehaviour:
   fillImages:
   - {fileID: 810327607739355772}
   - {fileID: 381740038777687087}
-  fillAmount: 1
+  fillAmount: 0.473
 --- !u!1 &5615681936347707706
 GameObject:
   m_ObjectHideFlags: 0
@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.49808383, g: 0.42653078, b: 0.6698113, a: 1}
+  m_Color: {r: 0.37254903, g: 0.26666668, b: 0.6431373, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.8845953, b: 0.5803922, a: 1}
+  m_Color: {r: 1, g: 0.8702451, b: 0.41037738, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -617,7 +617,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.473
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -664,18 +664,18 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.7264151, g: 0.35211077, b: 0.0788092, a: 1}
-      key1: {r: 0.9150943, g: 0.5287931, b: 0.13381095, a: 1}
-      key2: {r: 0.9622642, g: 0.74580985, b: 0.21333215, a: 1}
-      key3: {r: 0.9339623, g: 0.54620683, b: 0.14538093, a: 0}
+      key0: {r: 0.38679248, g: 0.16409378, b: 0, a: 1}
+      key1: {r: 1, g: 0.85225457, b: 0, a: 1}
+      key2: {r: 0.5660378, g: 0.25894, b: 0.03470988, a: 1}
+      key3: {r: 0.5660378, g: 0.25894, b: 0.03470988, a: 0}
       key4: {r: 0.5660378, g: 0.25894, b: 0.03470988, a: 0}
       key5: {r: 0.41176474, g: 0.08627451, b: 0.08627451, a: 0}
       key6: {r: 0.3137255, g: 0.09019608, b: 0.06666667, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 9252
-      ctime2: 18504
-      ctime3: 33153
+      ctime1: 65535
+      ctime2: 55898
+      ctime3: 55898
       ctime4: 55898
       ctime5: 59945
       ctime6: 65535
@@ -690,7 +690,7 @@ MonoBehaviour:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 5
+      m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
     - {r: 0, g: 0, b: 0, a: 0}
@@ -892,7 +892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3345164, g: 0.2665094, b: 0.5, a: 1}
+  m_Color: {r: 0.3171699, g: 0.21026166, b: 0.5943396, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
