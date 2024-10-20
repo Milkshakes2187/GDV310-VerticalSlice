@@ -62,6 +62,9 @@ public class PlayerSpellSystem : MonoBehaviour
         {
             owner = GetComponentInParent<Player>();
         }
+
+
+        //LINK WITH UI!!!!!
     }
 
     // Update is called once per frame
@@ -87,7 +90,6 @@ public class PlayerSpellSystem : MonoBehaviour
     {
         //returns if the player is not in a castable state
         if (abilityUseState != E_AbilityUseState.Ready) { return; }
-        if (currentGCD > 0.0f) { return; }
 
         //checks JUST THE BASIC - to improve
         if(abilityHolders.Count > 0)
@@ -96,6 +98,18 @@ public class PlayerSpellSystem : MonoBehaviour
             {
                 UseBasicAbility();
             }
+
+
+            foreach(AbilityDataHolder adh in abilityHolders)
+            {
+                if(Input.GetKeyDown(adh.keybind))
+                {
+                    UseAbility(adh);
+                }
+            }
+
+
+
         }
         
     }
@@ -113,7 +127,7 @@ public class PlayerSpellSystem : MonoBehaviour
 
 
         //Instantiate and use the ability
-        currentAbilityCast = abilityHolders[0].ability.InitialiseAbility(owner,target,transform.position);
+        currentAbilityCast = abilityHolders[0].abilitySO.InitialiseAbility(owner,target,transform.position);
         
         if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
@@ -126,7 +140,7 @@ public class PlayerSpellSystem : MonoBehaviour
             }
 
             //set Ability0 to the current ability sequence
-            abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
+            abilityHolders[0].abilitySO = basicAbilitySequence[currentSequenceIndex];
 
             //starts the cooldown of the next ability
             abilityHolders[0].currentCooldown = basicAbilitySequence[currentSequenceIndex].cooldown;
@@ -154,12 +168,12 @@ public class PlayerSpellSystem : MonoBehaviour
    ************************************************/
     public void UseAbility(AbilityDataHolder _abilityData) //WiP
     {
-        if (!_abilityData || !_abilityData.ability) { return; }
+        if (_abilityData == null || !_abilityData.abilitySO || !_abilityData.active) { return; }
         if (_abilityData.IsOnCooldown() || currentGCD > 0.0f) { return; }
 
 
         //instantiate ability, use ability, and start the cooldown
-        currentAbilityCast = _abilityData.ability.InitialiseAbility(owner, target, Vector3.zero); ;
+        currentAbilityCast = _abilityData.abilitySO.InitialiseAbility(owner, target, transform.position);
         
 
         if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
@@ -196,10 +210,13 @@ public class PlayerSpellSystem : MonoBehaviour
         //Iterates over all abilityDataHolder
         foreach (AbilityDataHolder sHolder in abilityHolders)
         {
-            if(sHolder.IsOnCooldown())
+            
+            if (sHolder.IsOnCooldown())
             {
                 sHolder.TickCoolDown(Time.deltaTime);
             }
+            
+            
         }
    
 
@@ -218,7 +235,7 @@ public class PlayerSpellSystem : MonoBehaviour
 
                 //reset the sequence index
                 currentSequenceIndex = 0;
-                abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
+                abilityHolders[0].abilitySO = basicAbilitySequence[currentSequenceIndex];
 
                 //sequence UI
             }
@@ -259,6 +276,8 @@ public class PlayerSpellSystem : MonoBehaviour
     public void AssignTarget()
     {
         //spherical raycast here!
+
+        target =  FindFirstObjectByType<TrashEnemy>();
     }
 
 

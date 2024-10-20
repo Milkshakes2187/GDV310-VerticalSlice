@@ -17,8 +17,11 @@ MonoBehaviour:
   animatorOverrideController: {fileID: 0}
   abilityPrefab: {fileID: 1645567380262440351, guid: 03af35892b2c7a243bd6308beb74ef96, type: 3}
   cooldown: 1
-  timeToCast: 0.2
+  timeToCast: 0.3
   timeToChannel: 0
+  castingCost: 0
+  castingCostGain: 0
+  CastingCostMultiplier: 0
   primaryDamage: 2
   secondaryDamage: 0
   tertiaryDamage: 0

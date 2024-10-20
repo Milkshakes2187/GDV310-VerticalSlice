@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   target: {fileID: 0}
-  currentCast: {fileID: 0}
+  currentAbilityCast: {fileID: 0}
   abilityUseState: 0
   spellCharge: 0
   spellChargeMax: 100

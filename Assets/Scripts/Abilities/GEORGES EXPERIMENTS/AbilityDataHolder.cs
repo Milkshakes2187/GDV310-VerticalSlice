@@ -2,12 +2,13 @@ using UnityEngine;
 using UnityEngine.WSA;
 
 [System.Serializable]
-public class AbilityDataHolder : MonoBehaviour
+public class AbilityDataHolder 
 {
     //Abilityholder variables
-    public AbilitySO ability;
+    public AbilitySO abilitySO;
     public KeyCode keybind;
     public float currentCooldown;
+    public bool active;
 
     /***********************************************
   * AbilityHolder: Construtor
@@ -15,11 +16,12 @@ public class AbilityDataHolder : MonoBehaviour
   * @parameter: Character , Character , Vector3 
   * @return: GameObject
   ************************************************/
-    public AbilityDataHolder(AbilitySO _aso = null, KeyCode _code = KeyCode.None, float _cd = 0.0f)
+    public AbilityDataHolder(AbilitySO _aso = null, KeyCode _code = KeyCode.None, float _cd = 0.0f, bool _active = true)
     {
-        ability = _aso;
+        abilitySO = _aso;
         keybind = _code;
         currentCooldown = _cd;
+        active = _active;
     }
 
     /***********************************************
@@ -64,7 +66,7 @@ public class AbilityDataHolder : MonoBehaviour
     ************************************************/
     public void StartCooldown()
     {
-        currentCooldown = ability.cooldown;
+        currentCooldown = abilitySO.cooldown;
     }
     
 }
