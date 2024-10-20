@@ -52,7 +52,11 @@ MonoBehaviour:
   spellChargeMax: 100
   GCD: 0.5
   currentGCD: 0
-  abilityHolders: []
+  abilityHolders:
+  - abilitySO: {fileID: 11400000, guid: 802e3d38466f5e8408c010bd32a3d13b, type: 2}
+    keybind: 50
+    currentCooldown: 0
+    active: 1
   basicKey: 113
   basicAbilitySequence:
   - {fileID: 11400000, guid: 224d6338977eb844fbbb0ac15ddb1a99, type: 2}

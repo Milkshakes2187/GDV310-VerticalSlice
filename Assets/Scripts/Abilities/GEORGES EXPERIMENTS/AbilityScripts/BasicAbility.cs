@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class BasicAbility : Ability
 {
-    //Gameobject that gets instantiated upon ability use
-    [SerializeField] GameObject tempAttack = null;
-
     //Signle hitbox that will be used for a physics area check
     Collider hitbox = null;
 

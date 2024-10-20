@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffeb83188ec511545940ebd97b376d92, type: 3}
-  m_Name: AbilitySO2
+  m_Name: ShieldSlamSO
   m_EditorClassIdentifier: 
-  abilityName: Ab2
+  abilityName: ShieldSlam
   image: {fileID: 0}
   animatorOverrideController: {fileID: 0}
-  abilityPrefab: {fileID: 1645567380262440351, guid: 22092ae0330010c4e99b79ca7c73ab19, type: 3}
-  cooldown: 1
-  timeToCast: 0.3
+  abilityPrefab: {fileID: 1645567380262440351, guid: fc5804dc3a8117547ba05ee47ec327b7, type: 3}
+  cooldown: 10
+  timeToCast: 0
   timeToChannel: 0
-  castingCost: 1
+  castingCost: 0
   castingCostGain: 0
   CastingCostMultiplier: 0
-  primaryDamage: 3
+  primaryDamage: 0
   secondaryDamage: 0
   tertiaryDamage: 0
   primaryEffectDuration: 0

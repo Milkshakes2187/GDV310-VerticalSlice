@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.Text;
+using static UnityEngine.Rendering.DebugUI;
 
 public class ShieldSlam : Ability
 {
     //Gameobject that gets instantiated upon ability use
-    [SerializeField] GameObject tempAttack = null;
+    [SerializeField] GameObject defenceStatusPF = null;
 
-    Collider hitbox = null;
     List<Collider> colliders = new List<Collider>();
 
 
@@ -14,11 +15,9 @@ public class ShieldSlam : Ability
 
     private void Start()
     {
-        hitbox = GetComponentInChildren<Collider>();
-        //hitbox.enabled = false;
-
         foreach (Collider collider in GetComponentsInChildren<Collider>())
         {
+            collider.enabled = false;
             colliders.Add(collider);
         }
     }
@@ -27,7 +26,7 @@ public class ShieldSlam : Ability
     {
         //start animation here
 
-
+        var slowStatus = Instantiate(defenceStatusPF, owner.gameObject.transform);
     }
 
 
@@ -40,17 +39,17 @@ public class ShieldSlam : Ability
    ************************************************/
     public override void UseSpellEffect()
     {
-        //temporary - while we have no animations. spawns a a cube above the player
-        if (tempAttack)
-        {
-            var tempobj = Instantiate(tempAttack, new Vector3(targetLocation.x, targetLocation.y + abilityData.primaryDamage, targetLocation.z), Quaternion.identity);
-            Destroy(tempobj, 1);
 
-        }
-
+        //setting origin of ability
         gameObject.transform.position = owner.gameObject.transform.position;
         gameObject.transform.rotation = owner.gameObject.transform.rotation;
 
+
+        //DEBUG LINE
+        foreach(MeshRenderer mr in GetComponentsInChildren<MeshRenderer>())
+        {
+            mr.enabled = true;
+        }
 
 
         //list to hold hit enemies
@@ -58,51 +57,41 @@ public class ShieldSlam : Ability
         List<Collider> collisions = new List<Collider>();
 
 
-        //perform a spherecheck
-        var cols = Physics.OverlapSphere(hitbox.transform.position, hitbox.transform.localScale.x);
-
+        //performs a physics area check for all colliders in ability
         foreach (Collider col in colliders)
         {
+            //IF clause depending on type of collider
+            //perform a spherecheck
             if (col.GetType() == typeof(SphereCollider))
             {
-                foreach (Collider collision in Physics.OverlapSphere(hitbox.transform.position, hitbox.transform.localScale.x))
+                foreach (Collider c in Physics.OverlapSphere(col.transform.position, col.GetComponent<SphereCollider>().radius * col.gameObject.transform.localScale.x))
                 {
-
+                    collisions.Add(c);
+                    print(col.GetComponent<SphereCollider>().radius * col.gameObject.transform.localScale.x);
                 }
             }
-        }
-
-        //adding enemies that havent been hit yet into the list
-        foreach (Collider col in cols)
-        {
-            //checkign for enemies in collider
-            if (col.gameObject.GetComponent<Enemy>())
+            //perform a boxcheck
+            else if (col.GetType() == typeof(BoxCollider))
             {
-                if (!enemies.Contains(col.gameObject.GetComponent<Enemy>().gameObject))
+                foreach (Collider c in Physics.OverlapBox(col.transform.position, col.gameObject.transform.localScale * 0.5f, col.gameObject.transform.rotation))
                 {
-                    enemies.Add(col.gameObject.GetComponent<Enemy>().gameObject);
+                    collisions.Add(c);
                 }
             }
-            //Checkign for enemies in parent of collider
-            if (col.gameObject.GetComponentInParent<Enemy>())
+            //perform a capsulecheck
+            else if (col.GetType() == typeof(CapsuleCollider))
             {
-                if (!enemies.Contains(col.gameObject.GetComponentInParent<Enemy>().gameObject))
+                foreach (Collider c in Physics.OverlapCapsule(col.transform.position + new Vector3(0f, col.GetComponent<CapsuleCollider>().height / 2f * col.gameObject.transform.localScale.y) + col.GetComponent<CapsuleCollider>().center,
+                col.transform.position - new Vector3(0f, col.GetComponent<CapsuleCollider>().height / 2f * col.gameObject.transform.localScale.y) + col.GetComponent<CapsuleCollider>().center,
+                col.GetComponent<CapsuleCollider>().radius * col.gameObject.transform.localScale.x))
                 {
-                    enemies.Add(col.gameObject.GetComponentInParent<Enemy>().gameObject);
+                    collisions.Add(c);
                 }
             }
-
         }
 
-
-
-
-        //add spellcharge if anything was hit
-        if (enemies.Count > 0)
-        {
-            owner.GetComponent<Player>().spellSystem.RegenerateSpellCharge(abilityData.castingCostGain);
-        }
-
+        
+        //Deal the damage
         foreach (GameObject enemy in enemies)
         {
             print("oh hi " + enemy.name);
@@ -114,8 +103,6 @@ public class ShieldSlam : Ability
 
 
         //Destroy the ability
-        //Destroy(gameObject);
+        Destroy(gameObject, 2);
     }
-
-
 }

@@ -99,19 +99,14 @@ public class PlayerSpellSystem : MonoBehaviour
                 UseBasicAbility();
             }
 
-
-            foreach(AbilityDataHolder adh in abilityHolders)
+            for(int i = 1; i < abilityHolders.Count; i++)
             {
-                if(Input.GetKeyDown(adh.keybind))
+                if (Input.GetKeyDown(abilityHolders[i].keybind))
                 {
-                    UseAbility(adh);
+                    UseAbility(abilityHolders[i]);
                 }
             }
-
-
-
         }
-        
     }
 
     /***********************************************
@@ -123,7 +118,7 @@ public class PlayerSpellSystem : MonoBehaviour
     public void UseBasicAbility()
     {
         //cant cast spell if it is on cooldown
-        if (abilityHolders[0].currentCooldown > 0.0f || currentGCD > 0.0f) { return; }
+        if (abilityHolders[0].currentCooldown > 0.0f || currentGCD > 0.0f || !abilityHolders[0].active) { return; }
 
 
         //Instantiate and use the ability
@@ -178,7 +173,6 @@ public class PlayerSpellSystem : MonoBehaviour
 
         if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
-            
             _abilityData.StartCooldown();
             currentGCD = GCD;
         }
