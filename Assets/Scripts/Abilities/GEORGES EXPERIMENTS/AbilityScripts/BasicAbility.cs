@@ -49,7 +49,7 @@ public class BasicAbility : Ability
 
 
         //Destroy the ability
-        //Destroy(gameObject);
+        Destroy(gameObject);
     }
 
 
