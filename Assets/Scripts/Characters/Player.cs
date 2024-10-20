@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using VInspector;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class Player : Character
 {
@@ -17,6 +18,9 @@ public class Player : Character
     // Excludes combat-related things (cooldowns, attacks, abilities)
 
     public static Player instance;
+
+    [SerializeField, ReadOnly] public PlayerSpellSystem spellSystem = null;
+    [SerializeField, ReadOnly] public Weapon weapon = null;
 
     //[Tab("Main")]
     //[Header("Stats")]
@@ -77,11 +81,24 @@ public class Player : Character
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
         charController = GetComponent<CharacterController>();
         playerAnim = GetComponent<Animator>();
         health = maxHealth;
+
+
+        //assigning spellsystem
+        if (GetComponentInChildren<PlayerSpellSystem>())
+        {
+            spellSystem = GetComponentInChildren<PlayerSpellSystem>();
+        }
+
+        //assigning weapon
+        if (GetComponentInChildren<Weapon>())
+        {
+            weapon = GetComponentInChildren<Weapon>();
+        }
     }
 
     // Update is called once per frame
