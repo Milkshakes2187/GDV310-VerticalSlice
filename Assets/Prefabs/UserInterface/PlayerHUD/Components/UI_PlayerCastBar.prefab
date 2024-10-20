@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.38107425, g: 0.2999733, b: 0.5943396, a: 1}
+  m_Color: {r: 0.29849246, g: 0.20372018, b: 0.3962264, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -113,7 +113,7 @@ MonoBehaviour:
     m_CornerRadius: 0
     m_Offset: {x: 0, y: 0}
   m_GradientEffect:
-    m_Enabled: 1
+    m_Enabled: 0
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
@@ -150,7 +150,7 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
-    m_Rotation: -85
+    m_Rotation: 0
 --- !u!1 &1396606528362994785
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 4899630058360559070}
   - component: {fileID: 3125734394522644372}
   m_Layer: 5
-  m_Name: TXT_CastName (1)
+  m_Name: TXT_CastLength
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -218,8 +218,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1.0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f6ddf7cc179d6d84286141d1247ee64b, type: 2}
-  m_sharedMaterial: {fileID: -8650913099626685908, guid: f6ddf7cc179d6d84286141d1247ee64b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -243,8 +243,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 17
-  m_fontSizeBase: 17
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.485
+  m_FillAmount: 0.704
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -404,7 +404,7 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.38679248, g: 0.16409378, b: 0, a: 1}
+      key0: {r: 0.3882353, g: 0.07838374, b: 0, a: 1}
       key1: {r: 1, g: 0.85225457, b: 0, a: 1}
       key2: {r: 0.5660378, g: 0.25894, b: 0.03470988, a: 1}
       key3: {r: 0.5660378, g: 0.25894, b: 0.03470988, a: 0}
@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9056604, g: 0.554563, b: 0.508366, a: 1}
+  m_Color: {r: 0.8679245, g: 0.56659186, b: 0.52812386, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -588,7 +588,7 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
-    m_Rotation: -85
+    m_Rotation: -100
 --- !u!1 &1721039663212494460
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.9245283, g: 0.70349824, b: 0.5276789, a: 0.49019608}
+  m_Color: {r: 0.8962264, g: 0.49230096, b: 0.10568706, a: 0.56078434}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.485
+  m_FillAmount: 0.704
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -708,7 +708,7 @@ MonoBehaviour:
       serializedVersion: 2
       key0: {r: 0.7264151, g: 0.2647681, b: 0, a: 1}
       key1: {r: 1, g: 0.65497077, b: 0, a: 1}
-      key2: {r: 1, g: 0.7946038, b: 0.3537736, a: 1}
+      key2: {r: 1, g: 0.6848485, b: 0, a: 1}
       key3: {r: 0.9339623, g: 0.54620683, b: 0.14538093, a: 0}
       key4: {r: 0.5660378, g: 0.25894, b: 0.03470988, a: 0}
       key5: {r: 0.41176474, g: 0.08627451, b: 0.08627451, a: 0}
@@ -798,7 +798,7 @@ MonoBehaviour:
   fillImages:
   - {fileID: 3357438544664165095}
   - {fileID: 3766830983076920331}
-  fillAmount: 0.485
+  fillAmount: 0.704
 --- !u!1 &4610100847193469375
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,8 +833,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -137.04335, y: -0.1717}
-  m_SizeDelta: {x: 85, y: 21.7966}
+  m_AnchoredPosition: {x: -137.25064, y: -0.17179}
+  m_SizeDelta: {x: 86.8473, y: 21.797}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7196158749074234828
 CanvasRenderer:
@@ -891,7 +891,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8.5
+  m_fontSize: 8.7
   m_fontSizeBase: 9
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -993,7 +993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4965372, g: 0.38203096, b: 0.8018868, a: 1}
+  m_Color: {r: 0.265836, g: 0.1512994, b: 0.3773585, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1048,7 +1048,7 @@ MonoBehaviour:
     m_CornerRadius: 0
     m_Offset: {x: 0, y: 0}
   m_GradientEffect:
-    m_Enabled: 1
+    m_Enabled: 0
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2

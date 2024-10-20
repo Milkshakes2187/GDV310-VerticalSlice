@@ -74,6 +74,7 @@ public class UIUnitFrameController : MonoBehaviour
 
     public void TickUnitFrame()
     {
+        if (!Camera.main) { Debug.LogError("Main camera not set, Unit frame wont update"); return; }
         rTransform.position = Camera.main.WorldToScreenPoint(attachedCharacter.transform.position + characterOffset + generalOffset);
     }
 }
