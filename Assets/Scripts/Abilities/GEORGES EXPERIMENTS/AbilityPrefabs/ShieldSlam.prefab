@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4549550258590780488}
   - component: {fileID: 3488650209667964705}
   m_Layer: 0
-  m_Name: Ability3
+  m_Name: ShieldSlam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,5 +51,5 @@ MonoBehaviour:
   canMoveWhileCasting: 1
   timeToCast: 0.3
   currentCastTime: 0
-  damage: 4
-  tempAttack: {fileID: 6947339161028381666, guid: 4587732ba71658b48b5a52c182c6c54d, type: 3}
+  damage: 5
+  tempAttack: {fileID: 6947339161028381666, guid: ddb8c21ab63f6134aadc8782fb6f2fdf, type: 3}
