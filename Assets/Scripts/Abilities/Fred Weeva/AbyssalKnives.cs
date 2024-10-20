@@ -9,7 +9,7 @@ public class AbyssalKnives : Ability
     List<GameObject> projectiles = new List<GameObject>();
 
     public float projectileSpeed = 5f;
-    public float range = 10f;
+    public float range = 20f;
 
     private void Update()
     {

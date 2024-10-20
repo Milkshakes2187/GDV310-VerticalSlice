@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &246623982476350993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3609706965837350383}
+  - component: {fileID: 5654340761945486853}
+  m_Layer: 0
+  m_Name: PlayerSpellSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3609706965837350383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246623982476350993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5654340761945486853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 246623982476350993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d568465066146d48b12c490028b7114, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 0}
+  target: {fileID: 0}
+  currentCast: {fileID: 0}
+  abilityUseState: 0
+  spellCharge: 0
+  spellChargeMax: 100
+  GCD: 0.5
+  currentGCD: 0
+  abilityHolders: []
+  basicKey: 113
+  basicAbilitySequence:
+  - {fileID: 11400000, guid: 822a712ac8a268747b98e0407a82ebd0, type: 2}
+  - {fileID: 11400000, guid: c71e0cfbe419dc64eaba1d2bf43022d1, type: 2}
+  - {fileID: 11400000, guid: 224d6338977eb844fbbb0ac15ddb1a99, type: 2}
+  abilitySequenceResetTime: 3
