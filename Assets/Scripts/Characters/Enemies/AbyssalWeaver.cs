@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class AbyssalWeaver : Enemy
 {
@@ -20,7 +19,7 @@ public class AbyssalWeaver : Enemy
 
     NavMeshAgent agent;
 
-    GameObject currentAbility;
+    [HideInInspector] public GameObject currentAbility;
     public AbilitySO abyssalKnives;
     public AbilitySO markedForAssassination;
     public AbilitySO EntwinedAbyss;
@@ -36,8 +35,11 @@ public class AbyssalWeaver : Enemy
     bool currentAbilityCreated = false;
     [HideInInspector] public List<PhantomAssassin> phantomAssassinList = new List<PhantomAssassin>();
 
-    STATES currentState = STATES.IDLE;
-    STATES nextState = STATES.INTERWOVEN_THREADS;
+    // list of all active collisions
+    [HideInInspector] public List<GameObject> collisions = new List<GameObject>();
+
+    [HideInInspector] public STATES currentState = STATES.IDLE;
+    [HideInInspector] public STATES nextState = STATES.INTERWOVEN_THREADS;
 
     private void Awake()
     {
@@ -239,7 +241,7 @@ public class AbyssalWeaver : Enemy
 
         // Set state transitions
         currentState = STATES.AGGRESSIVE;
-        nextState = STATES.MFA;
+        nextState = STATES.THREADED_SLIP;
     }
 
     /***********************************************
@@ -380,5 +382,29 @@ public class AbyssalWeaver : Enemy
 
         // Slerp the rotation towards the player at a designated turn speed
         transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
+    }
+
+    /***********************************************
+    * OnCollisionEnter: Gets called whenever a collision occurs with another object
+    * @author: Juan Le Roux
+    * @parameter: Collision
+    * @return: void
+    ************************************************/
+    private void OnCollisionEnter(Collision collision)
+    {
+        // add the collision to the collisions list
+        collisions.Add(collision.gameObject);
+    }
+
+    /***********************************************
+    * OnCollisionEnter: Gets called whenever the collider ends collision with another object
+    * @author: Juan Le Roux
+    * @parameter: Collision
+    * @return: void
+    ************************************************/
+    private void OnCollisionExit(Collision collision)
+    {
+        // remove the collision from the collisions list
+        collisions.Remove(collision.gameObject);
     }
 }

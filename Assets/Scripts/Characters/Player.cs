@@ -237,18 +237,4 @@ public class Player : Character
     //    // Update animator according to movement
     //    playerAnim.SetFloat("Velocity", velocity);
     //}
-
-    /***********************************************
-    * Step: Footsteps audio trigger matched to animation.
-    * @author: Justhine Nisperos
-    * @parameter: 
-    * @return: void
-    ************************************************/
-    public void Step()
-    {
-        if (AudioLibrary.instance.audioStep.clip)
-        {
-            AudioLibrary.instance.audioStep.PlayOneShot(AudioLibrary.instance.audioStep.clip, 1);
-        }
-    }
 }
