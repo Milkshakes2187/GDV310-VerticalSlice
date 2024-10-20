@@ -56,6 +56,19 @@ public class ThreadedSlip : Ability
             owner.transform.position = Vector3.Lerp(startPosition, targetLocation, elapsedTime / dashTime);
             elapsedTime += Time.deltaTime;
 
+            // TODO: Comment here
+            if (owner.GetComponent<AbyssalWeaver>())
+            {
+                foreach (var collision in owner.GetComponent<AbyssalWeaver>().collisions)
+                {
+                    if (collision.GetComponentInParent<Thread>())
+                    {
+                        owner.GetComponent<AbyssalWeaver>().currentState = AbyssalWeaver.STATES.STUNNED;
+                        Destroy(gameObject);
+                    }
+                }
+            }
+
             yield return null;
         }
 

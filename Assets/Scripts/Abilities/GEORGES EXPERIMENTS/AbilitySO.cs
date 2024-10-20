@@ -20,6 +20,11 @@ public  class AbilitySO : ScriptableObject
     public float timeToCast;
     public float timeToChannel;
 
+    [Header("Cost")]
+    public float castingCost;
+    public float castingCostGain;
+    public float CastingCostMultiplier;
+
     [Header("Damage")]
     public float primaryDamage; 
     public float secondaryDamage; 

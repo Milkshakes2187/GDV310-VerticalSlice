@@ -16,7 +16,14 @@ public class Enemy : Character
         player = FindFirstObjectByType<Player>();
 
         // Add this enemy to world manager's list of all enemies
-        WorldManager.instance.UpdateEnemyList(this, true);
+        if (WorldManager.instance)
+        {
+            WorldManager.instance.UpdateEnemyList(this, true);
+        }
+        else
+        {
+            Debug.LogWarning("No world manager in scene");
+        }
     }
 
     protected override void TriggerDeath()
@@ -24,7 +31,15 @@ public class Enemy : Character
         base.TriggerDeath();
 
         // Call world manager to update enemy list and destroy this enemy.
-        WorldManager.instance.UpdateEnemyList(this, false);
+        if (WorldManager.instance)
+        {
+            WorldManager.instance.UpdateEnemyList(this, false);
+        }
+        else
+        {
+            Debug.LogWarning("No world manager in scene");
+        }
+
         Destroy(gameObject);
     }
 

@@ -19,10 +19,18 @@ public enum E_AbilityUseState
 
 public class PlayerSpellSystem : MonoBehaviour
 {
+    [SerializeField, ReadOnly] Player owner = null;
+    [SerializeField, ReadOnly] Character target = null;
+    [SerializeField, ReadOnly] public GameObject currentAbilityCast = null;
 
     public E_AbilityUseState abilityUseState = E_AbilityUseState.Ready;
 
     [Tab("Main spell tab")]
+
+    public float spellCharge = 0.0f;
+    public float spellChargeMax = 100.0f;
+    public float GCD = 0.5f;
+    [SerializeField, ReadOnly] float currentGCD = 0.0f;
 
     [SerializeField] List<AbilityDataHolder> abilityHolders = new List<AbilityDataHolder>();
     [SerializeField] KeyCode basicKey = KeyCode.Q;
@@ -41,14 +49,27 @@ public class PlayerSpellSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //add the basic ability to the list of abilite holders
-        var newHolder = new AbilityDataHolder(basicAbilitySequence[0], basicKey, 0.0f);
-        abilityHolders.Insert(0, newHolder);
+        if(basicAbilitySequence.Count > 0)
+        {
+            //add the basic ability to the list of abilite holders
+            var newHolder = new AbilityDataHolder(basicAbilitySequence[0], basicKey, 0.0f);
+            abilityHolders.Insert(0, newHolder);
+        }
+       
+
+        //assigning player
+        if(GetComponentInParent<Player>())
+        {
+            owner = GetComponentInParent<Player>();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //raycast to select target
+        AssignTarget();
+
         //Deal with spell inputs
         CheckInputs();
 
@@ -66,12 +87,17 @@ public class PlayerSpellSystem : MonoBehaviour
     {
         //returns if the player is not in a castable state
         if (abilityUseState != E_AbilityUseState.Ready) { return; }
+        if (currentGCD > 0.0f) { return; }
 
         //checks JUST THE BASIC - to improve
-        if (Input.GetKeyDown(abilityHolders[0].keybind))
+        if(abilityHolders.Count > 0)
         {
-            UseBasicAbility();
+            if (Input.GetKeyDown(abilityHolders[0].keybind))
+            {
+                UseBasicAbility();
+            }
         }
+        
     }
 
     /***********************************************
@@ -83,31 +109,41 @@ public class PlayerSpellSystem : MonoBehaviour
     public void UseBasicAbility()
     {
         //cant cast spell if it is on cooldown
-        if (abilityHolders[0].currentCooldown > 0.0f) { return; }
+        if (abilityHolders[0].currentCooldown > 0.0f || currentGCD > 0.0f) { return; }
 
 
         //Instantiate and use the ability
-        var aaAbility = abilityHolders[0].ability.InitialiseAbility(null,null,transform.position);
-        aaAbility.GetComponent<Ability>().CastSpell();
-
-
-        //increment the sequence
-        currentSequenceIndex++;
-        if(currentSequenceIndex > basicAbilitySequence.Count - 1)
+        currentAbilityCast = abilityHolders[0].ability.InitialiseAbility(owner,target,transform.position);
+        
+        if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
-            currentSequenceIndex = 0;
+
+            //increment the sequence
+            currentSequenceIndex++;
+            if (currentSequenceIndex > basicAbilitySequence.Count - 1)
+            {
+                currentSequenceIndex = 0;
+            }
+
+            //set Ability0 to the current ability sequence
+            abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
+
+            //starts the cooldown of the next ability
+            abilityHolders[0].currentCooldown = basicAbilitySequence[currentSequenceIndex].cooldown;
+            currentGCD = GCD;
+
+
+            //start cooldowns for sequence resetting
+            currentAbilitySequenceResetTime = abilitySequenceResetTime;
+
+            //set ui
+        }
+        else
+        {
+            Destroy(currentAbilityCast);
         }
 
-        //set Ability0 to the current ability sequence
-        abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
 
-        //starts the cooldown of the next ability
-        abilityHolders[0].currentCooldown = basicAbilitySequence[currentSequenceIndex].cooldown;
-
-        //start cooldowns for sequence resetting
-        currentAbilitySequenceResetTime = abilitySequenceResetTime;
-
-        //set ui
     }
 
     /***********************************************
@@ -119,13 +155,23 @@ public class PlayerSpellSystem : MonoBehaviour
     public void UseAbility(AbilityDataHolder _abilityData) //WiP
     {
         if (!_abilityData || !_abilityData.ability) { return; }
-        if (_abilityData.IsOnCooldown()) { return; }
+        if (_abilityData.IsOnCooldown() || currentGCD > 0.0f) { return; }
 
 
         //instantiate ability, use ability, and start the cooldown
-        _abilityData.ability.InitialiseAbility(null, null, Vector3.zero); ;
-        _abilityData.ability.GetComponent<Ability>().CastSpell();
-        _abilityData.StartCooldown();
+        currentAbilityCast = _abilityData.ability.InitialiseAbility(owner, target, Vector3.zero); ;
+        
+
+        if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
+        {
+            
+            _abilityData.StartCooldown();
+            currentGCD = GCD;
+        }
+        else
+        {
+            Destroy(currentAbilityCast);
+        }
     }
 
     /***********************************************
@@ -136,6 +182,17 @@ public class PlayerSpellSystem : MonoBehaviour
     ************************************************/
     void TickCooldowns()
     {
+        //GCD
+        if (currentGCD > 0.0f)
+        {
+            currentGCD -= Time.deltaTime;
+            if(currentGCD < 0.0f)
+            {
+                currentGCD = 0.0f;
+            }
+        }
+
+
         //Iterates over all abilityDataHolder
         foreach (AbilityDataHolder sHolder in abilityHolders)
         {
@@ -145,16 +202,20 @@ public class PlayerSpellSystem : MonoBehaviour
             }
         }
    
-        //Tick basic sequence reset timer
-        if(currentAbilitySequenceResetTime > 0.0f)
+
+        if(abilityHolders.Count > 0)
         {
-            currentAbilitySequenceResetTime -= Time.deltaTime;
+            //Tick basic sequence reset timer
+            if (currentAbilitySequenceResetTime > 0.0f)
+            {
+                currentAbilitySequenceResetTime -= Time.deltaTime;
+            }
 
             // Resets the basic ability sequence if cooldown has expired
-            if (currentAbilitySequenceResetTime <=0.0f)
+            if (currentAbilitySequenceResetTime <= 0.0f)
             {
                 currentAbilitySequenceResetTime = 0.0f;
-   
+
                 //reset the sequence index
                 currentSequenceIndex = 0;
                 abilityHolders[0].ability = basicAbilitySequence[currentSequenceIndex];
@@ -162,6 +223,47 @@ public class PlayerSpellSystem : MonoBehaviour
                 //sequence UI
             }
         }
+        
     }
+
+
+    public bool SpendSpellCharge(float _cost)
+    {
+        if(_cost > spellCharge)
+        {
+            return false;
+        }
+        else
+        {
+            spellCharge -= _cost;
+            //update UI
+
+            return true;
+        }
+    }
+
+
+    public void RegenerateSpellCharge(float _charge)
+    {
+        spellCharge += _charge;
+
+        if (spellCharge > spellChargeMax)
+        {
+            spellCharge = spellChargeMax;
+        }
+
+        //update UI
+    }
+
+
+    public void AssignTarget()
+    {
+        //spherical raycast here!
+    }
+
+
+
+
+
 
 }
