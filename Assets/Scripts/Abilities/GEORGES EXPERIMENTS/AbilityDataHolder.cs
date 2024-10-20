@@ -6,9 +6,7 @@ public class AbilityDataHolder
 {
     //Abilityholder variables
     public AbilitySO abilitySO;
-    public GameObject cooldownFill;
-    public GameObject inactiveFill;
-    public GameObject lockedFill;
+    public GameObject iconHolder;
     public KeyCode keybind;
     public float currentCooldown;
     public bool active;
@@ -59,9 +57,9 @@ public class AbilityDataHolder
         {
             currentCooldown = 0.0f;
         }
-        if(cooldownFill)
+        if(iconHolder)
         {
-            cooldownFill.GetComponent<UIFillController>().fillAmount = Mathf.Abs( currentCooldown / _cooldownMax);
+            iconHolder.GetComponent<PlayerAbilityUI>().SetCooldownFill(Mathf.Abs(currentCooldown / _cooldownMax));
         }
     }
 
@@ -73,14 +71,14 @@ public class AbilityDataHolder
     ************************************************/
     public void ToggleAbilityIconLock(bool _shouldLock)
     {
-        if (!lockedFill) { return; }
+        if (!iconHolder) { return; }
         if(_shouldLock)
         {
-            lockedFill.GetComponent<UIFillController>().fillAmount = 1;
+            iconHolder.GetComponent<PlayerAbilityUI>().SetlockedFill(1);
         }
         else
         {
-            lockedFill.GetComponent<UIFillController>().fillAmount = 0;
+            iconHolder.GetComponent<PlayerAbilityUI>().SetlockedFill(0);
         }
         
     }
