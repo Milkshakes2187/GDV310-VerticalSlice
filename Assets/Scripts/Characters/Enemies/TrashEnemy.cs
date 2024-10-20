@@ -26,6 +26,12 @@ public class TrashEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
+        if (!Player.instance)
+        {
+            Debug.LogWarning("Player does not exist in scene");
+            return;
+        }
+
         float distFromPlayer = Vector3.Distance(transform.position, player.transform.position);
 
         // Check if the enemy has already been aggroed by the player.

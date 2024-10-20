@@ -51,7 +51,7 @@ Material:
     - _DecalMeshDepthBias: 0
     - _DecalMeshViewBias: 0
     - _DrawOrder: 0
-    - _FillAmount: 0.386
+    - _FillAmount: 1
     - _NoiseImpact: 0.7
     - _NoiseSize: 14
     - _NoiseSpeed: 0.05

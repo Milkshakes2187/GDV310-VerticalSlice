@@ -270,7 +270,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   stopFriction: 4
-  airMod: 0
+  airMod: 1
   bImmortal: 0
   dashKey: 304
   knockbackKey: 107

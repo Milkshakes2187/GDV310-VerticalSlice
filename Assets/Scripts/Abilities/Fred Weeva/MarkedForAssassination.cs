@@ -24,7 +24,10 @@ public class MarkedForAssassination : Ability
     ************************************************/
     public override void UseSpellEffect()
     {
-        var ability = phantomAssassin.InitialiseAbility(owner, target, target.transform.position);
+        Vector3 modifiedPosition = target.transform.position;
+        modifiedPosition.y = 0;
+
+        var ability = phantomAssassin.InitialiseAbility(owner, target, modifiedPosition);
 
         if (owner.GetComponent<AbyssalWeaver>())
         {
