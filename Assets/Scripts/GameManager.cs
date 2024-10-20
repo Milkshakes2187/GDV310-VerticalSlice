@@ -31,8 +31,7 @@ public class GameManager : MonoBehaviour
     public KeyCode togglePause = KeyCode.Escape;
     public KeyCode triggerLevelChoice = KeyCode.L;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void Awake()
     {
         if (instance == null)
         {
@@ -42,7 +41,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
         if (bInMainMenu) return;
 
         Cursor.visible = false;
