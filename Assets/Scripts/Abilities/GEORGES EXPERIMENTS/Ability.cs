@@ -69,7 +69,7 @@ public abstract class Ability : MonoBehaviour
     public bool CastSpell(bool _useSpellCost = false)
     {
         //cant cast spell if the target is invalid
-        if (!requiresTarget || !VerifyTarget()) { return false; }
+        if (requiresTarget && !VerifyTarget()) { return false; }
 
 
         if(_useSpellCost)

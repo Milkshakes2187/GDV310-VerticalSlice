@@ -46,9 +46,8 @@ public class PlayerSpellSystem : MonoBehaviour
     [SerializeField, ReadOnly] public Character target = null;
     [SerializeField, ReadOnly] public Vector3 targettedLocation = Vector3.zero;
     public RaycastHit predictionHit;
-    public LayerMask enemyMask;
+    public LayerMask targetRayMask;
     public float predictionSphereCastRadius;
-    public Transform predictionPoint;
     public float maxCastRange = 100.0f;
 
 
@@ -292,10 +291,10 @@ public class PlayerSpellSystem : MonoBehaviour
 
 
         RaycastHit spherecastHit;
-        Physics.SphereCast(owner.GetComponent<Player>().CMvcam.transform.position, predictionSphereCastRadius, owner.GetComponent<Player>().CMvcam.transform.forward, out spherecastHit, maxCastRange, enemyMask);
+        Physics.SphereCast(owner.GetComponent<Player>().CMvcam.transform.position, predictionSphereCastRadius, owner.GetComponent<Player>().CMvcam.transform.forward, out spherecastHit, maxCastRange);
 
         RaycastHit raycastHit;
-        Physics.Raycast(owner.GetComponent<Player>().CMvcam.transform.position, owner.GetComponent<Player>().CMvcam.transform.forward, out raycastHit, maxCastRange, enemyMask);
+        Physics.Raycast(owner.GetComponent<Player>().CMvcam.transform.position, owner.GetComponent<Player>().CMvcam.transform.forward, out raycastHit, maxCastRange);
 
         Vector3 realHitPoint;
 
@@ -304,19 +303,28 @@ public class PlayerSpellSystem : MonoBehaviour
         {
             realHitPoint = raycastHit.point;
 
+            target = raycastHit.transform.root.GetComponent<Character>();
+
             //assign ground target location
+            targettedLocation = realHitPoint;
         }
         //Indirect hit onto enemy
         else if(spherecastHit.point != Vector3.zero && raycastHit.transform.tag != "Enemy")
         {
             realHitPoint = spherecastHit.point;
 
+            target = spherecastHit.transform.root.GetComponent<Character>();
+
             //assign ground target location
+            targettedLocation = realHitPoint;
         }
         //floor location of hit
         else if(raycastHit.point!= Vector3.zero )
         {
             realHitPoint = raycastHit.point;
+
+            target = null;
+            targettedLocation = realHitPoint;
         }
         //miss entirely
         else
@@ -325,16 +333,7 @@ public class PlayerSpellSystem : MonoBehaviour
         }
 
 
-        if(realHitPoint != Vector3.zero)
-        {
-            predictionPoint.gameObject.SetActive(true);
-            predictionPoint.position = realHitPoint;
-        }
-        else
-        {
-            predictionPoint.gameObject.SetActive(false);
-        }
-
+        //the raycast that hit? idk bout this one
         predictionHit = raycastHit.point == Vector3.zero ? spherecastHit : raycastHit;
     }
 
