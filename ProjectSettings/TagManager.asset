@@ -5,11 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Thread
+  - Weapon
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - NavMeshSurface
   - Water
   - UI
   - 
