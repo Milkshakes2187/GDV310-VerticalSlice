@@ -61,7 +61,7 @@ public class ThreadedSlip : Ability
             {
                 foreach (var collision in owner.GetComponent<AbyssalWeaver>().collisions)
                 {
-                    if (collision.GetComponent<Thread>())
+                    if (collision.GetComponentInParent<Thread>())
                     {
                         owner.GetComponent<AbyssalWeaver>().currentState = AbyssalWeaver.STATES.STUNNED;
                         Destroy(gameObject);

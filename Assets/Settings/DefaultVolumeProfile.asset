@@ -433,6 +433,34 @@ MonoBehaviour:
   p31:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0, b: 0, a: 1}
+--- !u!114 &-1862026573833816
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfee7ec4ca286494fab6acac013eb80d, type: 3}
+  m_Name: GodRaysVolume
+  m_EditorClassIdentifier: 
+  active: 1
+  MainLightIntensity:
+    m_OverrideState: 1
+    m_Value: 0
+  AdditionalLightsIntensity:
+    m_OverrideState: 1
+    m_Value: 0
+  MainLightScattering:
+    m_OverrideState: 1
+    m_Value: 0.5
+  AdditionalLightsScattering:
+    m_OverrideState: 1
+    m_Value: 0.5
+  Tint:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,6 +493,7 @@ MonoBehaviour:
   - {fileID: -6288072647309666549}
   - {fileID: 7518938298396184218}
   - {fileID: -1410297666881709256}
+  - {fileID: -1862026573833816}
 --- !u!114 &853819529557874667
 MonoBehaviour:
   m_ObjectHideFlags: 3
