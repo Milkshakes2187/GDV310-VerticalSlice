@@ -29,7 +29,7 @@ public class BasicAbility : Ability
 
 
     /***********************************************
-   * UseSpellEffect: overridden function. Triggers after a "cast time"
+   * UseSpellEffect: overridden function. Triggers after a "cast time". Single target damage.
    * @author: George White
    * @parameter:
    * @return: override void
@@ -106,7 +106,7 @@ public class BasicAbility : Ability
         //add spellcharge if anything was hit
         if(enemies.Count > 0)
         {
-            owner.GetComponent<Player>().spellSystem.RegenerateSpellCharge(abilityData.castingCostGain);
+            owner.GetComponent<Player>().spellSystem.RegenerateClassPower(abilityData.castingCostGain);
         }
 
         //Damage each enemy in the list

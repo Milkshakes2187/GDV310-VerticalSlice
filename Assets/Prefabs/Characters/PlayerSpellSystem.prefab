@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
   target: {fileID: 0}
+  targettedLocation: {x: 0, y: 0, z: 0}
   currentAbilityCast: {fileID: 0}
   abilityUseState: 0
   spellCharge: 0
@@ -53,6 +54,10 @@ MonoBehaviour:
   GCD: 0.5
   currentGCD: 0
   abilityHolders:
+  - abilitySO: {fileID: 11400000, guid: 2ff6205fa343e5548913e3997ab4bc8e, type: 2}
+    keybind: 101
+    currentCooldown: 0
+    active: 1
   - abilitySO: {fileID: 11400000, guid: 802e3d38466f5e8408c010bd32a3d13b, type: 2}
     keybind: 50
     currentCooldown: 0

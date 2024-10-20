@@ -19,31 +19,37 @@ public enum E_AbilityUseState
 
 public class PlayerSpellSystem : MonoBehaviour
 {
+    [Header("Main References")]
     [SerializeField, ReadOnly] Player owner = null;
-    [SerializeField, ReadOnly] Character target = null;
     [SerializeField, ReadOnly] public GameObject currentAbilityCast = null;
 
     public E_AbilityUseState abilityUseState = E_AbilityUseState.Ready;
 
-    [Tab("Main spell tab")]
-
-    public float spellCharge = 0.0f;
-    public float spellChargeMax = 100.0f;
+    [Header("Core Spell Variables")]
+    public float classPowerCurrent = 0.0f;
+    public float classPowerMax = 100.0f;
     public float GCD = 0.5f;
     [SerializeField, ReadOnly] float currentGCD = 0.0f;
 
+    [Header("List of Ability Holders")]
     [SerializeField] List<AbilityDataHolder> abilityHolders = new List<AbilityDataHolder>();
     [SerializeField] KeyCode basicKey = KeyCode.Q;
-  
-    
+
+    [Header("Basic Ability Sequence")]
     [SerializeField] List<AbilitySO> basicAbilitySequence = new List<AbilitySO>();
     [ReadOnly] int currentSequenceIndex = 0;
-
 
     [SerializeField] float abilitySequenceResetTime = 3.0f;
     [ReadOnly] float currentAbilitySequenceResetTime = 3.0f;
 
-
+    [Header("Target Selection")]
+    [SerializeField, ReadOnly] public Character target = null;
+    [SerializeField, ReadOnly] public Vector3 targettedLocation = Vector3.zero;
+    public RaycastHit predictionHit;
+    public LayerMask enemyMask;
+    public float predictionSphereCastRadius;
+    public Transform predictionPoint;
+    public float maxCastRange = 100.0f;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -124,6 +130,7 @@ public class PlayerSpellSystem : MonoBehaviour
         //Instantiate and use the ability
         currentAbilityCast = abilityHolders[0].abilitySO.InitialiseAbility(owner,target,transform.position);
         
+        //attempt to use basic ability sequence
         if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
 
@@ -151,8 +158,6 @@ public class PlayerSpellSystem : MonoBehaviour
         {
             Destroy(currentAbilityCast);
         }
-
-
     }
 
     /***********************************************
@@ -170,7 +175,7 @@ public class PlayerSpellSystem : MonoBehaviour
         //instantiate ability, use ability, and start the cooldown
         currentAbilityCast = _abilityData.abilitySO.InitialiseAbility(owner, target, transform.position);
         
-
+        //Attempt to cast the spell
         if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
         {
             _abilityData.StartCooldown();
@@ -200,20 +205,16 @@ public class PlayerSpellSystem : MonoBehaviour
             }
         }
 
-
         //Iterates over all abilityDataHolder
         foreach (AbilityDataHolder sHolder in abilityHolders)
         {
-            
             if (sHolder.IsOnCooldown())
             {
                 sHolder.TickCoolDown(Time.deltaTime);
             }
-            
-            
         }
    
-
+        //Basic attack sequence reset timer
         if(abilityHolders.Count > 0)
         {
             //Tick basic sequence reset timer
@@ -234,44 +235,107 @@ public class PlayerSpellSystem : MonoBehaviour
                 //sequence UI
             }
         }
-        
     }
 
-
-    public bool SpendSpellCharge(float _cost)
+    /***********************************************
+   SpendClassPower: Spends class power if an ability requires it, and only if enough
+   @author: George White
+   @parameter: float _cost
+   @return: bool
+   ************************************************/
+    public bool SpendClassPower(float _cost)
     {
-        if(_cost > spellCharge)
+        if(_cost > classPowerCurrent)
         {
             return false;
         }
         else
         {
-            spellCharge -= _cost;
+            classPowerCurrent -= _cost;
             //update UI
 
             return true;
         }
     }
 
-
-    public void RegenerateSpellCharge(float _charge)
+    /***********************************************
+   RegenerateClassPower: Regenerates class power
+   @author: George White
+   @parameter: float _charge
+   @return: void
+   ************************************************/
+    public void RegenerateClassPower(float _charge)
     {
-        spellCharge += _charge;
+        classPowerCurrent += _charge;
 
-        if (spellCharge > spellChargeMax)
+        if (classPowerCurrent > classPowerMax)
         {
-            spellCharge = spellChargeMax;
+            classPowerCurrent = classPowerMax;
         }
 
         //update UI
     }
 
-
+    /***********************************************
+   AssignTarget: Assigns target by raycasting/spherecasting
+   @author: George White
+   @tutorial: https://youtu.be/HPjuTK91MA8?si=9Eo0dKizRC-ol4pn&t=330
+   @parameter: 
+   @return: void
+   ************************************************/
     public void AssignTarget()
     {
-        //spherical raycast here!
+        if (abilityUseState != E_AbilityUseState.Ready) { return; }
 
-        target =  FindFirstObjectByType<TrashEnemy>();
+
+
+
+
+        RaycastHit spherecastHit;
+        Physics.SphereCast(owner.GetComponent<Player>().CMvcam.transform.position, predictionSphereCastRadius, owner.GetComponent<Player>().CMvcam.transform.forward, out spherecastHit, maxCastRange, enemyMask);
+
+        RaycastHit raycastHit;
+        Physics.Raycast(owner.GetComponent<Player>().CMvcam.transform.position, owner.GetComponent<Player>().CMvcam.transform.forward, out raycastHit, maxCastRange, enemyMask);
+
+        Vector3 realHitPoint;
+
+        //Direct hit onto enemy
+        if(raycastHit.point != Vector3.zero && raycastHit.transform.tag != "Enemy")
+        {
+            realHitPoint = raycastHit.point;
+
+            //assign ground target location
+        }
+        //Indirect hit onto enemy
+        else if(spherecastHit.point != Vector3.zero && raycastHit.transform.tag != "Enemy")
+        {
+            realHitPoint = spherecastHit.point;
+
+            //assign ground target location
+        }
+        //floor location of hit
+        else if(raycastHit.point!= Vector3.zero )
+        {
+            realHitPoint = raycastHit.point;
+        }
+        //miss entirely
+        else
+        {
+            realHitPoint = Vector3.zero;
+        }
+
+
+        if(realHitPoint != Vector3.zero)
+        {
+            predictionPoint.gameObject.SetActive(true);
+            predictionPoint.position = realHitPoint;
+        }
+        else
+        {
+            predictionPoint.gameObject.SetActive(false);
+        }
+
+        predictionHit = raycastHit.point == Vector3.zero ? spherecastHit : raycastHit;
     }
 
 

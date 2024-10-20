@@ -15,6 +15,7 @@ public abstract class Ability : MonoBehaviour
 
     [Header("Base Ability Variables")]
     public bool canMoveWhileCasting = true;
+    public bool requiresTarget = false;
     [HideInInspector] public float currentCastTime = 0.0f;
     [HideInInspector] public float currentChannelTime = 0.0f;
 
@@ -29,6 +30,14 @@ public abstract class Ability : MonoBehaviour
     @return: virtual void
     ************************************************/
     public virtual void InitialSetup() { }
+
+    /***********************************************
+    VerifyTarget: Virtual function to verify that the target is correct
+    @author: George White
+    @parameter:
+    @return: virtual bool
+    ************************************************/
+    public virtual bool VerifyTarget() { return true; }
 
     /***********************************************
     * OnDestroy: virtual function that occurs when the ability is destroyed
@@ -59,13 +68,16 @@ public abstract class Ability : MonoBehaviour
     ************************************************/
     public bool CastSpell(bool _useSpellCost = false)
     {
+        //cant cast spell if the target is invalid
+        if (!requiresTarget || !VerifyTarget()) { return false; }
+
 
         if(_useSpellCost)
         {
             if(owner.GetComponent<Player>().spellSystem)
             {
                 //remove the casting cost from the player spell system, if possible.
-                if(owner.GetComponent<Player>().spellSystem.SpendSpellCharge(abilityData.castingCost))
+                if(owner.GetComponent<Player>().spellSystem.SpendClassPower(abilityData.castingCost))
                 {
                     //ability successfully paid for
                 }
@@ -120,23 +132,48 @@ public abstract class Ability : MonoBehaviour
     ************************************************/
     public void Interrupt()
     {
-        StopCoroutine(castTimerCrouton);
-        StopCoroutine(channelTimerCrouton);
+        if (castTimerCrouton != null) { StopCoroutine(castTimerCrouton); }
+        if (channelTimerCrouton != null) { StopCoroutine(channelTimerCrouton); }
+
+        if (owner.GetComponent<Player>())
+        {
+            owner.GetComponent<Player>().spellSystem.abilityUseState = E_AbilityUseState.Ready;
+        }
+
         Destroy(gameObject);
     }
 
     /***********************************************
-    * CastTimer: Coroutine to count down the spell's casting time, and casts the spell when done
+    * CastTimer: Coroutine to count down the spell's casting time, and casts the spell when done. unique effects for player
     * @author: George White
     * @parameter:
     * @return: IEnumerator
     ************************************************/
     IEnumerator CastTimer()
     {
+        Vector3 ownerCastLocation = owner.gameObject.transform.position;
+
+        if(owner.GetComponent<Player>())
+        {
+            owner.GetComponent<Player>().spellSystem.abilityUseState = E_AbilityUseState.Casting;
+        }
+
         while (currentCastTime > 0.0f)
         {
             currentCastTime -= Time.deltaTime;
+
+            //interrupts if player cant move while casting
+            if(!canMoveWhileCasting && owner.gameObject.transform.position != ownerCastLocation)
+            {
+                Interrupt();
+            }
             yield return new WaitForSeconds(0.0f);
+        }
+
+        //reset abilitystate
+        if (owner.GetComponent<Player>())
+        {
+            owner.GetComponent<Player>().spellSystem.abilityUseState = E_AbilityUseState.Ready;
         }
 
         //cast the spell
