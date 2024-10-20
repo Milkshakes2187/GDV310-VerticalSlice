@@ -13,7 +13,14 @@ public class Enemy : Character
         base.Start();
 
         // find first object with player script and set it to the player var
-        player = FindFirstObjectByType<Player>();
+        if (Player.instance)
+        {
+            player = Player.instance;
+        }
+        else
+        {
+            Debug.LogWarning("NO PLAYER IN SCENE.");
+        }
 
         // Add this enemy to world manager's list of all enemies
         if (WorldManager.instance)
@@ -26,6 +33,12 @@ public class Enemy : Character
         }
     }
 
+    /***********************************************
+    * TriggerDeath: Inform world manager of enemy list change and destroy this enemy.
+    * @author: Justhine Nisperos
+    * @parameter: 
+    * @return: void
+    ************************************************/
     protected override void TriggerDeath()
     {
         base.TriggerDeath();
@@ -45,6 +58,7 @@ public class Enemy : Character
 
     protected void OnDestroy()
     {
+        // Ensures that enemy still runs death functions properly when suddenly destroyed.
         TriggerDeath();
     }
 }

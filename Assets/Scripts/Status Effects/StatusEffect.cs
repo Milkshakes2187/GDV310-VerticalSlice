@@ -10,7 +10,14 @@ public class StatusEffect : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     protected virtual void Start()
     {
-        target = transform.root.GetComponent<Character>();
+        if (transform.root.GetComponent<Character>())
+        {
+            target = transform.root.GetComponent<Character>();
+        }
+        else
+        {
+            Debug.LogWarning("No Character parent.");
+        }
     }
 
     // Update is called once per frame

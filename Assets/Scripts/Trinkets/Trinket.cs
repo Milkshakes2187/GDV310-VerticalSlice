@@ -7,7 +7,14 @@ public abstract class Trinket : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        player = Player.instance;
+        if (Player.instance)
+        {
+            player = Player.instance;
+        }
+        else
+        {
+            Debug.LogWarning("NO PLAYER IN SCENE.");
+        }
     }
 
     // Update is called once per frame
