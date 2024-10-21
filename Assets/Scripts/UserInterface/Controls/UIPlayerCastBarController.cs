@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 using VInspector;
@@ -44,9 +45,8 @@ public class UIPlayerCastBarController : MonoBehaviour
     }
     public IEnumerator TickCastBar()
     {
-        while (true)
+        while (castingAbility != null)
         {
-            Debug.Log("ticking cast bar");
             float castFillAmount = Mathf.Abs(1 - castingAbility.currentCastTime / castingAbility.abilityData.timeToCast);
             castBarFill.fillAmount = castFillAmount;
 
@@ -59,26 +59,21 @@ public class UIPlayerCastBarController : MonoBehaviour
     public void OnCancelCast()
     {
         DisableCastBar();
-        Debug.Log("canceled cast");
     }
 
     public void OnSuccessfulCast()
     {
         DisableCastBar();
-        Debug.Log("successful cast");
     }
 
     private void EnableCastBar(Ability ability)
     {
+        if (ability.abilityData.timeToCast == 0) return;
+
         castingAbility = ability;
 
         castBarFrameHolder?.SetActive(true);
         castBarTextHolder?.SetActive(true);
-
-        float castFillAmount = Mathf.Abs(1 - castingAbility.currentCastTime / castingAbility.abilityData.timeToCast);
-        float _castTimeRemaining = castingAbility.abilityData.timeToCast - castingAbility.currentCastTime;
-
-        castTimeRemainingText.text = _castTimeRemaining.ToString("f1");
 
         castNameText.text = ability.name;
 
