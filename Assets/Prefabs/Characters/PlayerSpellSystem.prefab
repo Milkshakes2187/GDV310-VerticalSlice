@@ -45,27 +45,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  target: {fileID: 0}
-  targettedLocation: {x: 0, y: 0, z: 0}
   currentAbilityCast: {fileID: 0}
+  classPowerBar: {fileID: 0}
+  castBar: {fileID: 0}
+  castBarText: {fileID: 0}
   abilityUseState: 0
-  spellCharge: 0
-  spellChargeMax: 100
+  classPowerCurrent: 0
+  classPowerMax: 100
   GCD: 0.5
   currentGCD: 0
   abilityHolders:
-  - abilitySO: {fileID: 11400000, guid: 2ff6205fa343e5548913e3997ab4bc8e, type: 2}
-    keybind: 101
-    currentCooldown: 0
-    active: 1
   - abilitySO: {fileID: 11400000, guid: 802e3d38466f5e8408c010bd32a3d13b, type: 2}
+    iconHolder: {fileID: 0}
     keybind: 50
     currentCooldown: 0
     active: 1
+  - abilitySO: {fileID: 11400000, guid: 2ff6205fa343e5548913e3997ab4bc8e, type: 2}
+    iconHolder: {fileID: 0}
+    keybind: 101
+    currentCooldown: 0
+    active: 1
+  basicAbilityUIHolder: {fileID: 0}
   basicKey: 113
   basicAbilitySequence:
-  - {fileID: 11400000, guid: 224d6338977eb844fbbb0ac15ddb1a99, type: 2}
   - {fileID: 11400000, guid: 822a712ac8a268747b98e0407a82ebd0, type: 2}
-  - {fileID: 11400000, guid: cfc74dd3fa707064ebc984fc8224e53e, type: 2}
   - {fileID: 11400000, guid: c71e0cfbe419dc64eaba1d2bf43022d1, type: 2}
+  - {fileID: 11400000, guid: 224d6338977eb844fbbb0ac15ddb1a99, type: 2}
+  - {fileID: 11400000, guid: cfc74dd3fa707064ebc984fc8224e53e, type: 2}
   abilitySequenceResetTime: 3
+  target: {fileID: 0}
+  targettedLocation: {x: 0, y: 0, z: 0}
+  targetRayMask:
+    serializedVersion: 2
+    m_Bits: 0
+  predictionSphereCastRadius: 0
+  maxCastRange: 100

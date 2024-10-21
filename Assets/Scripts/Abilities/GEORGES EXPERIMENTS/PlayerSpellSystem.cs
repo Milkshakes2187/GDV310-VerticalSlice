@@ -257,17 +257,17 @@ public class PlayerSpellSystem : MonoBehaviour
         if (!classPowerBar || !castBar || !castBarText) { return; }
 
         //class power bar
-        classPowerBar.GetComponent<MPImage>().fillAmount = classPowerCurrent / classPowerMax;
+        classPowerBar.GetComponent<MPImage>().fillAmount = classPowerCurrent / classPowerMax * 100;
 
 
         //casting bar
-        if(abilityUseState == E_AbilityUseState.Casting || !currentAbilityCast)
+        if(abilityUseState == E_AbilityUseState.Casting && currentAbilityCast)
         {
             castBar.SetActive(true);
             castBarText.SetActive(true);
 
             castBar.GetComponent<UIFillController>().fillAmount = Mathf.Abs(1 - currentAbilityCast.GetComponent<Ability>().currentCastTime / currentAbilityCast.GetComponent<Ability>().abilityData.timeToCast);
-            castBarText.GetComponent<TextMeshPro>().text = currentAbilityCast.GetComponent<Ability>().abilityData.abilityName;
+            castBarText.GetComponent<TextMeshProUGUI>().text = currentAbilityCast.GetComponent<Ability>().abilityData.abilityName;
         }
         else
         {
