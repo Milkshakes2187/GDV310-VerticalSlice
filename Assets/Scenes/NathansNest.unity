@@ -882,7 +882,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000015258789, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.000030517578, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &860728524
@@ -1016,11 +1016,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 034bc47afcbf5e141a58d5c20b7808e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &924963707 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3354995642370838277, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
-  m_PrefabInstance: {fileID: 3616107936948718155}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &931513612 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -5619610716557293129, guid: a81fdfa699c176446a4f8557879fd329, type: 3}
@@ -1687,7 +1682,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 212.8}
+  m_AnchoredPosition: {x: 0, y: 215}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1457822754
@@ -2108,19 +2103,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2012103150029091523, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
   m_PrefabInstance: {fileID: 3616107936948718155}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1894901786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924963707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3aac5b71205d604890993602cbd6879, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  castBarFill: {fileID: 3616107936948718157}
 --- !u!1001 &2003600277
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3170,25 +3152,19 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_PlayerCastBar
       objectReference: {fileID: 0}
+    - target: {fileID: 6250400124671012467, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
+      propertyPath: m_fontSize
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6250400124671012467, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3354995642370838277, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1894901786}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
---- !u!114 &3616107936948718157 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8112673417220376884, guid: 4aaa3f4b33922de408e179f9afc4ee31, type: 3}
-  m_PrefabInstance: {fileID: 3616107936948718155}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e92ea03949d8c54f8e3059ff12ff084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3675741492825812492
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,6 +3697,18 @@ PrefabInstance:
     - target: {fileID: 3861970663263763576, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
       propertyPath: m_Name
       value: UI_TargetCastBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 4289106920894833442, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -24.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213539854437490426, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
+      propertyPath: m_fontSize
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5213539854437490426, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 7647888967566582275, guid: 8c7d70299f7f8f141b7ed1d33c747ed5, type: 3}
       propertyPath: m_Pivot.x

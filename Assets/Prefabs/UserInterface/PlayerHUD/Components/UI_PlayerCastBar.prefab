@@ -598,6 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2012103150029091523}
+  - component: {fileID: 808163424973163536}
   m_Layer: 5
   m_Name: UI_PlayerCastBar
   m_TagString: Untagged
@@ -615,7 +616,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2960031585318345797}
   - {fileID: 1553836086301181811}
@@ -626,6 +627,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &808163424973163536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354995642370838277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3aac5b71205d604890993602cbd6879, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castBarFill: {fileID: 8112673417220376884}
+  castBarFrameHolder: {fileID: 6290361393388745106}
+  castBarTextHolder: {fileID: 4019103099705886578}
+  castTimeRemainingText: {fileID: 3125734394522644372}
+  castNameText: {fileID: 6250400124671012467}
 --- !u!1 &4019103099705886578
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,8 +773,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 14
-  m_fontSizeBase: 14
+  m_fontSize: 13
+  m_fontSizeBase: 13
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
