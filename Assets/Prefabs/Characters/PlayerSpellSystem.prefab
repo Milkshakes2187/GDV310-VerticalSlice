@@ -79,4 +79,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   predictionSphereCastRadius: 0
-  maxCastRange: 100
+  maxCastRange: 1000

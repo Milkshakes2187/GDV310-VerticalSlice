@@ -31,6 +31,6 @@ MonoBehaviour:
   primaryEffectStrength: 0
   secondaryEffectStrength: 0
   tertiaryEffectStrength: 0
-  primaryRange: 20
+  primaryRange: 30
   secondaryRange: 0
   info: 
