@@ -65,7 +65,7 @@ public class ThreadManager : Ability
     void InitializeArenaThreads()
     {
         float fStep = 360f / iTotalPoints;
-        Vector3 fCenter = Vector3.zero;
+        Vector3 fCenter = owner.transform.position;
 
         // iterate through the points and place down a threadpoint forming a hexagon
         for (int i = 0; i < iTotalPoints; i++)

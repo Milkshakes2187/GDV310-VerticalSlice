@@ -25,7 +25,7 @@ public class MarkedForAssassination : Ability
     public override void UseSpellEffect()
     {
         Vector3 modifiedPosition = target.transform.position;
-        modifiedPosition.y = 0;
+        modifiedPosition.y = owner.transform.position.y;
 
         var ability = phantomAssassin.InitialiseAbility(owner, target, modifiedPosition);
 
