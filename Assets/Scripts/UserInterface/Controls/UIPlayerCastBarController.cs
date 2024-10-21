@@ -20,6 +20,8 @@ public class UIPlayerCastBarController : MonoBehaviour
 
     void Start()
     {
+        DisableCastBar();
+
         if (!Player.instance) { Debug.LogWarning("Player does not exist, UI Ability Frame will not work"); return; }
 
         spellSystem = Player.instance.GetComponentInChildren<PlayerSpellSystem>();
