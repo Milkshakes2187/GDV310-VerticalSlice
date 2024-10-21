@@ -7,7 +7,7 @@ public class UIClassPowerController_AbyssalKnight : MonoBehaviour
     [Header("Preassigned Variables")]
     public UIFillController classPowerFill;
     public TMPro.TextMeshProUGUI classPowerText;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         spellSystem = Player.instance.GetComponentInChildren<PlayerSpellSystem>();
@@ -19,7 +19,7 @@ public class UIClassPowerController_AbyssalKnight : MonoBehaviour
         }
     }
 
-    // change to events eventually
+
     void Update()
     {
         classPowerFill.fillAmount = spellSystem.classPowerCurrent / spellSystem.classPowerMax;

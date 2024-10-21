@@ -25,13 +25,26 @@ public class UIAbilityHolderController : MonoBehaviour
     public UIFillController lockFill;
     public Image abilityImage;
 
-   
+
+    void Start()
+    {
+        if (!Player.instance) { Debug.LogWarning("Player does not exist, UI Ability Frame will not work"); return; }
+
+        spellSystem = Player.instance.GetComponentInChildren<PlayerSpellSystem>();
+    }
+
     public void Update()
     {
         AssignAbility();
         TickAbilityFrame();
     }
-    //Eventually change to events
+
+
+    /***********************************************
+    * AssignAbility: Assigns the current ability data from the player spell systems slot
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     public void AssignAbility()
     {
         if (spellSystem == null) { Debug.LogWarning("Player spell system not found, UI Ability Frame will not update"); return; }
@@ -45,6 +58,11 @@ public class UIAbilityHolderController : MonoBehaviour
         }
     }
 
+    /***********************************************
+    * ResetSlotUI: Resets the current spell slot UI to be default empty
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     public void ResetSlotUI()
     {
         cooldownFill.fillAmount = 0;
@@ -54,7 +72,11 @@ public class UIAbilityHolderController : MonoBehaviour
     }
 
 
-    //Eventually change to events
+    /***********************************************
+    * TickAbilityFrame: Updates the spell slot UI every frame with current values from ability data. Eventually change to be event based when optimizing
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     public void TickAbilityFrame()
     {
         if (abilityData == null) { Debug.LogWarning("Ability data not found, UI Ability Frame will not update"); return; }
@@ -71,12 +93,4 @@ public class UIAbilityHolderController : MonoBehaviour
 
         lockFill.fillAmount = 0;
     }
-
-    void Start()
-    {
-        if (!Player.instance) { Debug.LogWarning("Player does not exist, UI Ability Frame will not work"); return; }
-
-        spellSystem = Player.instance.GetComponentInChildren<PlayerSpellSystem>();
-    }
-
 }

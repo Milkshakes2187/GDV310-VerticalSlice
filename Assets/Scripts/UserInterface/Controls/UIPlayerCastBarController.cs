@@ -35,7 +35,12 @@ public class UIPlayerCastBarController : MonoBehaviour
 
         spellSystem.OnPlayerCastAbility += OnPlayerStartCasting;
     }
-
+    /***********************************************
+    * OnPlayerStartCasting: Attached to event OnPlayerStartCastAbility from PlayerSpellSystem.cs, will activate whenever the player starts casting
+    * @author: Nathan Hunt
+    * @parameter: Ability
+    * @return: void
+    ************************************************/
     public void OnPlayerStartCasting(Ability ability)
     {
         DisableCastBar();
@@ -43,6 +48,12 @@ public class UIPlayerCastBarController : MonoBehaviour
 
         StartCoroutine(TickCastBar());
     }
+
+    /***********************************************
+    * OnPlayerStartCasting: Manages cast bar UI settings while player is casting
+    * @author: Nathan Hunt
+    * @return: IEnumerator
+    ************************************************/
     public IEnumerator TickCastBar()
     {
         while (castingAbility != null)
@@ -56,16 +67,32 @@ public class UIPlayerCastBarController : MonoBehaviour
         }
     }
 
+    /***********************************************
+    * OnCancelCast: Disables cast bar when cast is interrupted, attached to event OnCancelCast in Ability.cs, to be animated in future
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     public void OnCancelCast()
     {
         DisableCastBar();
     }
 
+    /***********************************************
+    * OnSuccessfulCast: Disables cast bar when cast is successful, attached to event OnSuccessfulCast in Ability.cs, to be animated in future
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     public void OnSuccessfulCast()
     {
         DisableCastBar();
     }
 
+    /***********************************************
+    * EnableCastBar: Setups cast bar with values from new ability and attaches events to be invoked with Ability.cs
+    * @author: Nathan Hunt
+    * @parameter: Ability
+    * @return: void
+    ************************************************/
     private void EnableCastBar(Ability ability)
     {
         if (ability.abilityData.timeToCast == 0) return;
@@ -81,6 +108,11 @@ public class UIPlayerCastBarController : MonoBehaviour
         castingAbility.OnSuccessfulCast += OnSuccessfulCast;
     }
 
+    /***********************************************
+    * DisableCastBar: Cleans up cast bar event handlers and disables the cast bar UI
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     private void DisableCastBar()
     {
         StopAllCoroutines();
