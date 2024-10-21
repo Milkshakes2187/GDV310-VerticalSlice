@@ -59,7 +59,7 @@ public class AbilityDataHolder
         }
         if(iconHolder)
         {
-            iconHolder.GetComponent<PlayerAbilityUI>().SetCooldownFill(Mathf.Abs(currentCooldown / _cooldownMax));
+            //iconHolder.GetComponent<PlayerAbilityUI>().SetCooldownFill(Mathf.Abs(currentCooldown / _cooldownMax));
         }
     }
 

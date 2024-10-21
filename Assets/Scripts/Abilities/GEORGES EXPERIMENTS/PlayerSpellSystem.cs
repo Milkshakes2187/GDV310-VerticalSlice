@@ -1,6 +1,8 @@
 using MPUIKIT;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using TMPro;
+using System;
 using UnityEngine;
 using VInspector;
 
@@ -51,20 +53,23 @@ public class PlayerSpellSystem : MonoBehaviour
     public float predictionSphereCastRadius;
     public float maxCastRange = 100.0f;
 
+    //Events
+
+    public event Action<Ability> OnPlayerCastAbility;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        if(basicAbilitySequence.Count > 0)
+        if (basicAbilitySequence.Count > 0)
         {
             //add the basic ability to the list of abilite holders
             var newHolder = new AbilityDataHolder(basicAbilitySequence[0], basicAbilityUIHolder, basicKey, 0.0f);
             abilityHolders.Insert(0, newHolder);
         }
-       
+
 
         //assigning player
-        if(GetComponentInParent<Player>())
+        if (GetComponentInParent<Player>())
         {
             owner = GetComponentInParent<Player>();
         }
@@ -101,14 +106,14 @@ public class PlayerSpellSystem : MonoBehaviour
         if (abilityUseState != E_AbilityUseState.Ready) { return; }
 
         //checks JUST THE BASIC - to improve
-        if(abilityHolders.Count > 0)
+        if (abilityHolders.Count > 0)
         {
             if (Input.GetKeyDown(abilityHolders[0].keybind))
             {
                 UseBasicAbility();
             }
 
-            for(int i = 1; i < abilityHolders.Count; i++)
+            for (int i = 1; i < abilityHolders.Count; i++)
             {
                 if (Input.GetKeyDown(abilityHolders[i].keybind))
                 {
@@ -119,9 +124,22 @@ public class PlayerSpellSystem : MonoBehaviour
     }
 
     /***********************************************
+    UseBasicAbility: Returns ability data from the list of players spells
+    @author: Nathan Hunt
+    @parameter: Int index
+    @return: AbilityDataHolder
+    ************************************************/
+
+    public AbilityDataHolder GetAbilityFromSlot(int index)
+    {
+        try { return abilityHolders[index]; }
+        catch { return null; }
+    }
+
+    /***********************************************
     UseBasicAbility: Uses the basic ability, and swaps it out for the next one in the sequence
     @author: George White
-    @parameter:
+    @parameter: Int index
     @return: void
     ************************************************/
     public void UseBasicAbility()
@@ -172,15 +190,16 @@ public class PlayerSpellSystem : MonoBehaviour
     public void UseAbility(AbilityDataHolder _abilityData) //WiP
     {
         if (_abilityData == null || !_abilityData.abilitySO || !_abilityData.active) { return; }
-        if (_abilityData.IsOnCooldown() || currentGCD > 0.0f) { return; }
-
+        if (_abilityData.IsOnCooldown() || currentGCD > 0.0f) {  return; }
 
         //instantiate ability, use ability, and start the cooldown
         currentAbilityCast = _abilityData.abilitySO.InitialiseAbility(owner, target, transform.position);
-        
+
         //Attempt to cast the spell
-        if (currentAbilityCast.GetComponent<Ability>().CastSpell(true))
+        Ability instantiatedAbility = currentAbilityCast.GetComponent<Ability>();
+        if (instantiatedAbility.CastSpell(true))
         {
+            OnPlayerCastAbility?.Invoke(instantiatedAbility);
             _abilityData.StartCooldown();
             currentGCD = GCD;
         }

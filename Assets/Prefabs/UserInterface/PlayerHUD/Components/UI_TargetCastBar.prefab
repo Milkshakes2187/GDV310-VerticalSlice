@@ -298,7 +298,7 @@ GameObject:
   - component: {fileID: 7647888967566582275}
   - component: {fileID: 2292200633273910505}
   m_Layer: 5
-  m_Name: UI_BossCastBar
+  m_Name: UI_TargetCastBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

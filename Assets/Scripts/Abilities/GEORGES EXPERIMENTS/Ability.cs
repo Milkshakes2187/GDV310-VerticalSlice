@@ -1,4 +1,5 @@
 using MPUIKIT;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,12 @@ public abstract class Ability : MonoBehaviour
     public bool requiresTarget = false;
     [HideInInspector] public float currentCastTime = 0.0f;
     [HideInInspector] public float currentChannelTime = 0.0f;
+
+    // Events
+
+    public event Action OnStartCasting;
+    public event Action OnCancelCast;
+    public event Action OnSuccessfulCast;
 
     //Coroutine to remember
     Coroutine castTimerCrouton;
