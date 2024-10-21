@@ -60,6 +60,7 @@ public  class AbilitySO : ScriptableObject
         ability.GetComponent<Ability>().targetLocation = _targetLocation;
         ability.GetComponent<Ability>().abilityData = this;
 
+
         //return the gameobject
         return ability;
     }

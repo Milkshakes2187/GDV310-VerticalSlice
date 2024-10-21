@@ -61,7 +61,7 @@ public class UIUnitFrameController : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Unit frame was not disposed of properly");
+                Debug.LogError("Unit frame was not disposed of properly, please ask nathan so we can fix it");
             }
 
             enabled = false;

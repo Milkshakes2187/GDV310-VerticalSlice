@@ -33,13 +33,24 @@ public class UIUnitFrameGroupManager : MonoBehaviour
         }
 
         worldManager.onEnemyListChange += UpdateUnitFrames;
+
+        StartCoroutine(UpdateInitalFrames());
+    }
+
+    IEnumerator UpdateInitalFrames()
+    {
+        yield return new WaitForEndOfFrame();
+
+        foreach(Character character in WorldManager.instance.allEnemies)
+        {
+            UpdateUnitFrames(character);
+        }
     }
 
     // Update is called once per frame
     void UpdateUnitFrames(Character unit)
     {
         bool containsNullKey = false;
-        Debug.Log(unit);
 
         if(unit == null)
         {
