@@ -124,7 +124,7 @@ public class PlayerSpellSystem : MonoBehaviour
     }
 
     /***********************************************
-    UseBasicAbility: Returns ability data from the list of players spells
+    GetAbilityFromSlot: Returns ability data from the list of players spells
     @author: Nathan Hunt
     @parameter: Int index
     @return: AbilityDataHolder
