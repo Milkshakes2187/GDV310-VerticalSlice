@@ -79,7 +79,7 @@ public class UIAbilityHolderController : MonoBehaviour
     ************************************************/
     public void TickAbilityFrame()
     {
-        if (abilityData == null) { Debug.LogWarning("Ability data not found, UI Ability Frame will not update"); return; }
+        if (abilityData == null) { Debug.LogWarning("Ability data not found, UI Ability Frame will not update"); ResetSlotUI(); return; }
 
         // Cooldown
         cooldownFill.fillAmount = abilityData.currentCooldown/abilityData.abilitySO.cooldown;
@@ -89,7 +89,10 @@ public class UIAbilityHolderController : MonoBehaviour
         if(!abilityImage.enabled) abilityImage.enabled = true;
 
         // Locked
+
         // Need coders to add a function to check if ability is able to be pressed
+        // Might already exist but something like abilityData.CheckAbilityCastEligibility()
+        // Ability should be "locked" if they dont have enough class power
 
         lockFill.fillAmount = 0;
     }
