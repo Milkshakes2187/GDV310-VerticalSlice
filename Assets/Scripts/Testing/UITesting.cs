@@ -16,12 +16,13 @@ public class UITesting : MonoBehaviour
 
     private void Update()
     {
+        healthBar.fillAmount = weaver.health / weaver.maxHealth;
+
         if (weaver.currentAbility)
         {
             castBar.SetActive(true);
             castName.text = weaver.currentAbility.GetComponent<Ability>().abilityData.abilityName;
             castBar.GetComponent<UIFillController>().fillAmount = 1 - (weaver.currentAbility.GetComponent<Ability>().currentCastTime / weaver.currentAbility.GetComponent<Ability>().abilityData.timeToCast);
-            healthBar.fillAmount = weaver.health / weaver.maxHealth;
         }
         else
         {
