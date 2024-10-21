@@ -1,5 +1,5 @@
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using VInspector;
@@ -44,14 +44,8 @@ public class Player : Character
 
     public float airMod = 0.1f;
 
-    //[Foldout("Dash Vars")]
-    //[SerializeField] private float fDashDistance = 10.0f;
-    //[SerializeField] private float fDashTime = 0.3f;
-    //public float fDashCooldown = 3.0f;
-    //public float fDashCDTimer = 0.0f;
-    //public bool bCanDash = true;
-    //
-    //public event Action<float> OnDash;
+    [Header("Trinkets")]
+    public List<Trinket> equippedTrinkets = new List<Trinket>();
 
     [Tab("Dev Mode")]
     public bool bImmortal = false;
@@ -107,19 +101,6 @@ public class Player : Character
         ProcessMovement();
         ProcessRotations();
 
-        // Check for dash input
-        //if (Input.GetKeyDown(dashKey) && bCanDash)
-        //{
-        //    Debug.Log("SCHWOOM DASH!");
-        //    StartCoroutine(Dash());
-        //}
-        //
-        //// --------------------- DEV KEYS ---------------------
-        //if (Input.GetKeyDown(knockbackKey))
-        //{
-        //    StartCoroutine(Knockback(Vector3.zero, 5.0f));
-        //}
-
         if (Input.GetKeyDown(immortalKey))
         {
             bImmortal = !bImmortal;
@@ -172,6 +153,7 @@ public class Player : Character
 
         float airMultiplier = (coyoteTimer > 0.2f) ? 1.0f : airMod;
 
+        // Cache and reset y velocity to discount gravity from velocity calculations
         moveVelocity.y -= gravity * Time.deltaTime;
         float cacheY = moveVelocity.y;
         moveVelocity.y = 0.0f;
@@ -185,6 +167,7 @@ public class Player : Character
             frictionVal * frictionMod * 
             acceleration * Time.deltaTime;
 
+        // Reapply y velocity (gravity)
         moveVelocity.y = cacheY;
 
         Vector3 velocity = moveVelocity;
@@ -196,20 +179,10 @@ public class Player : Character
         // Coyote time
         coyoteTimer -= Time.deltaTime;
         if ((charController.collisionFlags & CollisionFlags.Below) != 0)    // Grounded check
-        //if (charController.isGrounded)    // Grounded check
         {
             coyoteTimer = coyoteTime;
             moveVelocity.y = -1.0f;
         }
-
-        //if (canMove)
-        //{
-        //    charController.Move(moveVelocity * Time.deltaTime);
-        //    velocity = charController.velocity.magnitude;
-        //}
-
-        // This is gravity
-        //charController.Move(Vector3.up * -9.81f * Time.deltaTime * 2);
 
         // Update animator according to movement
         playerAnim.SetFloat("Velocity", charController.velocity.magnitude);
@@ -225,10 +198,6 @@ public class Player : Character
     {
         camRotation = camTarget.transform.forward;
 
-        // Reset Y vector to 0 to discount camera rotation
-        // And prevent gravity from affecting player rotation
-        //moveVelocity.y = 0;
-
         // Rotate player in desired direction
         if (moveVelocity != Vector3.zero)
         {
@@ -241,17 +210,4 @@ public class Player : Character
         Vector3 rotDiff = CMvcam.transform.eulerAngles - camTarget.transform.eulerAngles;
         camTarget.transform.eulerAngles += rotDiff;
     }
-
-    //public void TurnOffCanMove()
-    //{
-    //    canMove = false;
-    //    moveVelocity = Vector3.zero;
-    //    float velocity = 0.0f;
-    //
-    //    charController.Move(moveVelocity * moveSpeed * Time.deltaTime);
-    //    velocity = charController.velocity.magnitude;
-    //
-    //    // Update animator according to movement
-    //    playerAnim.SetFloat("Velocity", velocity);
-    //}
 }

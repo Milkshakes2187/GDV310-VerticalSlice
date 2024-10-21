@@ -129,7 +129,7 @@ public class IndicatorBase : MonoBehaviour
     {
         clone = false;
 
-        string savePath = "Assets\\Art\\Materials\\Indicators\\IndicatorVarients\\" + gameObject.name + "\\";
+        string savePath = "Assets\\Art\\DeleteLater\\IndicatorVarients\\" + gameObject.name + "\\";
 
         if (AssetDatabase.FindAssets("", new string[1] { savePath }).Length > 0)
         {
@@ -137,7 +137,7 @@ public class IndicatorBase : MonoBehaviour
             return;
         }
 
-        AssetDatabase.CreateFolder("Assets\\Art\\Materials\\Indicators\\IndicatorVarients", gameObject.name);
+        AssetDatabase.CreateFolder("Assets\\Art\\DeleteLater\\IndicatorVarients", gameObject.name);
 
         int index = 0;
         foreach (KeyValuePair<GameObject, IndicatorLibrary> projectorShader in projectorShaders)
@@ -170,7 +170,7 @@ public class IndicatorBase : MonoBehaviour
             return;
         }
 
-        AssetDatabase.DeleteAsset("Assets/Art/Materials/Indicators/IndicatorVarients/" + gameObject.name);
+        AssetDatabase.DeleteAsset("Assets/Art/DeleteLater/IndicatorVarients/" + gameObject.name);
 
         foreach(DecalProjector proj in allProjectors)
         {

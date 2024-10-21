@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -24,7 +25,7 @@ public class AbyssalWeaver : Enemy
     public AbilitySO markedForAssassination;
     public AbilitySO EntwinedAbyss;
     public AbilitySO ThreadedSlip;
-    public GameObject threadManagerPF;
+    public AbilitySO threadManagerAbility;
     ThreadManager threadManager;
 
     public float turnSpeed = 5f;
@@ -41,15 +42,18 @@ public class AbyssalWeaver : Enemy
     // list of all active collisions
     [HideInInspector] public List<GameObject> collisions = new List<GameObject>();
 
+    // Ability order list, abilities in this list will happen in the order placed, the count is used to determine what point in the list the boss is up to
+    public List<STATES> abilityRotation = new List<STATES>();
+    int rotationState = 0;
+
     [HideInInspector] public STATES currentState = STATES.IDLE;
-    [HideInInspector] public STATES nextState = STATES.INTERWOVEN_THREADS;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
 
         // create the thread manager
-        var threadArena = Instantiate(threadManagerPF, transform.position, Quaternion.identity);
+        var threadArena = threadManagerAbility.InitialiseAbility(this, null, transform.position);
         threadManager = threadArena.GetComponent<ThreadManager>();
     }
 
@@ -58,6 +62,12 @@ public class AbyssalWeaver : Enemy
     {
         // update state machine every frame
         RunStateMachine();
+
+        // Ensure the rotationState does not surpass the amount of abilities in the list
+        if (rotationState >= abilityRotation.Count)
+        {
+            rotationState = 0;
+        }
     }
 
     /***********************************************
@@ -154,9 +164,10 @@ public class AbyssalWeaver : Enemy
         agent.isStopped = true;
 
         // if player is in aggro range begin the fight
-        if (_distToPlayer <= 10)
+        if (_distToPlayer <= 20)
         {
-            currentState = nextState;
+            currentState = abilityRotation[rotationState];
+            rotationState++;
         }
     }
 
@@ -171,11 +182,12 @@ public class AbyssalWeaver : Enemy
         // Set state starting variables
         agent.isStopped = true;
 
+        stunElapsed -= Time.deltaTime;
+
         if (stunElapsed <= 0)
-        {
-            stunElapsed -= Time.deltaTime;
+        {            
             stunElapsed = stunTime;
-            currentState = nextState;
+            currentState = STATES.AGGRESSIVE;
         }
     }
 
@@ -216,7 +228,8 @@ public class AbyssalWeaver : Enemy
             tbcElapsed = timeBetweenCasts;
 
             // move to next state
-            currentState = STATES.ABYSSAL_KNIVES;
+            currentState = abilityRotation[rotationState];
+            rotationState++;
         }
     }
 
@@ -232,7 +245,6 @@ public class AbyssalWeaver : Enemy
         {
             currentAbilityCreated = true;
             currentAbility = abyssalKnives.InitialiseAbility(this, player, this.transform.position);
-            currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
 
             foreach (var assassin in phantomAssassinList)
@@ -252,8 +264,6 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void InterwovenThreadState()
     {
-        nextState = STATES.MFA;
-
         threadManager.InterwovenThreads();
         currentAbilityCreated = true;
 
@@ -272,31 +282,17 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void MFAState()
     {
-        switch (mfaCountThisRotation)
-        {
-            case 0:
-                nextState = STATES.ENTWINED_ABYSS;
-                break;
-
-            case 1:
-                nextState = STATES.THREADED_SLIP;
-                break;
-
-            case 2:
-                nextState = STATES.INTERWOVEN_THREADS;
-                break;
-        }
-
         if (!currentAbilityCreated)
         {
             currentAbilityCreated = true;
             currentAbility = markedForAssassination.InitialiseAbility(this, player, player.transform.position);
-            currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
+
+            // Increment the amount of times marked for assassination has been cast this rotation
+            mfaCountThisRotation++;
         }
 
         CheckForTransition();
-        mfaCountThisRotation++;
     }
 
     /***********************************************
@@ -307,14 +303,11 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void EntwinedAbyssState()
     {
-        nextState = STATES.MFA;
-
         // if the ability hasn't been created, create it first
         if (!currentAbilityCreated)
         {
             currentAbilityCreated = true;
             currentAbility = EntwinedAbyss.InitialiseAbility(this, player, transform.position);
-            currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
         }
 
@@ -336,14 +329,11 @@ public class AbyssalWeaver : Enemy
     ************************************************/
     void ThreadedSlipState()
     {
-        nextState = STATES.MFA;
-
         // if the ability hasn't been created, create it first
         if (!currentAbilityCreated)
         {
             currentAbilityCreated = true;
             currentAbility = ThreadedSlip.InitialiseAbility(this, player, player.transform.position);
-            currentAbility.GetComponent<Ability>().InitialSetup();
             currentAbility.GetComponent<Ability>().CastSpell();
         }
 
