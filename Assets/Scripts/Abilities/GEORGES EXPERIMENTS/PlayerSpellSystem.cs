@@ -257,7 +257,7 @@ public class PlayerSpellSystem : MonoBehaviour
         if (!classPowerBar || !castBar || !castBarText) { return; }
 
         //class power bar
-        classPowerBar.GetComponent<MPImage>().fillAmount = classPowerCurrent / classPowerMax * 100;
+        classPowerBar.GetComponent<MPImage>().fillAmount = classPowerCurrent / classPowerMax ;
 
 
         //casting bar
