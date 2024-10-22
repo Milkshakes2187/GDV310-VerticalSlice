@@ -2959,22 +2959,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2162221507163888098, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
-      propertyPath: m_Color.a
-      value: 0.6666667
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162221507163888098, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
-      propertyPath: m_Color.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162221507163888098, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2162221507163888098, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
-      propertyPath: m_Color.r
-      value: 0.26415092
-      objectReference: {fileID: 0}
     - target: {fileID: 7130981801480267581, guid: 542832528f2da4c4a85a701cff7466e9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -3576,9 +3560,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8356972323864296116}
     m_Modifications:
-    - target: {fileID: 831998200694180944, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
+    - target: {fileID: 1634504887419324379, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: fillAmount
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_Pivot.x
@@ -3660,20 +3644,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4890194321470354340, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6340064456231841443, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_Name
       value: UI_AbilityHolder (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7062780447322007776, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: slot
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7131962906902804013, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
-      propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []

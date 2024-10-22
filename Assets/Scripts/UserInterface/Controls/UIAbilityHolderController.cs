@@ -24,6 +24,7 @@ public class UIAbilityHolderController : MonoBehaviour
     public UIFillController cooldownFill;
     public UIFillController lockFill;
     public Image abilityImage;
+    public TMPro.TextMeshProUGUI keybindText;
 
 
     void Start()
@@ -80,6 +81,9 @@ public class UIAbilityHolderController : MonoBehaviour
     public void TickAbilityFrame()
     {
         if (abilityData == null) { Debug.LogWarning("Ability data not found, UI Ability Frame will not update"); ResetSlotUI(); return; }
+
+        // Keybind Text
+        keybindText.text = UIKeybindMap.KeybindToString(abilityData.keybind);
 
         // Cooldown
         cooldownFill.fillAmount = abilityData.currentCooldown/abilityData.abilitySO.cooldown;

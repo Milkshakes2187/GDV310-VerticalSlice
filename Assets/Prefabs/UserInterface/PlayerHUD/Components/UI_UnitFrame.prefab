@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8584906, g: 0.24182937, b: 0.1579299, a: 1}
+  m_Color: {r: 0.7169812, g: 0.18363006, b: 0.1251335, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -259,7 +259,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.323
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -306,19 +306,19 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 1}
-      key3: {r: 0.5882353, g: 0.23529412, b: 0.26666668, a: 0}
-      key4: {r: 0.5882353, g: 0.23529412, b: 0.26666668, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 0.2924528, g: 0.2924528, b: 0.2924528, a: 1}
+      key2: {r: 1, g: 1, b: 1, a: 1}
+      key3: {r: 0.7840074, g: 0.7840074, b: 0.7840074, a: 0}
+      key4: {r: 0.31534404, g: 0.31534404, b: 0.31534404, a: 0}
       key5: {r: 0.41176474, g: 0.08627451, b: 0.08627451, a: 0}
       key6: {r: 0.3137255, g: 0.09019608, b: 0.06666667, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
       ctime1: 65535
-      ctime2: 65535
-      ctime3: 55705
-      ctime4: 55705
+      ctime2: 33153
+      ctime3: 50886
+      ctime4: 65535
       ctime5: 59945
       ctime6: 65535
       ctime7: 0
@@ -339,7 +339,7 @@ MonoBehaviour:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
-    m_Rotation: 0
+    m_Rotation: -90
 --- !u!1 &3975951621786787460
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.26415092, g: 0, b: 0, a: 0.6666667}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -642,7 +642,7 @@ MonoBehaviour:
     m_CornerRadius: 0
     m_Offset: {x: 0, y: 0}
   m_GradientEffect:
-    m_Enabled: 1
+    m_Enabled: 0
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
