@@ -31,6 +31,11 @@ public class UIGRPSpacingController : MonoBehaviour
         UpdateSpacing();
     }
 
+    /***********************************************
+    * AddChildren: Tool to allow the developer to add all children under a UI element for easy access
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     [Button]
     public void AddChildren()
     {
@@ -41,6 +46,12 @@ public class UIGRPSpacingController : MonoBehaviour
         }
     }
 
+
+    /***********************************************
+    * UpdateSpacing: Developer tool to easily control spacing and size of UI elements under a group
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     [Button]
     [OnValueChanged("spacingSettings")]
     public void UpdateSpacing()

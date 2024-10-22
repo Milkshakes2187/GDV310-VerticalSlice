@@ -10,6 +10,11 @@ public class UIFillController : MonoBehaviour
     [Range(0f,1f)] public float fillAmount = 1;
 
 
+    /***********************************************
+    * AddChildren: Tool to allow the developer to add all children under a UI element for easy access
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     [Button]
     public void AddChildren()
     {
