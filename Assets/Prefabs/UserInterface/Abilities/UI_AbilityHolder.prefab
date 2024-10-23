@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 1826965679975855737}
   - component: {fileID: 5515542733528447237}
   - component: {fileID: 8329828654167144115}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IMG_Cooldown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8773585, g: 0.5473028, b: 0.5007565, a: 1}
+  m_Color: {r: 1, g: 0.6778029, b: 0.5518868, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -341,21 +341,21 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
-      key2: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 0}
-      key3: {r: 0.254717, g: 0.254717, b: 0.254717, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
-      key5: {r: 0, g: 0, b: 0, a: 0}
-      key6: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+      key1: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+      key2: {r: 1, g: 1, b: 1, a: 0}
+      key3: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0}
+      key4: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0}
+      key5: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0}
+      key6: {r: 0.36130595, g: 0.19991374, b: 0.13423082, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 193
-      ctime1: 47995
-      ctime2: 65535
-      ctime3: 65535
-      ctime4: 0
-      ctime5: 0
-      ctime6: 0
+      ctime0: 19082
+      ctime1: 22937
+      ctime2: 25636
+      ctime3: 28720
+      ctime4: 33153
+      ctime5: 38165
+      ctime6: 38165
       ctime7: 0
       atime0: 0
       atime1: 65535
@@ -367,14 +367,14 @@ MonoBehaviour:
       atime7: 0
       m_Mode: 0
       m_ColorSpace: 0
-      m_NumColorKeys: 3
+      m_NumColorKeys: 6
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
     - {r: 0, g: 0, b: 0, a: 0}
-    m_Rotation: -80
+    m_Rotation: -90
 --- !u!1 &1713696429833325072
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +386,7 @@ GameObject:
   - component: {fileID: 8807955471486927832}
   - component: {fileID: 7412052742141063923}
   - component: {fileID: 2613973802429367553}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IMG_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 4773690235862839772}
   - component: {fileID: 5430364572453677841}
   - component: {fileID: 8809461514309366984}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IMG_Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +844,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.45663327, g: 0.33935562, b: 0.5849056, a: 1}
+  m_Color: {r: 0.20784314, g: 0.16862746, b: 0.26666668, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 6990909604717197348}
   - component: {fileID: 103211062739828694}
   - component: {fileID: 8009270150494071004}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IMG_KeyLocked
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1275,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 17, y: -17}
-  m_SizeDelta: {x: 24, y: 24}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6340064456231841443
 GameObject:
@@ -1345,7 +1345,7 @@ GameObject:
   - component: {fileID: 9153937913009160741}
   - component: {fileID: 4229988720498548235}
   - component: {fileID: 4941886085488872683}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IMG_Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1392,7 +1392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8113208, g: 0.4798082, b: 0.43244928, a: 1}
+  m_Color: {r: 1, g: 0.6784314, b: 0.5529412, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1451,20 +1451,20 @@ MonoBehaviour:
     m_GradientType: 0
     m_Gradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
-      key2: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 0}
-      key3: {r: 0, g: 0, b: 0, a: 0}
-      key4: {r: 0, g: 0, b: 0, a: 0}
-      key5: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.33962262, g: 0.33962262, b: 0.33962262, a: 1}
+      key1: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+      key2: {r: 1, g: 1, b: 1, a: 0}
+      key3: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 0}
+      key4: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 0}
+      key5: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
-      ctime0: 193
-      ctime1: 47995
-      ctime2: 65535
-      ctime3: 0
-      ctime4: 0
-      ctime5: 0
+      ctime0: 5590
+      ctime1: 14649
+      ctime2: 25636
+      ctime3: 31611
+      ctime4: 41056
+      ctime5: 53006
       ctime6: 0
       ctime7: 0
       atime0: 0
@@ -1476,8 +1476,8 @@ MonoBehaviour:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
-      m_NumColorKeys: 3
+      m_ColorSpace: 0
+      m_NumColorKeys: 6
       m_NumAlphaKeys: 2
     m_CornerGradientColors:
     - {r: 0, g: 0, b: 0, a: 0}
@@ -1645,7 +1645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5588899301042139704}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: KeyFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1684,7 +1684,7 @@ GameObject:
   - component: {fileID: 6315875484120484699}
   - component: {fileID: 9103408403452687331}
   - component: {fileID: 7035185727249419289}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: IMG_AbilityIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
