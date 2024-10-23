@@ -2602,7 +2602,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -145.8, y: 75}
+  m_AnchoredPosition: {x: -147.5, y: 75}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1906234769536241730
@@ -2817,11 +2817,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2853,7 +2853,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -47.61
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2950,9 +2950,9 @@ MonoBehaviour:
   - {fileID: 7034549081452427265}
   spacingSettings:
     vertical: 0
-    spacing: 95.22
+    spacing: 120
     overrideSize: 1
-    size: {x: 180, y: 180}
+    size: {x: 200, y: 200}
 --- !u!224 &2500844510143078116
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4204,11 +4204,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 180
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4240,7 +4240,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 47.61
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 1748952701665506596, guid: e7c152865e514fe429443096ffbb28f9, type: 3}
       propertyPath: m_AnchoredPosition.y
