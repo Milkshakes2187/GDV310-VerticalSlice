@@ -33,13 +33,34 @@ public class UIUnitFrameGroupManager : MonoBehaviour
         }
 
         worldManager.onEnemyListChange += UpdateUnitFrames;
+
+        StartCoroutine(UpdateInitalFrames());
     }
 
-    // Update is called once per frame
+    /***********************************************
+    * UpdateInitalFrames: Updates all unit frames when first loaded to ensure every character has a frame
+    * @author: Nathan Hunt
+    * @return: IEnumerator
+    ************************************************/
+    IEnumerator UpdateInitalFrames()
+    {
+        yield return new WaitForEndOfFrame();
+
+        foreach(Character character in WorldManager.instance.allEnemies)
+        {
+            UpdateUnitFrames(character);
+        }
+    }
+
+    /***********************************************
+    * UpdateUnitFrames: Updates the assigned characters unit frame, adding or deleting if character exists
+    * @author: Nathan Hunt
+    * @parameter: Character
+    * @return: void
+    ************************************************/
     void UpdateUnitFrames(Character unit)
     {
         bool containsNullKey = false;
-        Debug.Log(unit);
 
         if(unit == null)
         {
@@ -64,6 +85,11 @@ public class UIUnitFrameGroupManager : MonoBehaviour
         if(containsNullKey) EmptyNullKeys();
     }
 
+    /***********************************************
+    * EmptyNullKeys: Iterates through Unit Frame dictionary and removes all null keys
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     private void EmptyNullKeys()
     {
         foreach (var key in unitFrames.Keys.ToArray())
@@ -77,6 +103,12 @@ public class UIUnitFrameGroupManager : MonoBehaviour
 
     #region Frame Management
 
+    /***********************************************
+    * CreateNewUnitFrame: Creates new unit frame for character
+    * @author: Nathan Hunt
+    * @parameter: Character
+    * @return: void
+    ************************************************/
     private void CreateNewUnitFrame(Character character)
     {
         UIUnitFrameController newUnitFrame = Instantiate(unitFrameSettings.unitFramePrefab, transform).GetComponent<UIUnitFrameController>();
@@ -85,9 +117,20 @@ public class UIUnitFrameGroupManager : MonoBehaviour
         InitializeFrame(newUnitFrame, character);
     }
 
+    /***********************************************
+    * InitializeFrame: Initializes the characters Unit Frame UI
+    * @author: Nathan Hunt
+    * @parameter: UIUnitFrameController, Character
+    * @return: void
+    ************************************************/
     private void InitializeFrame(UIUnitFrameController frame, Character character) => frame.Initialize(character, unitFrameSettings);
 
 
+    /***********************************************
+    * ReinitializeFrames: If any Unit Frame settings have been changed, reinitizaing all the Unit Frames with new settings
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
     [OnValueChanged("unitFrameSettings")]
     private void ReinitializeFrames()
     {

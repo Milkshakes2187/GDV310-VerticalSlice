@@ -1,4 +1,5 @@
 using MPUIKIT;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,12 @@ public abstract class Ability : MonoBehaviour
     public bool requiresTarget = false;
     [HideInInspector] public float currentCastTime = 0.0f;
     [HideInInspector] public float currentChannelTime = 0.0f;
+
+    // Events
+
+    public event Action OnStartCast;
+    public event Action OnCancelCast;
+    public event Action OnSuccessfulCast;
 
     //Coroutine to remember
     Coroutine castTimerCrouton;
@@ -106,6 +113,7 @@ public abstract class Ability : MonoBehaviour
             castTimerCrouton = StartCoroutine(CastTimer());
         }
 
+        OnStartCast?.Invoke();
         return true;
     }
 
@@ -141,6 +149,8 @@ public abstract class Ability : MonoBehaviour
         }
 
         print("interrupted, unlucky ig");
+
+        OnCancelCast?.Invoke();
         Destroy(gameObject);
     }
 
@@ -178,6 +188,7 @@ public abstract class Ability : MonoBehaviour
         }
 
         //cast the spell
+        OnSuccessfulCast?.Invoke();
         UseSpellEffect();
     }
 

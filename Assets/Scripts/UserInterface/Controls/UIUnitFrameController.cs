@@ -21,6 +21,27 @@ public class UIUnitFrameController : MonoBehaviour
         rTransform = GetComponent<RectTransform>();
     }
 
+    private void LateUpdate()
+    {
+        if (!initialized || attachedCharacter == null)
+        {
+            if (!initialized) Debug.LogError("Unit frame was not initialized before creation");
+            else Debug.LogError("Unit frame was not disposed of properly, please ask nathan so we can fix it"); 
+
+            enabled = false;
+            Destroy(gameObject);
+            return;
+        }
+
+        TickUnitFrame();
+    }
+
+    /***********************************************
+    * Initialize: Attaches Unit Frame to character. Assigned by UIUnitFrameGroupManager.cs
+    * @author: Nathan Hunt
+    * @parameter: Character, UnitFrameSettings
+    * @return: void
+    ************************************************/
     public void Initialize(Character character, UIUnitFrameGroupManager.UnitFrameSettings unitFrameSettings)
     {
         if (character == null) return;
@@ -33,12 +54,30 @@ public class UIUnitFrameController : MonoBehaviour
         transform.localScale = Vector3.one * unitFrameSettings.frameScale;
 
         // Generate Average bounds of character
-        UpdateCharacterOffset();
+        characterOffset = GenerateCharacterOffset();
     }
 
-    public void UpdateCharacterOffset()
+    /***********************************************
+    * TickUnitFrame: Updates the Unit Frames values every frame
+    * @author: Nathan Hunt
+    * @return: void
+    ************************************************/
+
+    public void TickUnitFrame()
     {
-        if (!attachedCharacter) return;
+        if (!Camera.main) { Debug.LogError("Main camera not set, Unit frame wont update"); return; }
+        rTransform.position = Camera.main.WorldToScreenPoint(attachedCharacter.transform.position + characterOffset + generalOffset);
+    }
+
+    /***********************************************
+    * GenerateCharacterOffset: Finds the average point of the attached characters mesh bounds and creates an offset for the Unit Frame
+    * @author: Nathan Hunt
+    * @return: Vector3
+    ************************************************/
+
+    public Vector3 GenerateCharacterOffset()
+    {
+        if (!attachedCharacter) return Vector3.zero;
 
         float _charHeight = 0;
         Bounds _charAverageBound = attachedCharacter.GetComponentInChildren<Renderer>().bounds;
@@ -48,33 +87,6 @@ public class UIUnitFrameController : MonoBehaviour
             if (_renderer.bounds.size.y > _charHeight) _charHeight = _renderer.bounds.size.y;
             _charAverageBound.Encapsulate(_renderer.bounds);
         }
-        characterOffset = _charAverageBound.center - attachedCharacter.transform.position + Vector3.up * _charHeight / 2f;
-    }
-
-    private void LateUpdate()
-    {
-        if (!initialized || attachedCharacter == null)
-        {
-            if(!initialized)
-            {
-                Debug.LogError("Unit frame was not initialized before creation");
-            }
-            else
-            {
-                Debug.LogError("Unit frame was not disposed of properly");
-            }
-
-            enabled = false;
-            Destroy(gameObject);
-            return;
-        }
-
-        TickUnitFrame();
-    }
-
-    public void TickUnitFrame()
-    {
-        if (!Camera.main) { Debug.LogError("Main camera not set, Unit frame wont update"); return; }
-        rTransform.position = Camera.main.WorldToScreenPoint(attachedCharacter.transform.position + characterOffset + generalOffset);
+        return _charAverageBound.center - attachedCharacter.transform.position + Vector3.up * _charHeight / 2f;
     }
 }
